@@ -1,43 +1,37 @@
 import check from './script/SupportThreeChecking.js'
 import showError from './script/ShowError.js'
-import renderer from './script/Renderer.js'
+import threeBuilder from './script/Renderer.js'
+const canvas = document.querySelector("#canvas");
+let ctx = [];
 
-class rendering{
-    constructor(canvas){
-        try{
-            renderer(canvas, window.innerWidth, window.innerHeight); //добавить адаптивность размера канваса
-        }
-        catch(e){
-            showError(e)
-        }
-    }
-}
-
-function appMain(canvas){
+appMain();
+function appMain(){
     try{
         let three = check(canvas)
 
         if(three == null){
-            showError("Ваш браузер не поддерживает webGL")
+            showError("Your browser not support webGL")
         }
         else{
-            let ctx = new rendering(canvas)
+            try{
+                ctx[0] = new threeBuilder(canvas, window.innerWidth, window.innerHeight);
+            }
+            catch(e){
+                showError('threeBuilder: '+ e)
+            }
         }
     }catch(e){
         showError(e)
     }
 }
 
-window.onresize = setSize();
-window.onload = setSize();
+//window.onload = appMain();
 
-function setSize(){
+window.onresize = function(){
     try{
-        const canvas = document.querySelector("#canvas");
-        console.log(canvas)
-        appMain(canvas)
+        ctx[0].setCanvasSize(canvas, window.innerWidth, window.innerHeight);
     }
     catch(e){
-        showError(e);
+        showError('biba'+e);
     }
 }
