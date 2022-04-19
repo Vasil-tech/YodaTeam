@@ -3,9 +3,9 @@ import showError from './script/ShowError.js'
 import renderer from './script/Renderer.js'
 
 class rendering{
-    constructor(canvas, three){
+    constructor(canvas){
         try{
-            console.log(renderer(canvas, three));
+            renderer(canvas, window.innerWidth, window.innerHeight); //добавить адаптивность размера канваса
         }
         catch(e){
             showError(e)
@@ -13,27 +13,30 @@ class rendering{
     }
 }
 
-try{
-    const canvas = document.getElementById('canvas');
+function appMain(canvas){
     try{
         let three = check(canvas)
+
         if(three == null){
             showError("Ваш браузер не поддерживает webGL")
         }
         else{
-            let ctx = new rendering(canvas, three)
+            let ctx = new rendering(canvas)
         }
     }catch(e){
         showError(e)
     }
-}
-catch(extensions){
-    showError('Не найден элемент canvas');
 }
 
 window.onresize = setSize();
 window.onload = setSize();
 
 function setSize(){
-    console.log('biba');
+    try{
+        const canvas = document.getElementById('canvas');
+        appMain(canvas)
+    }
+    catch(e){
+        showError(e);
+    }
 }
