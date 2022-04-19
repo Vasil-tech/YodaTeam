@@ -33,7 +33,8 @@ window.onload = setSize();
 
 function setSize(){
     try{
-        const canvas = document.getElementById('canvas');
+        const canvas = document.querySelector("#canvas");
+        console.log(canvas)
         appMain(canvas)
     }
     catch(e){
