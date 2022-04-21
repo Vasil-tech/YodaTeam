@@ -1,18 +1,22 @@
 <template>
     <div class="threeContainerRoot">
-        <button @click="sayHello()"></button>
+        <button @click="check()">Загрузить</button>
+        <div class="canvasContainer">
+            <canvas id="canvas"></canvas>
+        </div>
     </div>
 </template>
 
 <script>
-import errorHandler from '../scripts/errorHandler.js'
+import threeLogic from '../scripts/Three/threeLogic.js'
 export default {
     data(){
 
     },
     methods:{
-        sayHello(){
-            errorHandler('', '', '', "canvas")
+        check(){
+            new threeLogic();
+            
         }
     }
 }
