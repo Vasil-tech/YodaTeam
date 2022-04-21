@@ -9,12 +9,12 @@ function appMain(){
     try{
         let three = check(canvas)
 
-        if(three == null){
+        if(three != null){
             showError("Your browser not support webGL", "three not null", "appMain 2", "canvas")
         }
         else{
             try{
-                ctx[0] = new threeBuilder(canvas, window.innerWidth, window.innerHeight); //массив - окна приложения с различными канвасами.
+                ctx[0] = new threeBuilder(canvas, window.innerWidth, window.innerHeight);
             }
             catch(e){
                 showError('threeBuilder: ', e, "appMain 3", "canvas")

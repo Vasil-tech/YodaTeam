@@ -31,40 +31,23 @@ export default class threeBuilder{
             let camera = this.Camera(width, height);
             let light = this.Light();
             try{
-                scene.add(light);
-                renderer.render(scene, camera);
+                let ldr = new loader();
+                try{
+                    scene.add(light, ldr);
+                    renderer.render(scene, camera);
+                }
+                catch(e){
+                    showError("adding to scene", e, "draw from Rendering 3", "canvas");
+                }
             }
             catch(e){
-                showError("scene add", e, "draw from Rendering 2", "canvas");
+                showError("model make", e, "draw from Rendering 2", "canvas");
             }
+
         }
         catch(e){
             showError("elements of scene", e, "draw from Rendering 1", "canvas");
         }
-        
-        // try{
-        //     renderer = new THREE.WebGLRenderer({canvas});
-        //     console.log(canvas)
-        //     scene = new THREE.Scene;
-        //     scene.background = new THREE.Color('black');
-        //     try{
-        //         camera = new THREE.PerspectiveCamera(45, width/height, 0.1, 3000);
-        //         camera.position.set(0, 0, 1000);
-        //         light = new THREE.AmbientLight(0xffffff);
-        //         scene.add(light);
-        //         renderer.render(scene, camera);
-        //         ready = true;
-        //     }
-        //     catch(e){
-        //         showError("set camera or light error"+e);
-        //     }
-        // }
-        // catch(e){
-        //     showError("make scene error: "+ e)
-        // }
-        // if(ready){
-        //     scene.add(this.addModel(camera, renderer.domElement));
-        // }
     }
     Light(){
         try{
@@ -112,7 +95,7 @@ export default class threeBuilder{
             showError("error set orbit control", e, "addModel 1 from Rendering", "canvas");
         }
         try{
-            let model = loader();
+            let model = new loader();
         }
         catch(e){
             showError("add model", e, "addModel 2 from Rendering", "canvas");
