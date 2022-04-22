@@ -13,7 +13,7 @@ export default class{
             }
             else{
                 try{
-                    new renderering(canvas, window.innerWidth, window.innerHeight, THREE);                    
+                    new renderering(canvas, canvas.width, canvas.height, THREE); 
                 }
                 catch(e){
                     errorHandler('threeLogic', 'constructor_2', e, 'canvas');

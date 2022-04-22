@@ -7,11 +7,10 @@
 </template>
 
 <script>
-//const canvas = document.querySelector("#canvas");
-
 import errorHandler from '../scripts/errorHandler.js';
 import threeLogic from '../scripts/Three/threeLogic.js'
 import * as THREE from 'three'
+
 export default {
     data(){
 
@@ -25,9 +24,19 @@ export default {
             console.log(answ)
             }
         catch(e){
-            errorHandler('', '', '', '')
+            errorHandler('ThreeContainer', 'mounted', e, 'canvas')
         }
     }
+}
+
+window.onresize = function(){
+    try{
+            const answ = new threeLogic(THREE)
+            console.log(answ)
+            }
+        catch(e){
+            errorHandler('ThreeContainer', 'onresize', e, 'canvas')
+        }
 }
 </script>
 
