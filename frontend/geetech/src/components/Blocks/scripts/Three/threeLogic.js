@@ -1,20 +1,19 @@
 import check from './SupportThreeCheck.js'
 import errorHandler from '../errorHandler.js'
-//import renderering from './Renderering.js'
-let canvas = null;
+import renderering from './Renderering.js'
 
 export default class{
-    constructor(){
+    constructor(THREE){
         try{
-            const three = check(canvas);
-            canvas = document.querySelector("#canvas");
-            if(three != null){
+            const canvas = document.querySelector("#canvas");
+            console.log(THREE, canvas);
+            const checking = check(canvas);
+            if(checking == null){
                 alert("чекай мать");
             }
             else{
                 try{
-                    //new renderering(canvas, window.innerWidth, window.innerHeight);
-                    console.log('await here')
+                    new renderering(canvas, window.innerWidth, window.innerHeight, THREE);                    
                 }
                 catch(e){
                     errorHandler('threeLogic', 'constructor_2', e, 'canvas');

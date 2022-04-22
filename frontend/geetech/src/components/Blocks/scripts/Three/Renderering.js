@@ -1,15 +1,13 @@
-import * as THREE from 'three'
 import loader from './Loader.js'
 import errorHandler from '../errorHandler.js'
 
 export default class{
-    constructor(canvas, width, height) {
-        let answ = this.setCanvasSize(canvas, width, height)
-        if(answ){
-            this.draw(canvas, width, height);
+    constructor(canvas, width, height, THREE) {
+        if(this.setCanvasSize(canvas, width, height)){
+            this.draw(canvas, width, height, THREE);
         }
         else{
-            errorHandler('Rendering', 'constructor', answ, 'canvas');
+            errorHandler('Rendering', 'constructor', 'setCanvasSize', 'canvas');
         }
     }
 
@@ -24,14 +22,14 @@ export default class{
         }
     }
 
-    draw(canvas, width, height){
+    draw(canvas, width, height, THREE){
         try{
-            let renderer = this.Renderer(canvas);
-            let scene = this.Scene();
-            let camera = this.Camera(width, height);
-            let light = this.Light();
+            let renderer = this.Renderer(canvas, THREE);
+            let scene = this.Scene(THREE);
+            let camera = this.Camera(width, height, THREE);
+            let light = this.Light(THREE);
             try{
-                let ldr = new loader();
+                let ldr = new loader(THREE);
                 try{
                     scene.add(light, ldr);
                     renderer.render(scene, camera);
@@ -49,7 +47,7 @@ export default class{
             errorHandler('Rendering', 'draw_1', e, 'canvas');
         }
     }
-    Light(){
+    Light(THREE){
         try{
             let light = new THREE.AmbientLight(0xffffff);
             return light;
@@ -58,7 +56,7 @@ export default class{
             errorHandler('Rendering', 'Light', e, 'canvas');
         }
     }
-    Camera(width, height){
+    Camera(width, height, THREE){
         try{
             let camera = new THREE.PerspectiveCamera(45, width/height, 0.1, 3000);
             camera.position.set(0, 0, 1000);
@@ -68,7 +66,7 @@ export default class{
             errorHandler('Rendering', 'Camera', e, 'canvas');
         }
     }
-    Scene(){
+    Scene(THREE){
         try{
             const scene = new THREE.Scene;
             scene.background = new THREE.Color('black');
@@ -78,7 +76,7 @@ export default class{
             errorHandler('Rendering', 'Scene', e, 'canvas');
         }
     }
-    Renderer(canvas){
+    Renderer(canvas, THREE){
         try{
             const rend =  new THREE.WebGLRenderer({canvas});
             return rend;

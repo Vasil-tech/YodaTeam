@@ -1,6 +1,5 @@
 <template>
     <div class="threeContainerRoot">
-        <button @click="check()">Загрузить</button>
         <div class="canvasContainer">
             <canvas id="canvas"></canvas>
         </div>
@@ -8,15 +7,25 @@
 </template>
 
 <script>
+//const canvas = document.querySelector("#canvas");
+
+import errorHandler from '../scripts/errorHandler.js';
 import threeLogic from '../scripts/Three/threeLogic.js'
+import * as THREE from 'three'
 export default {
     data(){
 
     },
     methods:{
-        check(){
-            new threeLogic();
-            
+
+    },
+    mounted: function(){
+        try{
+            const answ = new threeLogic(THREE)
+            console.log(answ)
+            }
+        catch(e){
+            errorHandler('', '', '', '')
         }
     }
 }

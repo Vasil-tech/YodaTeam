@@ -7,10 +7,12 @@
 </template>
 
 <script>
-import ThreeContainer from './WorkAreaContainer/ThreeContainer.vue'
+//import ThreeContainer from './WorkAreaContainer/ThreeContainer.vue'
+import { defineAsyncComponent } from 'vue'
+
 export default{
     components:{
-        ThreeContainer
+        ThreeContainer: defineAsyncComponent(()=> import('./WorkAreaContainer/ThreeContainer.vue'))
     },
     data(){
 
