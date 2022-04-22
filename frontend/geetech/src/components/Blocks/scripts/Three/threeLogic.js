@@ -1,12 +1,14 @@
 import check from './SupportThreeCheck.js'
 import errorHandler from '../errorHandler.js'
 import renderering from './Renderering.js'
-
+import { canvasHeight } from '../bus.js';
+import { canvasWidht } from '../bus.js';
 export default class{
     constructor(THREE){
         try{
             const canvas = document.querySelector("#canvas");
-            console.log(THREE, canvas);
+            canvas.width = canvasWidht();
+            canvas.height = canvasHeight();
             const checking = check(canvas);
             if(checking == null){
                 alert("чекай мать");

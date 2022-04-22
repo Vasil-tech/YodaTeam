@@ -20,6 +20,7 @@ export default {
     },
     mounted: function(){
         try{
+            //создание экземпляров 
             const answ = new threeLogic(THREE)
             console.log(answ)
             }
@@ -29,15 +30,15 @@ export default {
     }
 }
 
-window.onresize = function(){
-    try{
-            const answ = new threeLogic(THREE)
-            console.log(answ)
-            }
-        catch(e){
-            errorHandler('ThreeContainer', 'onresize', e, 'canvas')
-        }
-}
+// window.onresize = function(){
+//     try{
+//             const answ = new threeLogic(THREE)
+//             console.log(answ)
+//             }
+//         catch(e){
+//             errorHandler('ThreeContainer', 'onresize', e, 'canvas')
+//         }
+// }
 </script>
 
 <style>

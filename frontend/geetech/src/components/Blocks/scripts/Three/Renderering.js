@@ -1,4 +1,4 @@
-import loader from './Loader.js'
+import { Loader } from './Loader.js';
 import errorHandler from '../errorHandler.js'
 
 export default class{
@@ -13,8 +13,8 @@ export default class{
 
     setCanvasSize(canvas, width, height){
         try{
-            canvas.setAttribute("width", width);
-            canvas.setAttribute("height", height);
+            canvas.width = width
+            canvas.height = height
             return true;
         }
         catch(e){
@@ -28,20 +28,15 @@ export default class{
             let scene = this.Scene(THREE);
             let camera = this.Camera(width, height, THREE);
             let light = this.Light(THREE);
+            
             try{
-                let ldr = new loader(THREE);
-                try{
-                    scene.add(light, ldr);
-                    renderer.render(scene, camera);
-                }
-                catch(e){
-                    errorHandler('Rendering', 'draw_3', e, 'canvas');
-                }
+                scene.add(Loader(THREE));
+                scene.add(light)
+                renderer.render(scene, camera);
             }
             catch(e){
                 errorHandler('Rendering', 'draw_2', e, 'canvas');
             }
-
         }
         catch(e){
             errorHandler('Rendering', 'draw_1', e, 'canvas');
