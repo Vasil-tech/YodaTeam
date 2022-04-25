@@ -1,4 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-//import * as THREE from 'three'
-createApp(App).mount('#app')
+import mitt from 'mitt';
+const emitter = mitt();
+const app = createApp(App);
+app.config.globalProperties.emitter = emitter;
+app.mount('#app');

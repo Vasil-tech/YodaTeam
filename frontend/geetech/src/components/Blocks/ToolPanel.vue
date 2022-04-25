@@ -6,12 +6,16 @@
 
 <script>
 import editMenu from "./ToolPanelContainer/Editor/EditParam.vue" 
+
 export default ({
     components:{
         editMenu
     },
     data(){
 
+    },
+    methods:{
+        
     }
 })
 </script>

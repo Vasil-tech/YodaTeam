@@ -46,12 +46,10 @@ export default{
                 case 1:
                     this.EditTool2 = false;
                     this.componentVisible = true;
-                    this.buttonVisible = false;
                     break;
                 case 2:
                     this.EditTool1 = false;
                     this.componentVisible = true;
-                    this.buttonVisible = false;
                     break;
             }
         },

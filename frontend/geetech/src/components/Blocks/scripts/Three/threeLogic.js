@@ -4,7 +4,7 @@ import renderering from './Renderering.js'
 import { canvasHeight } from '../bus.js';
 import { canvasWidht } from '../bus.js';
 export default class{
-    constructor(THREE){
+    constructor(THREE, color){
         try{
             const canvas = document.querySelector("#canvas");
             canvas.width = canvasWidht();
@@ -15,7 +15,7 @@ export default class{
             }
             else{
                 try{
-                    new renderering(canvas, canvas.width, canvas.height, THREE); 
+                    new renderering(canvas, canvas.width, canvas.height, THREE, color); 
                 }
                 catch(e){
                     errorHandler('threeLogic', 'constructor_2', e, 'canvas');

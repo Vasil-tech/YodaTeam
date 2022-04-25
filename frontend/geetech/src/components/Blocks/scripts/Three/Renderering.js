@@ -2,9 +2,9 @@ import { Loader } from './Loader.js';
 import errorHandler from '../errorHandler.js'
 
 export default class{
-    constructor(canvas, width, height, THREE) {
+    constructor(canvas, width, height, THREE, color) {
         if(this.setCanvasSize(canvas, width, height)){
-            this.draw(canvas, width, height, THREE);
+            this.draw(canvas, width, height, THREE, color);
         }
         else{
             errorHandler('Rendering', 'constructor', 'setCanvasSize', 'canvas');
@@ -22,10 +22,10 @@ export default class{
         }
     }
 
-    draw(canvas, width, height, THREE){
+    draw(canvas, width, height, THREE, color){
         try{
             let renderer = this.Renderer(canvas, THREE);
-            let scene = this.Scene(THREE);
+            let scene = this.Scene(THREE, color);
             let camera = this.Camera(width, height, THREE);
             let light = this.Light(THREE);
             
@@ -61,10 +61,10 @@ export default class{
             errorHandler('Rendering', 'Camera', e, 'canvas');
         }
     }
-    Scene(THREE){
+    Scene(THREE, color){
         try{
             const scene = new THREE.Scene;
-            scene.background = new THREE.Color('black');
+            scene.background = new THREE.Color(color);
             return scene;
         }
         catch(e){

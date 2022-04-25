@@ -16,6 +16,8 @@
 import WorkArea from './Blocks/NavMenu.vue'
 import ToolPanel from './Blocks/ToolPanel.vue'
 import NavMenu from './Blocks/WorkArea.vue'
+
+
 export default{
     components:{
         WorkArea,
