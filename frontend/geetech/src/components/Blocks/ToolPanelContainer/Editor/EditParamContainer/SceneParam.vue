@@ -1,13 +1,18 @@
 <template>
     <div class="SceneParamRoot">
-        <img src="https://web.archive.org/web/20190322065716im_/http://www.williamgibsonbooks.com/images/source/header.jpg">
+        <p>жили были три пирата</p>
+        <div class="colorBar">
+            <button>писька</button>
+            <button>жопа</button>
+            <button>и лопата</button>
+        </div>
     </div>
 </template>
 
 <script>
 export default{
     data(){
-        
+
     }
 }
 </script>
