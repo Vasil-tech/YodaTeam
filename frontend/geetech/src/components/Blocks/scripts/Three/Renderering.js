@@ -1,10 +1,27 @@
 import { Loader } from './Loader.js';
 import errorHandler from '../errorHandler.js'
 
-export default class{
-    constructor(canvas, width, height, THREE, color) {
+let camera, controls, scene, renderer;
+
+function animate(){
+    try{
+        controls.update(); // only required if controls.enableDamping = true, or if controls.autoRotate = true
+        render();
+        requestAnimationFrame( animate );
+
+    }
+    catch(e){
+        errorHandler('Rendering', 'animate', e, 'camvas')
+    }
+}
+function render(){
+    renderer.render(scene, camera)
+}
+export default class main{
+    constructor(canvas, width, height, THREE, color, OrbitControl) {
         if(this.setCanvasSize(canvas, width, height)){
-            this.draw(canvas, width, height, THREE, color);
+            let a = this.draw(canvas, width, height, THREE, color, OrbitControl);
+            animate(a);
         }
         else{
             errorHandler('Rendering', 'constructor', 'setCanvasSize', 'canvas');
@@ -22,26 +39,46 @@ export default class{
         }
     }
 
-    draw(canvas, width, height, THREE, color){
+    draw(canvas, width, height, THREE, color, OrbitControl){
         try{
-            let renderer = this.Renderer(canvas, THREE);
-            let scene = this.Scene(THREE, color);
-            let camera = this.Camera(width, height, THREE);
+            renderer = this.Renderer(canvas, THREE);
+            scene = this.Scene(THREE, color);
+            camera = this.Camera(width, height, THREE);
             let light = this.Light(THREE);
-            
-            try{
-                scene.add(Loader(THREE));
-                scene.add(light)
-                renderer.render(scene, camera);
+            if(OrbitControl != false){
+                try{
+                    controls = new OrbitControl(camera, canvas)
+                    controls.target.set(0, 0, 0);
+                    controls.update();
+                    scene.add(Loader(THREE));
+                    scene.add(light)
+                    return true;
+                }
+                catch(e){
+                    errorHandler('Rendering', 'draw_3', e, 'canvas');
+                }
             }
-            catch(e){
-                errorHandler('Rendering', 'draw_2', e, 'canvas');
+            else{
+                try{
+
+                    scene.add(Loader(THREE));
+                    scene.add(light)
+                    renderer.render(scene, camera);
+                    return true
+                }
+                catch(e){
+                    errorHandler('Rendering', 'draw_2', e, 'canvas');
+                }
             }
         }
         catch(e){
             errorHandler('Rendering', 'draw_1', e, 'canvas');
         }
     }
+    // Controls(camera, canvas, OrbitControl){
+        
+    //     return controls
+    // }
     Light(THREE){
         try{
             let light = new THREE.AmbientLight(0xffffff);

@@ -10,11 +10,12 @@
 import errorHandler from '../scripts/errorHandler.js';
 import threeLogic from '../scripts/Three/threeLogic.js'
 import * as THREE from 'three'
-
+import OrbitControl from 'three-orbitcontrols'
 export default {
     data(){
         return{
-            color: "purple"
+            color: "black",
+            orbValue: false,
         }
     },
     methods:{
@@ -22,24 +23,32 @@ export default {
     },
     mounted: function(){
         start3d(THREE)
+        //console.log(OrbitControl)
     },
-    created(){
+    created: function(){
         this.emitter.on("SceneBackgroundColor", color => {
-            start3d(THREE, color)
+            start3d(THREE, color), this.color= color
+        })
+        this.emitter.on("OrbitControlStatus", orbValue =>{
+            start3d(THREE, this.color, this.orbValue = orbValue)
         })
     }
 }
 
-function start3d(THREE, color = 'black'){
+function start3d(THREE, color = 'black', orbCont=false){
     try{
+        if(orbCont == true){
+            orbCont = OrbitControl
+        }
         //создание экземпляров 
-        const answ = new threeLogic(THREE, color)
-        console.log(answ)
+        const answ = new threeLogic(THREE, color, orbCont)
+        console.log(answ, orbCont)
         }
     catch(e){
         errorHandler('ThreeContainer', 'mounted', e, 'canvas')
     }
 }
+
 
 // window.onresize = function(){
 //     try{
