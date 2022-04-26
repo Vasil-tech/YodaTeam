@@ -1,30 +1,57 @@
 import { Loader } from './Loader.js';
 import errorHandler from '../errorHandler.js'
 
-let camera, controls, scene, renderer;
+let camera, controls, scene, renderer, light;
 
-function animate(){
-    try{
-        controls.update(); // only required if controls.enableDamping = true, or if controls.autoRotate = true
-        render();
-        requestAnimationFrame( animate );
 
-    }
-    catch(e){
-        errorHandler('Rendering', 'animate', e, 'camvas')
-    }
-}
-function render(){
-    renderer.render(scene, camera)
-}
-export default class main{
-    constructor(canvas, width, height, THREE, color, OrbitControl) {
+export default class{
+    constructor(canvas, width, height, THREE, color, OrbitControl, autoRotate) {
         if(this.setCanvasSize(canvas, width, height)){
-            let a = this.draw(canvas, width, height, THREE, color, OrbitControl);
-            animate(a);
+            if(this.init(THREE, canvas, color, width, height)){
+                this.addToScene(THREE)
+                if(OrbitControl!=false){
+                    this.setControls(OrbitControl, canvas)
+                    controls.autoRotate = autoRotate
+                    animate()
+                }
+            }
         }
         else{
             errorHandler('Rendering', 'constructor', 'setCanvasSize', 'canvas');
+        }
+    }
+
+    init(THREE, canvas, color, width, height){
+        try{
+            renderer = this.Renderer(canvas, THREE);
+            scene = this.Scene(THREE, color);
+            camera = this.Camera(width, height, THREE);
+            light = this.Light(THREE);
+            return true;
+        }
+        catch(e){
+            errorHandler('Rendering', 'init', e, 'canvas')
+        }
+    }
+
+    setControls(OrbitControl, canvas){
+        controls = new OrbitControl(camera, canvas)
+        controls.target.set(0, 0, 0);
+        controls.update();
+    }
+    addToScene(THREE){
+        try{
+            scene.add(Loader(THREE))
+        }
+        catch(e){
+            errorHandler('Rendering', 'addToScene_1', e, 'canvas')
+        }
+        try{
+            scene.add(light)
+            renderer.render(scene, camera);
+        }
+        catch(e){
+            errorHandler('Rendering', 'addToScene_2', e, 'canvas')
         }
     }
 
@@ -39,46 +66,6 @@ export default class main{
         }
     }
 
-    draw(canvas, width, height, THREE, color, OrbitControl){
-        try{
-            renderer = this.Renderer(canvas, THREE);
-            scene = this.Scene(THREE, color);
-            camera = this.Camera(width, height, THREE);
-            let light = this.Light(THREE);
-            if(OrbitControl != false){
-                try{
-                    controls = new OrbitControl(camera, canvas)
-                    controls.target.set(0, 0, 0);
-                    controls.update();
-                    scene.add(Loader(THREE));
-                    scene.add(light)
-                    return true;
-                }
-                catch(e){
-                    errorHandler('Rendering', 'draw_3', e, 'canvas');
-                }
-            }
-            else{
-                try{
-
-                    scene.add(Loader(THREE));
-                    scene.add(light)
-                    renderer.render(scene, camera);
-                    return true
-                }
-                catch(e){
-                    errorHandler('Rendering', 'draw_2', e, 'canvas');
-                }
-            }
-        }
-        catch(e){
-            errorHandler('Rendering', 'draw_1', e, 'canvas');
-        }
-    }
-    // Controls(camera, canvas, OrbitControl){
-        
-    //     return controls
-    // }
     Light(THREE){
         try{
             let light = new THREE.AmbientLight(0xffffff);
@@ -117,4 +104,18 @@ export default class main{
             errorHandler('Rendering', 'Renderer', e, 'canvas');
         }
     }
+}
+
+function animate(){
+    try{
+        controls.update();
+        render();
+        requestAnimationFrame( animate );
+    }
+    catch(e){
+        errorHandler('Rendering', 'animate', e, 'camvas')
+    }
+}
+function render(){
+    renderer.render(scene, camera)
 }

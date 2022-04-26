@@ -4,9 +4,9 @@ import renderering from './Renderering.js'
 import { canvasHeight } from '../bus.js';
 import { canvasWidht } from '../bus.js';
 export default class{
-    constructor(THREE, color, OrbitControl){
+    constructor(THREE, color, OrbitControl, autoRotate){
         try{
-            const canvas = document.querySelector("#canvass");
+            const canvas = document.querySelector("#canvas");
             canvas.width = canvasWidht();
             canvas.height = canvasHeight();
             const checking = check(canvas);
@@ -15,7 +15,7 @@ export default class{
             }
             else{
                 try{
-                    new renderering(canvas, canvas.width, canvas.height, THREE, color, OrbitControl); 
+                    new renderering(canvas, canvas.width, canvas.height, THREE, color, OrbitControl, autoRotate); 
                 }
                 catch(e){
                     errorHandler('threeLogic', 'constructor_2', e, 'canvas');

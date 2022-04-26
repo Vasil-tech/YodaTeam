@@ -22,6 +22,9 @@
         <div class="fullScreenButt">
             <button @click="fullScreen()">Открыть на весь экран</button>
         </div>
+        <div class="rotate">
+            <button @click="rotateOn()">Auto rotate</button>
+        </div>
     </div>
 </template>
 
@@ -29,7 +32,7 @@
 export default{
     data(){
         return{
-            
+           rotateStatus: false, 
         }
     },
     methods:{
@@ -55,6 +58,15 @@ export default{
             }
             catch(e){
                 this.emitter.emit("CanvasError", {'file': 'SceneParam', 'method':'fullScreen', 'ext':e})
+            }
+        },
+        rotateOn(){
+            try{
+                this.rotateStatus = !this.rotateStatus
+                this.emitter.emit("RotateOn", this.rotateStatus)
+            }
+            catch(e){
+                this.emitter.emit("CanvasError", {'file': 'SceneParam', 'method': 'rotateOn', 'ext': e})
             }
         }
     }

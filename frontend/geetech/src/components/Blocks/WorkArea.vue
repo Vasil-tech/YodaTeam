@@ -8,6 +8,7 @@
             <p>в файле: {{Error.file}}</p>
             <p>метод: {{Error.method}}</p>
             <p>Extension: {{Error.ext}}</p>
+            <button @click="Error.check = !Error.check"></button>
         </div>
     </div>
 </template>

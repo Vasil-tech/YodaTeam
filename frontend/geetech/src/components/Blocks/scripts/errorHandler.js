@@ -3,7 +3,6 @@ export default function(File = "Unknown file", Method = "Unknown method", Ext = 
     switch (Type){
         case "canvas":
             emitter.emit("CanvasError", {'file': File, 'method':Method, 'ext':Ext})
-
             break;
         case "UI":
             break;

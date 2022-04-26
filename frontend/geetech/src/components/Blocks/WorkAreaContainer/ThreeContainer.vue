@@ -30,17 +30,21 @@ export default {
         this.emitter.on("OrbitControlStatus", orbValue =>{
             start3d(THREE, this.color, this.orbValue = orbValue)
         })
+        this.emitter.on("RotateOn", data=> {
+            start3d(THREE, this.color, this.orbValue, data)
+        })
     }
 }
 
-function start3d(THREE, color = 'black', orbCont=false){
+function start3d(THREE, color = 'black', orbCont, autoRotate){
     try{
-        if(orbCont == true){
-            orbCont = OrbitControl
+        if(orbCont){
+            new threeLogic(THREE, color, OrbitControl, autoRotate)
+        }
+        else{
+            new threeLogic(THREE, color, false, autoRotate)
         }
         //создание экземпляров 
-        const answ = new threeLogic(THREE, color, orbCont)
-        console.log(answ, orbCont)
         }
     catch(e){
         this.emitter.emit("CanvasError", {'file': 'ThreeContainer', 'method':'start3d', 'ext':e})
