@@ -6,7 +6,7 @@ import { canvasWidht } from '../bus.js';
 export default class{
     constructor(THREE, color, OrbitControl){
         try{
-            const canvas = document.querySelector("#canvas");
+            const canvas = document.querySelector("#canvass");
             canvas.width = canvasWidht();
             canvas.height = canvasHeight();
             const checking = check(canvas);

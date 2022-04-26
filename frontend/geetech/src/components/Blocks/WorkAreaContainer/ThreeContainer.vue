@@ -7,7 +7,6 @@
 </template>
 
 <script>
-import errorHandler from '../scripts/errorHandler.js';
 import threeLogic from '../scripts/Three/threeLogic.js'
 import * as THREE from 'three'
 import OrbitControl from 'three-orbitcontrols'
@@ -23,11 +22,10 @@ export default {
     },
     mounted: function(){
         start3d(THREE)
-        //console.log(OrbitControl)
     },
     created: function(){
         this.emitter.on("SceneBackgroundColor", color => {
-            start3d(THREE, color), this.color= color
+            start3d(THREE, color, this.orbValue), this.color= color
         })
         this.emitter.on("OrbitControlStatus", orbValue =>{
             start3d(THREE, this.color, this.orbValue = orbValue)
@@ -45,19 +43,19 @@ function start3d(THREE, color = 'black', orbCont=false){
         console.log(answ, orbCont)
         }
     catch(e){
-        errorHandler('ThreeContainer', 'mounted', e, 'canvas')
+        this.emitter.emit("CanvasError", {'file': 'ThreeContainer', 'method':'start3d', 'ext':e})
+
     }
 }
 
 
 // window.onresize = function(){
 //     try{
-//             const answ = new threeLogic(THREE)
-//             console.log(answ)
-//             }
-//         catch(e){
-//             errorHandler('ThreeContainer', 'onresize', e, 'canvas')
-//         }
+//         start3d(THREE, this.color, this.orbValue)
+//     }
+//     catch(e){
+//         errorHandler('ThreeContainer', 'onresize', e, 'canvas')
+//     }
 // }
 </script>
 

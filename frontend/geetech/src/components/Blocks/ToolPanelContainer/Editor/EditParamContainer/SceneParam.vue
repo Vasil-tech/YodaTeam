@@ -19,6 +19,9 @@
             >
             <label for="checkbox">Включить orbit control</label>
         </div>
+        <div class="fullScreenButt">
+            <button @click="fullScreen()">Открыть на весь экран</button>
+        </div>
     </div>
 </template>
 
@@ -35,7 +38,7 @@ export default{
                 this.emitter.emit("SceneBackgroundColor", color);
             }
             catch(e){
-                console.error('fuck')
+                this.emitter.emit("CanvasError", {'file': 'SceneParam', 'method':'changeColor', 'ext':e})
             }
         },
         orbContChecked(orbValue){
@@ -43,7 +46,15 @@ export default{
                 this.emitter.emit("OrbitControlStatus", orbValue)
             }
             catch(e){
-                console.log('fuckingFuck')
+                this.emitter.emit("CanvasError", {'file': 'SceneParam', 'method':'orbContChecked', 'ext':e})
+            }
+        },
+        fullScreen(){
+            try{
+                this.emitter.emit('FullScreenCanvas', true)
+            }
+            catch(e){
+                this.emitter.emit("CanvasError", {'file': 'SceneParam', 'method':'fullScreen', 'ext':e})
             }
         }
     }
