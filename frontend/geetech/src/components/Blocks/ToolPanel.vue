@@ -19,3 +19,18 @@ export default ({
     }
 })
 </script>
+<style>
+.ToolPanelRoot{
+    position: fixed;
+     float: right;
+    width: 25%;
+    height: 85%;
+    right: 1%;
+    top: 12%;
+    bottom: 3px;
+    border: 2px solid #3A506B;
+   
+    
+    
+}
+</style>

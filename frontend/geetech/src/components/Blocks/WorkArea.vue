@@ -46,5 +46,15 @@ export default{
 </script>
 
 <style>
-
+.workAreaRoot{
+    position: fixed;
+    width: 72%;
+    height: 85%;
+    float: left;
+    left: 1%;
+    bottom: 0;
+    border: 2px dotted #3A506B;
+    top: 12%;
+    
+}
 </style>

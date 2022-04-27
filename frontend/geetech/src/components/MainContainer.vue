@@ -13,15 +13,15 @@
 </template>
 
 <script>
-import WorkArea from './Blocks/NavMenu.vue'
+import NavMenu from './Blocks/NavMenu.vue'
 import ToolPanel from './Blocks/ToolPanel.vue'
-import NavMenu from './Blocks/WorkArea.vue'
-
+import WorkArea from './Blocks/WorkArea.vue'   
 export default{
     components:{
+        NavMenu,
         WorkArea,
-        ToolPanel,
-        NavMenu
+        ToolPanel
+       
     },
     data(){
         

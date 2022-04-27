@@ -73,5 +73,9 @@ function start3d(THREE, color = 'black', orbCont, autoRotate, fullScreen=false){
 </script>
 
 <style>
-
+#canvas{
+    position: relative;
+    width: 100%;
+    height: 100%
+}
 </style>
