@@ -8,22 +8,24 @@
                 <button @click="changeColor('white')">белый</button>
             </div>
         </div>
-        <div class="orbControl">
+        <div class="control">
+            <div class="orbControl">
             <input 
-            type="checkbox" 
-            id="checkbox" 
-            v-model="checked" 
-            :value="checkboxVal"
-            :checked="booleanValue"
-            @input="orbContChecked(!checked)"
+                type="checkbox" 
+                id="checkbox" 
+                v-model="checked" 
+                :value="checkboxVal"
+                :checked="booleanValue"
+                @input="orbContChecked(!checked)"
             >
             <label for="checkbox">Включить orbit control</label>
-        </div>
-        <div class="fullScreenButt">
-            <button @click="fullScreen()">Открыть на весь экран</button>
-        </div>
-        <div class="rotate">
-            <button @click="rotateOn()">Auto rotate</button>
+            </div>
+            <div class="rotate" v-if="checked">
+                <button @click="rotateOn()">Auto rotate</button>
+            </div>
+            <div class="fullScreenButt" id="fullScreenButt">
+                <button @click="fullScreen()">Открыть на весь экран</button>
+            </div>
         </div>
     </div>
 </template>
@@ -32,7 +34,8 @@
 export default{
     data(){
         return{
-           rotateStatus: false, 
+           rotateStatus: false,
+           checked: false
         }
     },
     methods:{
@@ -47,6 +50,7 @@ export default{
         orbContChecked(orbValue){
             try{
                 this.emitter.emit("OrbitControlStatus", orbValue)
+                console.log(orbValue)
             }
             catch(e){
                 this.emitter.emit("CanvasError", {'file': 'SceneParam', 'method':'orbContChecked', 'ext':e})
@@ -72,3 +76,6 @@ export default{
     }
 }
 </script>
+<style>
+
+</style>

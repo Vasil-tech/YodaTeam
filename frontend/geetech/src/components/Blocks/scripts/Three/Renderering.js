@@ -11,7 +11,9 @@ export default class{
                 this.addToScene(THREE)
                 if(OrbitControl!=false){
                     this.setControls(OrbitControl, canvas)
+                    controls.autoRotateSpeed = 2;
                     controls.autoRotate = autoRotate
+                    console.log(controls)
                     animate()
                 }
             }
@@ -108,6 +110,7 @@ export default class{
 
 function animate(){
     try{
+        console.log(camera)
         controls.update();
         render();
         requestAnimationFrame( animate );

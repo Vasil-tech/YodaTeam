@@ -7,6 +7,8 @@
 </template>
 
 <script>
+let session = [];
+let rotationStatus;
 import threeLogic from '../scripts/Three/threeLogic.js'
 import * as THREE from 'three'
 import OrbitControl from 'three-orbitcontrols'
@@ -33,16 +35,23 @@ export default {
         this.emitter.on("RotateOn", data=> {
             start3d(THREE, this.color, this.orbValue, data)
         })
+        this.emitter.on("FullScreenCanvas", data=>{
+            start3d(THREE, this.color, this.orbValue, data, true)
+        })
     }
 }
 
-function start3d(THREE, color = 'black', orbCont, autoRotate){
+function start3d(THREE, color = 'black', orbCont, autoRotate, fullScreen=false){
     try{
         if(orbCont){
-            new threeLogic(THREE, color, OrbitControl, autoRotate)
+            rotationStatus = true;
+            session[0] = new threeLogic(THREE, color, OrbitControl, autoRotate, fullScreen)
         }
         else{
-            new threeLogic(THREE, color, false, autoRotate)
+            if(rotationStatus){
+                console.log(session[0].rend.controls)
+            }
+            session[0] = new threeLogic(THREE, color, false, autoRotate, fullScreen)
         }
         //создание экземпляров 
         }
