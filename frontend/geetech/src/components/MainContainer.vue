@@ -6,7 +6,7 @@
         <div class="toolPanel">
             <tool-panel></tool-panel>
         </div>
-        <div class="workArea">
+        <div class="workArea" id="workArea">
             <work-area></work-area>
         </div>
     </div>

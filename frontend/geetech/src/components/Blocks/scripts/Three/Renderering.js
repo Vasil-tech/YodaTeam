@@ -110,7 +110,6 @@ export default class{
 
 function animate(){
     try{
-        console.log(camera)
         controls.update();
         render();
         requestAnimationFrame( animate );

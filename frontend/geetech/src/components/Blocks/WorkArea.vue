@@ -1,5 +1,5 @@
 <template>
-    <div class="workAreaRoot">
+    <div class="workAreaRoot" id="workAreaRoot">
         <div class="threeContainer" v-if="!Error.check">
             <three-container></three-container>
         </div>

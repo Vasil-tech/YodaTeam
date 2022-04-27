@@ -1,8 +1,8 @@
 export function canvasWidht(){
-    let width = window.innerWidth/2;
+    let width = document.getElementById("workAreaRoot").offsetWidth
     return width;
 }
 export function canvasHeight(){
-    let height = window.innerHeight/2;
+    let height = document.getElementById("workAreaRoot").offsetHeight
     return height;
 }
