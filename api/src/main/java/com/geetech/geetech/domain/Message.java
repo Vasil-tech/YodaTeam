@@ -8,14 +8,23 @@ import javax.persistence.Id;
 @Entity
 public class Message {
 
+    public Message() {
+    }
+
+    public Message(String tittle, String anons, String text) {
+        this.tittle = tittle;
+        this.anons = anons;
+        this.text = text;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private Integer views;
 
-    private String text;
     private String tittle;
     private String anons;
+    private String text;
 
     public Integer getId() {
         return id;
