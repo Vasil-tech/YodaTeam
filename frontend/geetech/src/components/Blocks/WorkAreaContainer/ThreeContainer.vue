@@ -46,14 +46,14 @@ function start3d(THREE, color = 'black', orbCont, autoRotate, fullScreen=false){
         if(orbCont){
             rotationStatus = true;
             session[0] = new threeLogic(THREE, color, OrbitControl, autoRotate, fullScreen)
+            //console.log(session[0].Camera)
         }
         else{
             if(rotationStatus){
-                console.log(session[0].rend.controls)
+                console.log(session[0].rend.controls.position)
             }
-            session[0] = new threeLogic(THREE, color, false, autoRotate, fullScreen)
-        }
-        //создание экземпляров 
+                session[0] = new threeLogic(THREE, color, false, autoRotate, fullScreen)
+            }
         }
     catch(e){
         this.emitter.emit("CanvasError", {'file': 'ThreeContainer', 'method':'start3d', 'ext':e})

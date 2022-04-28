@@ -8,7 +8,7 @@
             <p>в файле: {{Error.file}}</p>
             <p>метод: {{Error.method}}</p>
             <p>Extension: {{Error.ext}}</p>
-            <button @click="Error.check = !Error.check"></button>
+            <button @click="Error.check = !Error.check">открыть канвас</button>
         </div>
     </div>
 </template>
@@ -35,7 +35,6 @@ export default{
     created(){
         this.emitter.on("CanvasError", data => 
         {
-            console.log('sdjfn')
             this.Error.check = true;
             this.Error.file = data.file;
             this.Error.method = data.method
