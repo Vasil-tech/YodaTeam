@@ -48,11 +48,12 @@ export default {
 
 function start3d(THREE, color="black", orbCont, autoRotate = false){
     try{
+        let cp = false;
         if(typeof session[0] == 'object'){
-            console.log(camera.position)
+            cp = camera.position
         }
         if(orbCont){
-            session[0]=new Rendering(THREE, color, OrbitControl, autoRotate)
+            session[0]=new Rendering(THREE, color, OrbitControl, autoRotate, cp)
         }
         else{
             session[0]=new Rendering(THREE, color, false);

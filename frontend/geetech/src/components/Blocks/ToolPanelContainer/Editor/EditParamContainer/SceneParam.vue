@@ -49,7 +49,6 @@ export default{
         },
         orbContChecked(orbValue){
             try{
-                console.log(orbValue)
                 this.emitter.emit("OrbitControlStatus", orbValue)
             }
             catch(e){

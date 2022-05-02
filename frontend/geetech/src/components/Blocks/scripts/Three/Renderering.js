@@ -3,17 +3,18 @@ import errorHandler from '../errorHandler.js'
 import check from './SupportThreeCheck.js'
 import { canvasHeight } from '../bus.js';
 import { canvasWidht } from '../bus.js';
-export let camera, controls, scene, renderer, light;
+export let camera
+let controls, scene, renderer, light;
 
 
 export default class{
-    constructor(THREE, color, OrbitControl, autoRotate) {
+    constructor(THREE, color, OrbitControl, autoRotate, cameraPosition=false) {
         const ans = this.supportAndCnvsSize();
         const canvas = ans.canvas;
         let height = ans.height;
         let width = ans.width;
         try{
-            this.init(THREE, canvas, color, width, height);
+            this.init(THREE, canvas, color, width, height, cameraPosition);
             this.addToScene(THREE);
             if(OrbitControl!=false){
                 this.setControls(OrbitControl, canvas)
@@ -50,11 +51,11 @@ export default class{
         }
         return false;
     }
-    init(THREE, canvas, color, width, height){
+    init(THREE, canvas, color, width, height, cameraPosition){
         try{
             renderer = this.Renderer(canvas, THREE);
             scene = this.Scene(THREE, color);
-            camera = this.Camera(width, height, THREE);
+            camera = this.Camera(width, height, THREE, cameraPosition);
             light = this.Light(THREE);
         }
         catch(e){
@@ -86,10 +87,15 @@ export default class{
             errorHandler('Rendering', 'Light', e, 'canvas');
         }
     }
-    Camera(width, height, THREE){
+    Camera(width, height, THREE, cameraPosition){
         try{
             let camera = new THREE.PerspectiveCamera(45, width/height, 0.1, 3000);
-            camera.position.set(0, 0, 1000);
+            if(cameraPosition==false){
+                camera.position.set(0, 0, 1000);
+            }
+            else{
+                camera.position.set(cameraPosition.x, cameraPosition.y, cameraPosition.z)
+            }
             return camera;
         }
         catch(e){
