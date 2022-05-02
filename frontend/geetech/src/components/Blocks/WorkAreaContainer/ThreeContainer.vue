@@ -17,6 +17,7 @@ export default {
             color: "black",
             orbValue: false,
             renderNum:0,
+            autoRotate: false,
         }
     },
     methods:{
@@ -27,23 +28,26 @@ export default {
     },
     created: function(){
         this.emitter.on("SceneBackgroundColor", color => {
-            start3d(THREE, color, this.orbValue)
+            start3d(THREE, color, this.orbValue, this.autoRotate)
             this.color = color
         })
         this.emitter.on("OrbitControlStatus", orbValue =>{
-            start3d(THREE, this.color, this.orbValue = orbValue)
+            this.orbValue = orbValue
+            start3d(THREE, this.color, orbValue)
         })
-        this.emitter.on("RotateOn", data=> {
-            start3d(THREE, this.color, this.orbValue, data)
+        this.emitter.on("RotateOn", autoRotate=> {
+            this.autoRotate = autoRotate
+            start3d(THREE, this.color, true, this.autoRotate)
         })
-        this.emitter.on("FullScreenCanvas", data=>{
-            start3d(THREE, this.color, this.orbValue, data, true)
-        })
+        // this.emitter.on("FullScreenCanvas", data=>{
+        //     start3d(THREE, this.color, this.orbValue, data, true)
+        // })
     }
 }
 
-function start3d(THREE, color="black", orbCont, autoRotate){
+function start3d(THREE, color="black", orbCont, autoRotate = false){
     try{
+        console.log(autoRotate)
         if(orbCont){
             session[0]=new Rendering(THREE, color, OrbitControl, autoRotate)
         }
@@ -56,7 +60,3 @@ function start3d(THREE, color="black", orbCont, autoRotate){
     }
 }
 </script>
-
-<style>
-
-</style>

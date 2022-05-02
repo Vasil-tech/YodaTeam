@@ -25,7 +25,6 @@ export default class{
             }
             else{
                 renderer.render(scene, camera);
-                console.log(scene)
             }
         }
         catch(e){
