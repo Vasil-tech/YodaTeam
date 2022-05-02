@@ -1,35 +1,62 @@
 import { Loader } from './Loader.js';
 import errorHandler from '../errorHandler.js'
-
+import check from './SupportThreeCheck.js'
+import { canvasHeight } from '../bus.js';
+import { canvasWidht } from '../bus.js';
 let camera, controls, scene, renderer, light;
 
 
 export default class{
-    constructor(canvas, width, height, THREE, color, OrbitControl, autoRotate) {
-        if(this.setCanvasSize(canvas, width, height)){
-            if(this.init(THREE, canvas, color, width, height)){
-                this.addToScene(THREE)
-                if(OrbitControl!=false){
-                    this.setControls(OrbitControl, canvas)
-                    controls.autoRotateSpeed = 2;
+    constructor(THREE, color, OrbitControl, autoRotate) {
+        const ans = this.supportAndCnvsSize();
+        const canvas = ans.canvas;
+        let height = ans.height;
+        let width = ans.width;
+        try{
+            this.init(THREE, canvas, color, width, height);
+            this.addToScene(THREE);
+            if(OrbitControl!=false){
+                this.setControls(OrbitControl, canvas)
+                if(autoRotate){
                     controls.autoRotate = autoRotate
-                    console.log(controls)
-                    animate()
+                    controls.autoRotateSpeed = 2;
                 }
+                animate()
+            }
+            else{
+                renderer.render(scene, camera);
+                console.log(scene)
             }
         }
-        else{
-            errorHandler('Rendering', 'constructor', 'setCanvasSize', 'canvas');
+        catch(e){
+            errorHandler("Rendering", "constructor", e, "canvas")
         }
     }
 
+    supportAndCnvsSize(){
+        try{
+            const canvas = document.querySelector("#canvas");
+            canvas.width = canvasWidht();
+            canvas.height = canvasHeight();
+            const checking = check(canvas);
+            if(checking.status == false){
+                errorHandler('threeLogic', 'checking', checking.ext, 'canvas');
+            }
+            else{   
+                return {canvas: canvas, width: canvas.width, height: canvas.height}
+            }
+        }
+        catch(e){
+            errorHandler("Rendering", "supportAndCnvsSize_1", e, "canvas");
+        }
+        return false;
+    }
     init(THREE, canvas, color, width, height){
         try{
             renderer = this.Renderer(canvas, THREE);
             scene = this.Scene(THREE, color);
             camera = this.Camera(width, height, THREE);
             light = this.Light(THREE);
-            return true;
         }
         catch(e){
             errorHandler('Rendering', 'init', e, 'canvas')
@@ -44,27 +71,10 @@ export default class{
     addToScene(THREE){
         try{
             scene.add(Loader(THREE))
-        }
-        catch(e){
-            errorHandler('Rendering', 'addToScene_1', e, 'canvas')
-        }
-        try{
             scene.add(light)
-            renderer.render(scene, camera);
         }
         catch(e){
-            errorHandler('Rendering', 'addToScene_2', e, 'canvas')
-        }
-    }
-
-    setCanvasSize(canvas, width, height){
-        try{
-            canvas.width = width
-            canvas.height = height
-            return true;
-        }
-        catch(e){
-            return e;
+            errorHandler('Rendering', 'addToScene', e, 'canvas')
         }
     }
 

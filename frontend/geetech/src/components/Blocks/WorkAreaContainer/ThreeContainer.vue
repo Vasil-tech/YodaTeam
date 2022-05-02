@@ -8,8 +8,7 @@
 
 <script>
 let session = [];
-let rotationStatus;
-import threeLogic from '../scripts/Three/threeLogic.js'
+import Rendering from '../scripts/Three/Renderering.js'
 import * as THREE from 'three'
 import OrbitControl from 'three-orbitcontrols'
 export default {
@@ -17,6 +16,7 @@ export default {
         return{
             color: "black",
             orbValue: false,
+            renderNum:0,
         }
     },
     methods:{
@@ -27,7 +27,7 @@ export default {
     },
     created: function(){
         this.emitter.on("SceneBackgroundColor", color => {
-            start3d(THREE, color, this.orbValue), this.color= color
+            start3d(THREE, color, this.orbValue)
         })
         this.emitter.on("OrbitControlStatus", orbValue =>{
             start3d(THREE, this.color, this.orbValue = orbValue)
@@ -41,35 +41,31 @@ export default {
     }
 }
 
-function start3d(THREE, color = 'black', orbCont, autoRotate, fullScreen=false){
+function start3d(THREE, color="black", orbCont, autoRotate){
     try{
         if(orbCont){
-            rotationStatus = true;
-            session[0] = new threeLogic(THREE, color, OrbitControl, autoRotate, fullScreen)
-            //console.log(session[0].Camera)
+            session[0]=new Rendering(THREE, color, OrbitControl, autoRotate)
         }
         else{
-            if(rotationStatus){
-                console.log(session[0].rend.controls.position)
-            }
-                session[0] = new threeLogic(THREE, color, false, autoRotate, fullScreen)
-            }
+            session[0]=new Rendering(THREE, color, false);
+        }
+
+
+        // if(orbCont){
+        //     rotationStatus = true
+        //     session[0] = new Renderering(THREE, color, OrbitControl, autoRotate)
+        // }
+        // else{
+        //     if(rotationStatus){
+        //         console.log(session[0].rend.controls.position)
+        //     }
+        //         session[0] = new Renderering(THREE, color, false, autoRotate)
+        //     }
         }
     catch(e){
         this.emitter.emit("CanvasError", {'file': 'ThreeContainer', 'method':'start3d', 'ext':e})
-
     }
 }
-
-
-// window.onresize = function(){
-//     try{
-//         start3d(THREE, this.color, this.orbValue)
-//     }
-//     catch(e){
-//         errorHandler('ThreeContainer', 'onresize', e, 'canvas')
-//     }
-// }
 </script>
 
 <style>

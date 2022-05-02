@@ -21,12 +21,14 @@ export default{
         NavMenu,
         WorkArea,
         ToolPanel
-       
     },
     data(){
         
     }
 }
+// window.onload = function(){
+//     this.emitter.emit("Rendering", {Num:0})
+// }
 </script>
 
 <style>
