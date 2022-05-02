@@ -11,6 +11,7 @@ let session = [];
 import Rendering from '../scripts/Three/Renderering.js'
 import * as THREE from 'three'
 import OrbitControl from 'three-orbitcontrols'
+import {camera} from '../scripts/Three/Renderering.js'
 export default {
     data(){
         return{
@@ -47,7 +48,9 @@ export default {
 
 function start3d(THREE, color="black", orbCont, autoRotate = false){
     try{
-        console.log(autoRotate)
+        if(typeof session[0] == 'object'){
+            console.log(camera.position)
+        }
         if(orbCont){
             session[0]=new Rendering(THREE, color, OrbitControl, autoRotate)
         }

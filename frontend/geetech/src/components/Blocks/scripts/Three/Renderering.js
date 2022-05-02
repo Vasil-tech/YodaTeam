@@ -3,7 +3,7 @@ import errorHandler from '../errorHandler.js'
 import check from './SupportThreeCheck.js'
 import { canvasHeight } from '../bus.js';
 import { canvasWidht } from '../bus.js';
-let camera, controls, scene, renderer, light;
+export let camera, controls, scene, renderer, light;
 
 
 export default class{
