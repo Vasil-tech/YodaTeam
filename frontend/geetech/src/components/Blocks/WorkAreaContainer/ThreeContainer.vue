@@ -28,6 +28,7 @@ export default {
     created: function(){
         this.emitter.on("SceneBackgroundColor", color => {
             start3d(THREE, color, this.orbValue)
+            this.color = color
         })
         this.emitter.on("OrbitControlStatus", orbValue =>{
             start3d(THREE, this.color, this.orbValue = orbValue)
@@ -49,19 +50,7 @@ function start3d(THREE, color="black", orbCont, autoRotate){
         else{
             session[0]=new Rendering(THREE, color, false);
         }
-
-
-        // if(orbCont){
-        //     rotationStatus = true
-        //     session[0] = new Renderering(THREE, color, OrbitControl, autoRotate)
-        // }
-        // else{
-        //     if(rotationStatus){
-        //         console.log(session[0].rend.controls.position)
-        //     }
-        //         session[0] = new Renderering(THREE, color, false, autoRotate)
-        //     }
-        }
+    }
     catch(e){
         this.emitter.emit("CanvasError", {'file': 'ThreeContainer', 'method':'start3d', 'ext':e})
     }
