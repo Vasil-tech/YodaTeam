@@ -3,12 +3,12 @@ import errorHandler from '../errorHandler.js'
 import check from './SupportThreeCheck.js'
 import { canvasHeight } from '../bus.js';
 import { canvasWidht } from '../bus.js';
-export let camera
-let controls, scene, renderer, light;
+export let camera, controls
+let  scene, renderer, light;
 
 
 export default class{
-    constructor(THREE, color, OrbitControl, autoRotate, cameraPosition=false) {
+    constructor(THREE, color, OrbitControl, autoRotate, cameraPosition) {
         const ans = this.supportAndCnvsSize();
         const canvas = ans.canvas;
         let height = ans.height;
@@ -16,7 +16,7 @@ export default class{
         try{
             this.init(THREE, canvas, color, width, height, cameraPosition);
             this.addToScene(THREE);
-            if(OrbitControl!=false){
+            if(OrbitControl!== false){
                 this.setControls(OrbitControl, canvas)
                 if(autoRotate){
                     controls.autoRotate = autoRotate
@@ -24,7 +24,7 @@ export default class{
                 }
                 animate()
             }
-            else{
+            else {
                 renderer.render(scene, camera);
             }
         }
@@ -71,6 +71,7 @@ export default class{
     addToScene(THREE){
         try{
             scene.add(Loader(THREE))
+            console.log(scene)
             scene.add(light)
         }
         catch(e){
@@ -89,13 +90,9 @@ export default class{
     }
     Camera(width, height, THREE, cameraPosition){
         try{
-            let camera = new THREE.PerspectiveCamera(45, width/height, 0.1, 3000);
-            if(cameraPosition==false){
-                camera.position.set(0, 0, 1000);
-            }
-            else{
-                camera.position.set(cameraPosition.x, cameraPosition.y, cameraPosition.z)
-            }
+            const camera = new THREE.PerspectiveCamera(45, width/height, 0.1, 3000);
+            camera.position.set(cameraPosition.x, cameraPosition.y, cameraPosition.z);
+            console.log(cameraPosition)
             return camera;
         }
         catch(e){
@@ -127,10 +124,10 @@ function animate(){
     try{
         controls.update();
         render();
-        requestAnimationFrame( animate );
+        requestAnimationFrame(animate);
     }
     catch(e){
-        errorHandler('Rendering', 'animate', e, 'camvas')
+        errorHandler('Rendering', 'animate', e, 'canvas')
     }
 }
 function render(){

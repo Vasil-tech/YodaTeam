@@ -12,6 +12,7 @@ import Rendering from '../scripts/Three/Renderering.js'
 import * as THREE from 'three'
 import OrbitControl from 'three-orbitcontrols'
 import {camera} from '../scripts/Three/Renderering.js'
+import {controls} from '../scripts/Three/Renderering.js'
 export default {
     data(){
         return{
@@ -48,15 +49,21 @@ export default {
 
 function start3d(THREE, color="black", orbCont, autoRotate = false){
     try{
-        let cp = false;
+        console.log("eeee",controls)
+        console.log("aaaaaa", camera)
+        let cameraPosition = {};
         if(typeof session[0] == 'object'){
-            cp = camera.position
+            cameraPosition = camera.position
+        }else{
+            cameraPosition.x = 0;
+            cameraPosition.y = 0;
+            cameraPosition.z = 1000;
         }
         if(orbCont){
-            session[0]=new Rendering(THREE, color, OrbitControl, autoRotate, cp)
+            session[0]=new Rendering(THREE, color, OrbitControl, autoRotate, cameraPosition)
         }
         else{
-            session[0]=new Rendering(THREE, color, false);
+            session[0]=new Rendering(THREE, color, false, null, cameraPosition);
         }
     }
     catch(e){
