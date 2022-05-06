@@ -72,7 +72,6 @@ export default class{
         try{
             let model = Loader(THREE)
             scene.add(model)
-            console.log("mesh: ",model)
             scene.add(light)
         }
         catch(e){

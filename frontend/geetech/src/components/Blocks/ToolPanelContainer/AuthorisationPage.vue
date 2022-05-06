@@ -1,55 +1,58 @@
 <template>
-    <div class="authRoot">
-        <div class="entire" v-if="visible1">
-            <button @click="authorisationButtonClick(1)" v-if="buttonVisible">Вход</button>
-            <div class="entireForm" v-if="!buttonVisible">
-                <input type="text" id="loginInput">
-                <p v-if="alertVisible">Введите логин</p>
-                <input type="text" id="passwordInput">
-                <p v-if="alertVisible">Введите пароль</p>
-                <button @click="checkInputs()">Вход</button>
-            </div>
+    <div class="AuthPageRoot">
+        <h2>{{title}}</h2>
+        <div class="inputs" v-if="AuthForm">
+            <p>Логин</p>
+            <input type="text">
+            <p>Пароль</p>
+            <input type="password">
         </div>
-        <div class="registration" v-if="visible2">
-            <button @click="authorisationButtonClick(2)" v-if="buttonVisible">Регистрация</button>
-            <div class="registrationForm" v-if="!buttonVisible">
-                <input>
-            </div>
+        <div class="inputs" v-if="RegistForm">
+            <p>E-mail</p>
+            <input>
+            <p>Логин</p>
+            <input>
+            <p>Пароль</p>
+            <input type="password">
         </div>
+        <button>Вход</button>
     </div>
 </template>
 
 <script>
-export default ({
+export default {
+    props:{
+        way: String,
+        title: String
+    },
     data(){
         return{
-            visible1: true,
-            visible2: true,
-            buttonVisible: true,
-            alertVisible: false,
+            AuthForm: false,
+            RegistForm: false
         }
     },
-    methods:{
-        checkInputs(){
-            if(document.getElementById("loginInput".value == "" || document.getElementById("passwordInput").value == "")){
-                this.alertVisible = true
-            }
-        },
-        authorisationButtonClick(type){
-            switch(type){
-                case 0:
-                    break;
-                case 1:
-                    this.visible2 = false
-                    this.buttonVisible = false;
-                    break;
-                case 2:
-                    this.visible1 = false;
-                    this.buttonVisible = false;
-            }
+    created: function(){
+        if(this.way == "Registration"){
+            this.RegistForm = true;
+            this.AuthForm = false
+        }
+        else if(this.way == "Authorisation"){
+            this.AuthForm = true;
+            this.RegistForm = false
+        }
+    },
+    updated(){
+        if(this.way == "Registration"){
+            this.RegistForm = true;
+            this.AuthForm = false
+        }
+        else if(this.way == "Authorisation"){
+            this.AuthForm = true;
+            this.RegistForm = false
         }
     }
-})
+}
+
 </script>
 
 <style>

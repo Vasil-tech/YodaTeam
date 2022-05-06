@@ -1,7 +1,11 @@
 <template>
     <div class="ToolPanelRoot">
-        <editMenu></editMenu>
-        <authorisation-page></authorisation-page>
+        <editMenu v-if="editMenuVisible"></editMenu>
+        <authorisation-page 
+        v-if="AuthorisationPageVisible"
+        :title="title"
+        :way="way"
+        ></authorisation-page>
     </div>
 </template>
 
@@ -14,12 +18,40 @@ export default ({
         AuthorisationPage
     },
     data(){
-
+        return{
+            editMenuVisible: false,
+            AuthorisationPageVisible: false,
+            way: String,
+            title: String
+        }
     },
     methods:{
         
+    },
+    created: function(){
+        this.emitter.on("OpenAuthorisation", data =>{
+        if(data == 0){
+            this.AuthorisationPageVisible = true;
+            this.editMenuVisible = false;
+            this.way = "Registration"
+            this.title = "Регистрация"
+            }
+        else if(data == 1){
+            this.AuthorisationPageVisible = true;
+            this.editMenuVisible = false;
+            this.way = "Authorisation"
+            this.title = "Вход"
+        }
+        })
+        this.emitter.on("OpenEditor", data => {
+            if(data){
+                this.AuthorisationPageVisible = false;
+                this.editMenuVisible = true;
+            }
+        })
     }
 })
+
 </script>
 <style>
 .ToolPanelRoot{
