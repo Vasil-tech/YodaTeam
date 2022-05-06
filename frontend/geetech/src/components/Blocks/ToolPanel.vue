@@ -1,15 +1,17 @@
 <template>
     <div class="ToolPanelRoot">
         <editMenu></editMenu>
+        <authorisation-page></authorisation-page>
     </div>
 </template>
 
 <script>
 import editMenu from "./ToolPanelContainer/Editor/EditParam.vue" 
-
+import AuthorisationPage from "./ToolPanelContainer/AuthorisationPage.vue"
 export default ({
     components:{
-        editMenu
+        editMenu,
+        AuthorisationPage
     },
     data(){
 

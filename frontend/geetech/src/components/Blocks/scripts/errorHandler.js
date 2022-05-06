@@ -8,5 +8,8 @@ export default function(File = "Unknown file", Method = "Unknown method", Ext = 
             break;
         case "Backend":
             break;
+        case "Connect":
+            alert("Connect to backend error", Ext)
+            console.log(Ext)
     }
 }
