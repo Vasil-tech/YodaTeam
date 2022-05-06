@@ -4,7 +4,7 @@
       <ul>
         <li><a href="#">Редактор</a></li>
         <li><a href="#">Модели</a></li>  
-        <li class="RightMenu"><a href="#Autorize">Авторизация</a></li>
+        <li class="RightMenu"><a>Авторизация</a></li>
       </ul>
     </nav>
   </div>

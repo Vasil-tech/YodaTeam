@@ -70,8 +70,9 @@ export default class{
     }
     addToScene(THREE){
         try{
-            scene.add(Loader(THREE))
-            console.log(scene)
+            let model = Loader(THREE)
+            scene.add(model)
+            console.log("mesh: ",model)
             scene.add(light)
         }
         catch(e){
@@ -92,7 +93,7 @@ export default class{
         try{
             const camera = new THREE.PerspectiveCamera(45, width/height, 0.1, 3000);
             camera.position.set(cameraPosition.x, cameraPosition.y, cameraPosition.z);
-            console.log(cameraPosition)
+            camera.lookAt(0, 0, 0)
             return camera;
         }
         catch(e){
