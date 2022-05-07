@@ -3,23 +3,26 @@
         <h2>{{title}}</h2>
         <div class="inputs" v-if="AuthForm">
             <p>Логин</p>
-            <input type="text">
+            <input id="loginInput" type="text">
             <p>Пароль</p>
-            <input type="password">
+            <input id="passwordInput" type="password">
+            <p v-show="fieldAlert">Введите данные корректно</p>
         </div>
         <div class="inputs" v-if="RegistForm">
             <p>E-mail</p>
-            <input>
+            <input id="emailInput" type="text">
             <p>Логин</p>
-            <input>
+            <input id="loginInput" type="text">
             <p>Пароль</p>
-            <input type="password">
+            <input id="passwordInput" type="password">
+            <p v-show="fieldAlert">Введите данные корректно</p>
         </div>
-        <button>Вход</button>
+        <button @click="fieldAlertCheck()">Вход</button>
     </div>
 </template>
 
 <script>
+import jsonGenerate from "../scripts/JSONgenerate.js"
 export default {
     props:{
         way: String,
@@ -28,28 +31,44 @@ export default {
     data(){
         return{
             AuthForm: false,
-            RegistForm: false
+            RegistForm: false,
+            fieldAlert: false
         }
     },
     created: function(){
-        if(this.way == "Registration"){
-            this.RegistForm = true;
-            this.AuthForm = false
-        }
-        else if(this.way == "Authorisation"){
-            this.AuthForm = true;
-            this.RegistForm = false
-        }
+        this.showAuth()
     },
     updated(){
+        this.showAuth()
+    },
+    methods:{
+        showAuth(){
         if(this.way == "Registration"){
-            this.RegistForm = true;
-            this.AuthForm = false
-        }
+        this.RegistForm = true;
+        this.AuthForm = false
+            }
         else if(this.way == "Authorisation"){
             this.AuthForm = true;
             this.RegistForm = false
+            }
+        },
+    fieldAlertCheck(){
+        if(this.way == "Authorisation" && document.getElementById("loginInput").value.length < 3 || document.getElementById("passwordInput").value.length <= 8){
+            this.fieldAlert = true;
         }
+        else{
+            this.fieldAlert = false
+            jsonGenerate({ action: this.way, login: document.getElementById("loginInput").value, password: document.getElementById("passwordInput").value})
+            return null;
+        }
+        if(this.way == "Registration" && document.getElementById("emailInput").value.length < 5 || document.getElementById("loginInput").value.length < 3 || document.getElementById("passwordInput").value.length <= 8){
+            this.fieldAlert = true;
+        }
+        else{
+            this.fieldAlert = false
+            jsonGenerate({action: this.way, email: document.getElementById("emailInput").value, login: document.getElementById("loginInput").value, password: document.getElementById("passwordInput").value})
+        }
+    }
     }
 }
 

@@ -31,11 +31,12 @@
 </template>
 
 <script>
+
 export default{
     data(){
         return{
-           rotateStatus: false,
-           checked: false
+                rotateStatus: false,
+                checked: false
         }
     },
     methods:{
