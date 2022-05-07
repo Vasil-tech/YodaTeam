@@ -1,16 +1,24 @@
 <template>
     <div class="ModelInfoRoot">
         <p>Информация о модели</p>
-        <p>Объем файла: {{}}</p>
-        
+        <li v-for="item in modelInfo" :key="item.id">
+            {{ item }}
+        </li>
     </div>
 </template>
 
 <script>
+import getCookie from "@/components/Blocks/scripts/getCookie.js"
 export default{
     data(){
         return{
-            fileSize: null,
+            modelInfo:[]
+        }
+    },
+    created: function(){
+        let data = JSON.parse(getCookie('modelParams'));
+        for (let key in data){
+            this.modelInfo.push(key+": "+ data[key])
         }
     }
 }
