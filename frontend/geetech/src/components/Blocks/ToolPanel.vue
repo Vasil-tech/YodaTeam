@@ -1,5 +1,6 @@
 <template>
     <div class="ToolPanelRoot">
+        <DefaultWindow v-if="defWinVisible"></DefaultWindow>
         <editMenu v-if="editMenuVisible"></editMenu>
         <authorisation-page 
         v-if="AuthorisationPageVisible"
@@ -12,17 +13,20 @@
 <script>
 import editMenu from "./ToolPanelContainer/Editor/EditParam.vue" 
 import AuthorisationPage from "./ToolPanelContainer/AuthorisationPage.vue"
+import DefaultWindow from "./ToolPanelContainer/DefaultWindow.vue"
 export default ({
     components:{
         editMenu,
-        AuthorisationPage
+        AuthorisationPage,
+        DefaultWindow
     },
     data(){
         return{
             editMenuVisible: false,
             AuthorisationPageVisible: false,
             way: String,
-            title: String
+            title: String,
+            defWinVisible: true
         }
     },
     methods:{

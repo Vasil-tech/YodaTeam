@@ -5,6 +5,5 @@ export function Loader(THREE){
     let param = mesh.geometry.parameters
     param = JSON.stringify(param)
     document.cookie = encodeURIComponent("modelParams")+ '=' + encodeURIComponent(param)
-    console.log(document.cookie)
     return(mesh);
 }
