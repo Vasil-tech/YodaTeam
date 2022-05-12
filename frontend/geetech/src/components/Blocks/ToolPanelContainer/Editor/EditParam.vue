@@ -2,21 +2,18 @@
     <div class="EditParamRoot">
         <div class="MenuButtons">
             <div class="component1" v-if="EditTool1">
-                <button v-if="buttonVisible" @click="NavButtonClick(1)">1</button>
+                <button v-if="buttonVisible" @click="NavButtonClick(1)">Данные о модели</button>
                 <div v-if="componentVisible">
                     <button @click="NavButtonClick(0)">Назад</button>
                     <ModelInfo></ModelInfo>
                 </div>
             </div>
             <div class="component2" v-if="EditTool2">
-                <button v-if="buttonVisible" @click="NavButtonClick(2)">2</button>
+                <button v-if="buttonVisible" @click="NavButtonClick(2)">Параметры сцены</button>
                 <div v-if="componentVisible">
                     <button @click="NavButtonClick(0)">Назад</button>
                     <SceneParam></SceneParam>
                 </div>
-            </div>
-            <div class="download">
-                <input type="file" id="file" ref="file" v-on:change="handleFileUpload()">
             </div>
         </div>
     </div>

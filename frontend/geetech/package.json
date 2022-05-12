@@ -8,12 +8,18 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@ckpack/vue-color": "^1.1.9",
     "core-js": "^3.8.3",
     "mitt": "^3.0.0",
+    "one-colorpicker": "^1.0.12",
     "three": "^0.139.2",
     "three-orbit-controls": "^82.1.0",
     "three-orbitcontrols": "^2.110.3",
-    "vue": "^3.2.13"
+    "tolw": "^0.1.8",
+    "vue": "^3.2.13",
+    "vue-color": "^2.8.1",
+    "vue-color-picker-simple": "^1.0.8",
+    "vue-native-color-picker": "^1.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

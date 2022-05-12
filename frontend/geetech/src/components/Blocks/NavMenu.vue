@@ -2,13 +2,13 @@
   <div class="navMenuRoot">
     <nav class="Navbar">
       <ul>
-        <li><a href="#Geet">Geetech</a></li>
-        <li><a href="#Redactor">Редактор</a></li>
-        <li><a href="#Models">Модели</a></li>  
+        <li><a @click="Editor()">Редактор</a></li>
+        <li><a>Модели</a></li>  
+
           <div class="RightMenu">
-              <li><a class="vhod" href="#Vhod">Вход</a></li>
-           <li><a class="registration" href="#Registration">Регистрация</a></li>
-         </div>
+              <li><a class="vhod" @click="Auth(0)">Вход</a></li>
+              <li><a class="registration" @click="Auth(1)">Регистрация</a></li>
+          </div>
       </ul>
     </nav>
   </div>
@@ -16,7 +16,19 @@
 
 <script>
 export default {
+    data(){
+      return{
 
+      }
+    },
+    methods:{
+      Auth(type){
+        this.emitter.emit("OpenAuthorisation", type)
+      },
+      Editor(){
+        this.emitter.emit("OpenEditor", true)
+      },
+    }
 }
 </script>
 
