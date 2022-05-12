@@ -33,6 +33,9 @@ export default {
 </script>
 
 <style>
+li{
+  cursor: pointer;
+}
 .Navbar{
   position: fixed;
   top: 1%;

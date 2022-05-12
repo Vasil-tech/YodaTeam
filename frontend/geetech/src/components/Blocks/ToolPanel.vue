@@ -1,14 +1,14 @@
 <template>
     <div class="ToolPanelRoot">
-        <div class="homePage" v-if="HPEvisible">
-            <HomePageEdit></HomePageEdit>
-        </div>
         <editMenu v-if="editMenuVisible"></editMenu>
         <authorisation-page 
         v-if="AuthorisationPageVisible"
         :title="title"
         :way="way"
         ></authorisation-page>
+        <div class="homePage" v-if="HPEvisible">
+            <HomePageEdit></HomePageEdit>
+        </div>
     </div>
 </template>
 
@@ -73,8 +73,5 @@ export default ({
     top: 12%;
     bottom: 3px;
     border: 2px solid #3A506B;
-   
-    
-    
 }
 </style>
