@@ -2,9 +2,13 @@
   <div class="navMenuRoot">
     <nav class="Navbar">
       <ul>
-        <li><a href="#">Редактор</a></li>
-        <li><a href="#">Модели</a></li>  
-        <li class="RightMenu"><a href="#Autorize">Авторизация</a></li>
+        <li><a href="#Geet">Geetech</a></li>
+        <li><a href="#Redactor">Редактор</a></li>
+        <li><a href="#Models">Модели</a></li>  
+          <div class="RightMenu">
+              <li><a class="vhod" href="#Vhod">Вход</a></li>
+           <li><a class="registration" href="#Registration">Регистрация</a></li>
+         </div>
       </ul>
     </nav>
   </div>
@@ -19,14 +23,14 @@ export default {
 <style>
 .Navbar{
   position: fixed;
-  top: 0;
+  top: 1%;
   left: 1%;
   right: 1%;
   overflow: hidden;
   width: 98%;
-  height: 10%;
-  background-color: #F5F5F5;
-  border-bottom: 2px solid #3A506B;
+  height: 8%;
+  background-color: #FFFFFF;
+  border-bottom: 2px solid #1CBAC3;
 }
 .Navbar li{
   display:inline;
@@ -44,11 +48,30 @@ export default {
   display: block;
   text-align: center;
   text-decoration: none;
-  padding: 20px;
-  font-size: 22px;
+  padding: 15px;
+  font-family: 'Montserrat';
+  font-size: 18px;
+  margin-bottom: 1%;
+  margin-right: 15px;
 }
+
 .RightMenu{
   float: right;
-  text-decoration: none;
+  text-decoration: none; 
+  
+}
+
+.vhod{
+  box-sizing: border-box; 
+  background: #71D4DA;
+  border-radius: 40px;
+  width: 100px;
+}
+
+.registration{
+  box-sizing: border-box;
+  border: 1px solid #1CBAC4;
+  border-radius: 40px;
+  width: 140px;
 }
 </style>

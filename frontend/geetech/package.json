@@ -7,13 +7,12 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
-
   "dependencies": {
     "core-js": "^3.8.3",
     "mitt": "^3.0.0",
+    "three": "^0.139.2",
     "three-orbit-controls": "^82.1.0",
     "three-orbitcontrols": "^2.110.3",
-    "three": "^0.139.2",
     "vue": "^3.2.13"
   },
   "devDependencies": {

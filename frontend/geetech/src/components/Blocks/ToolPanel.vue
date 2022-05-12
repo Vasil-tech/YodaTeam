@@ -1,15 +1,17 @@
 <template>
     <div class="ToolPanelRoot">
-        <editMenu></editMenu>
+        <HomePageEdit></HomePageEdit>
+      <!--<editMenu></editMenu>-->
     </div>
 </template>
 
 <script>
-import editMenu from "./ToolPanelContainer/Editor/EditParam.vue" 
+import HomePageEdit from"./ToolPanelContainer/HomePageEdit.vue"
+//import editMenu from "./ToolPanelContainer/Editor/EditParam.vue" 
 
 export default ({
     components:{
-        editMenu
+        HomePageEdit
     },
     data(){
 
@@ -23,14 +25,11 @@ export default ({
 .ToolPanelRoot{
     position: fixed;
      float: right;
-    width: 25%;
+    width: 24%;
     height: 85%;
     right: 1%;
     top: 12%;
     bottom: 3px;
-    border: 2px solid #3A506B;
-   
-    
-    
+    border: 2px solid #1CBAC3;  
 }
 </style>

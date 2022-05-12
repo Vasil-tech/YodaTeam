@@ -1,9 +1,12 @@
 <template>
     <div class="workAreaRoot" id="workAreaRoot">
-        <div class="threeContainer" v-if="!Error.check">
+    <div class="HomePade" v-if="!HPWork">
+         <HomeWorkArea></HomeWorkArea>
+    </div>
+      <div class="threeContainer" v-if="!Canvass">
             <three-container></three-container>
         </div>
-        <div class="errorHandler" v-if="Error.check">
+        <div class="errorHandler" v-if="Canvass">
             <h1>Хьюстон, пиздец</h1>
             <p>в файле: {{Error.file}}</p>
             <p>метод: {{Error.method}}</p>
@@ -11,13 +14,30 @@
             <button @click="Error.check = !Error.check"></button>
         </div>
     </div>
+       
 </template>
 
 <script>
+/*import HomeWorkArea from "./HomeWorkArea.vue"
+
+export default ({
+    components:{
+        HomeWorkArea
+    },
+    data(){
+
+    },
+    methods:{
+        
+    }
+})*/
+
 import { defineAsyncComponent } from 'vue'
+import HomeWorkArea from "./HomeWorkArea.vue"
 
 export default{
     components:{
+        HomeWorkArea,
         ThreeContainer: defineAsyncComponent(()=> import('./WorkAreaContainer/ThreeContainer.vue'))
     },
     data(){
@@ -27,7 +47,9 @@ export default{
                 file: null,
                 method: null,
                 ext: null,
-                type: null
+                type: null,
+                HPWork: true,
+                Canvass: false
             },
             
         }
