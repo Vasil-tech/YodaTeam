@@ -50,7 +50,6 @@ export default{
         orbContChecked(orbValue){
             try{
                 this.emitter.emit("OrbitControlStatus", orbValue)
-                console.log(orbValue)
             }
             catch(e){
                 this.emitter.emit("CanvasError", {'file': 'SceneParam', 'method':'orbContChecked', 'ext':e})

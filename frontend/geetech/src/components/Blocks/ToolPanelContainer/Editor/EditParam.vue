@@ -15,6 +15,9 @@
                     <SceneParam></SceneParam>
                 </div>
             </div>
+            <div class="download">
+                <input type="file" id="file" ref="file" v-on:change="handleFileUpload()">
+            </div>
         </div>
     </div>
 </template>
@@ -55,6 +58,9 @@ export default{
                     break;
             }
         },
+        downloadButtonClick(){
+
+        }
     }
 }
 </script>

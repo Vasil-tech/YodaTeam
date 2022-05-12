@@ -4,9 +4,7 @@ export default function(canvas){
         gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
     }
     catch(e) {
-        if (!gl) {
-        gl = null;
-    }
+        return {status: false, ext: e}
 }
   return gl;
 }

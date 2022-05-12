@@ -1,35 +1,62 @@
 import { Loader } from './Loader.js';
 import errorHandler from '../errorHandler.js'
-
-let camera, controls, scene, renderer, light;
+import check from './SupportThreeCheck.js'
+import { canvasHeight } from '../bus.js';
+import { canvasWidht } from '../bus.js';
+export let camera;
+let controls, scene, renderer, light;
 
 
 export default class{
-    constructor(canvas, width, height, THREE, color, OrbitControl, autoRotate) {
-        if(this.setCanvasSize(canvas, width, height)){
-            if(this.init(THREE, canvas, color, width, height)){
-                this.addToScene(THREE)
-                if(OrbitControl!=false){
-                    this.setControls(OrbitControl, canvas)
-                    controls.autoRotateSpeed = 2;
+    constructor(THREE, color, OrbitControl, autoRotate, cameraPosition) {
+        const ans = this.supportAndCnvsSize();
+        const canvas = ans.canvas;
+        let height = ans.height;
+        let width = ans.width;
+        try{
+            this.init(THREE, canvas, color, width, height, cameraPosition);
+            this.addToScene(THREE);
+            if(OrbitControl!== false){
+                this.setControls(OrbitControl, canvas)
+                if(autoRotate){
                     controls.autoRotate = autoRotate
-                    console.log(controls)
-                    animate()
+                    controls.autoRotateSpeed = 2;
                 }
+                animate()
+            }
+            else {
+                renderer.render(scene, camera);
             }
         }
-        else{
-            errorHandler('Rendering', 'constructor', 'setCanvasSize', 'canvas');
+        catch(e){
+            errorHandler("Rendering", "constructor", e, "canvas")
         }
     }
 
-    init(THREE, canvas, color, width, height){
+    supportAndCnvsSize(){
+        try{
+            const canvas = document.querySelector("#canvas");
+            canvas.width = canvasWidht();
+            canvas.height = canvasHeight();
+            const checking = check(canvas);
+            if(checking.status == false){
+                errorHandler('threeLogic', 'checking', checking.ext, 'canvas');
+            }
+            else{   
+                return {canvas: canvas, width: canvas.width, height: canvas.height}
+            }
+        }
+        catch(e){
+            errorHandler("Rendering", "supportAndCnvsSize_1", e, "canvas");
+        }
+        return false;
+    }
+    init(THREE, canvas, color, width, height, cameraPosition){
         try{
             renderer = this.Renderer(canvas, THREE);
             scene = this.Scene(THREE, color);
-            camera = this.Camera(width, height, THREE);
+            camera = this.Camera(width, height, THREE, cameraPosition);
             light = this.Light(THREE);
-            return true;
         }
         catch(e){
             errorHandler('Rendering', 'init', e, 'canvas')
@@ -44,27 +71,11 @@ export default class{
     addToScene(THREE){
         try{
             scene.add(Loader(THREE))
-        }
-        catch(e){
-            errorHandler('Rendering', 'addToScene_1', e, 'canvas')
-        }
-        try{
+            console.log(scene)
             scene.add(light)
-            renderer.render(scene, camera);
         }
         catch(e){
-            errorHandler('Rendering', 'addToScene_2', e, 'canvas')
-        }
-    }
-
-    setCanvasSize(canvas, width, height){
-        try{
-            canvas.width = width
-            canvas.height = height
-            return true;
-        }
-        catch(e){
-            return e;
+            errorHandler('Rendering', 'addToScene', e, 'canvas')
         }
     }
 
@@ -77,10 +88,11 @@ export default class{
             errorHandler('Rendering', 'Light', e, 'canvas');
         }
     }
-    Camera(width, height, THREE){
+    Camera(width, height, THREE, cameraPosition){
         try{
-            let camera = new THREE.PerspectiveCamera(45, width/height, 0.1, 3000);
-            camera.position.set(0, 0, 1000);
+            const camera = new THREE.PerspectiveCamera(45, width/height, 0.1, 3000);
+            camera.position.set(cameraPosition.x, cameraPosition.y, cameraPosition.z);
+            console.log(cameraPosition)
             return camera;
         }
         catch(e){
@@ -112,10 +124,10 @@ function animate(){
     try{
         controls.update();
         render();
-        requestAnimationFrame( animate );
+        requestAnimationFrame(animate);
     }
     catch(e){
-        errorHandler('Rendering', 'animate', e, 'camvas')
+        errorHandler('Rendering', 'animate', e, 'canvas')
     }
 }
 function render(){
