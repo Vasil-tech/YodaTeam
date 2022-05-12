@@ -9,7 +9,9 @@
   },
   "dependencies": {
     "@ckpack/vue-color": "^1.1.9",
+    "ajax": "^0.0.4",
     "core-js": "^3.8.3",
+    "fs": "^0.0.1-security",
     "mitt": "^3.0.0",
     "one-colorpicker": "^1.0.12",
     "three": "^0.139.2",

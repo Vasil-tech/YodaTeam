@@ -17,7 +17,7 @@
             <input id="passwordInput" type="password">
             <p v-show="fieldAlert">Введите данные корректно</p>
         </div>
-        <button @click="fieldAlertCheck()">Вход</button>
+        <button @click="fieldAlertCheck()">{{buttonTitle}}</button>
     </div>
 </template>
 
@@ -32,7 +32,8 @@ export default {
         return{
             AuthForm: false,
             RegistForm: false,
-            fieldAlert: false
+            fieldAlert: false,
+            buttonTitle: ""
         }
     },
     created: function(){
@@ -46,10 +47,12 @@ export default {
         if(this.way == "Registration"){
             this.RegistForm = true;
             this.AuthForm = false
+            this.buttonTitle = "Зарегестрироваться"
         }
         else if(this.way == "Authorisation"){
             this.AuthForm = true;
             this.RegistForm = false
+            this.buttonTitle = "Войти"
         }
         },
     fieldAlertCheck(){

@@ -1,16 +1,16 @@
 <template>
-<div class="HomeWorkArea">
-<h1>Загрузите свою первую модель</h1>
-<button>(Виды поддерживаемых форматов)</button>
-<nav class="navb">
-<p>примеры моделей:</p>
-<ul>
-<li><a href="#">biba</a></li>
-<li><a href="#">Bigbiba</a></li>
-<li><a class="last" href="#">Boba</a></li>
-</ul>
-</nav>
-</div>
+    <div class="HomeWorkArea">
+        <h1>Загрузите свою первую модель</h1>
+        <button>(Виды поддерживаемых форматов)</button>
+        <nav class="navb">
+            <p>примеры моделей:</p>
+            <ul>
+                <li><a>biba</a></li>
+                <li><a>Bigbiba</a></li>
+                <li><a class="last">Boba</a></li>
+            </ul>
+        </nav>
+    </div>
 </template>
 
 <script>
@@ -25,7 +25,6 @@
 
 .navb li{
     display: inline;
-    
 }
 
 h1{

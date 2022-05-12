@@ -6,8 +6,8 @@
         <li><a>Модели</a></li>  
 
           <div class="RightMenu">
-              <li><a class="vhod" @click="Auth(0)">Вход</a></li>
-              <li><a class="registration" @click="Auth(1)">Регистрация</a></li>
+              <li><a class="vhod" @click="Auth(1)">Вход</a></li>
+              <li><a class="registration" @click="Auth(0)">Регистрация</a></li>
           </div>
       </ul>
     </nav>
@@ -33,6 +33,9 @@ export default {
 </script>
 
 <style>
+li{
+  cursor: pointer;
+}
 .Navbar{
   position: fixed;
   top: 1%;
@@ -61,7 +64,7 @@ export default {
   text-align: center;
   text-decoration: none;
   padding: 15px;
-  font-family: 'Montserrat';
+  font-family: 'Montserrat', 'sans-serif';
   font-size: 18px;
   margin-bottom: 1%;
   margin-right: 15px;

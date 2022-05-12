@@ -7,3 +7,16 @@ export function Loader(THREE){
     document.cookie = encodeURIComponent("modelParams")+ '=' + encodeURIComponent(param)
     return(mesh);
 }
+//import {fs} from 'fs';
+export function userLoader(fs, file){
+    console.log(fs, file)
+    // const tolw = require("tolw");
+    // // initialise tolw
+    // //const fs = require('fs');
+    // tolw.init().then(() => {
+    // // have fun
+    // let objFile = new Uint8Array(fs.readFileSync(file, null));
+    // let { attrib, shapes } = tolw.loadObj(objFile);
+    // console.log(attrib, shapes)
+    // });
+}
