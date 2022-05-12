@@ -1,6 +1,8 @@
 <template>
     <div class="ToolPanelRoot">
-        <DefaultWindow v-if="defWinVisible"></DefaultWindow>
+        <div class="homePage" v-if="HPEvisible">
+            <HomePageEdit></HomePageEdit>
+        </div>
         <editMenu v-if="editMenuVisible"></editMenu>
         <authorisation-page 
         v-if="AuthorisationPageVisible"
@@ -13,15 +15,16 @@
 <script>
 import editMenu from "./ToolPanelContainer/Editor/EditParam.vue" 
 import AuthorisationPage from "./ToolPanelContainer/AuthorisationPage.vue"
-import DefaultWindow from "./ToolPanelContainer/DefaultWindow.vue"
+import HomePageEdit from "./ToolPanelContainer/HomePageEdit.vue"
 export default ({
     components:{
         editMenu,
         AuthorisationPage,
-        DefaultWindow
+        HomePageEdit
     },
     data(){
         return{
+            HPEvisible: true,
             editMenuVisible: false,
             AuthorisationPageVisible: false,
             way: String,
@@ -35,12 +38,14 @@ export default ({
     created: function(){
         this.emitter.on("OpenAuthorisation", data =>{
         if(data == 0){
+            this.HPEvisible = false;
             this.AuthorisationPageVisible = true;
             this.editMenuVisible = false;
             this.way = "Registration"
             this.title = "Регистрация"
             }
         else if(data == 1){
+            this.HPEvisible = false;
             this.AuthorisationPageVisible = true;
             this.editMenuVisible = false;
             this.way = "Authorisation"
@@ -49,6 +54,7 @@ export default ({
         })
         this.emitter.on("OpenEditor", data => {
             if(data){
+                this.HPEvisible = false;
                 this.AuthorisationPageVisible = false;
                 this.editMenuVisible = true;
             }
