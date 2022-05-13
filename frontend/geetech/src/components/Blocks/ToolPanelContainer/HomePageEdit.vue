@@ -33,8 +33,7 @@ export default{
 function handleFiles() {
     try{
         const fileList = this.files;
-        const fs = require('fs');
-        userLoader(fs, fileList[0])
+        userLoader(fileList[0])
     }
     catch(e){
         errorHandler("HomePage", "handleFiles", e, "canvas")
