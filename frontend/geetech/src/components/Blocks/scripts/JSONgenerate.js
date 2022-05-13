@@ -1,39 +1,25 @@
-import { emitter } from "@/main";
-import errorHandler from "./errorHandler";
-export default function(obj){
+export default async function(obj){
     try{
-        obj = JSON.stringify(obj)
-        let check = IsJsonString(obj)
-        if(check){
-            let xmlhttp = new XMLHttpRequest();
-            xmlhttp.open('POST', "/", true);
-            xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            xmlhttp.send("biba")
-            xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4) {
-                if(this.status == 200){
-                    console.log(this.responseText);
-                    emitter.emit("Response", this.responseText)
-                    }
-                }
-            }
-        }
-        else{
-            errorHandler("JSONgenerate", "default", "not json", "Connection")
-        }
-        
+        let data = JSON.stringify(obj)
+        let url = '/'
+        try {
+            const response = await fetch(url, {
+              method: 'POST', 
+              body: data,
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            });
+            const json = await response.json();
+            console.log('Успех:', JSON.stringify(json));
+          } catch (error) {
+            console.error('Ошибка:', error);
+          }        
     }
     catch(e){
-        errorHandler("JSONgenerate","default",e, "Connection")
+        console.error(e)
     }
     
 }
-function IsJsonString(str) {
-    try {
-        JSON.parse(str);
-        console.log(str)
-    } catch (e) {
-        return false;
-    }
-    return true;
-}
+
+

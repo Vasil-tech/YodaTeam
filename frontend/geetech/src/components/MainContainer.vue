@@ -32,5 +32,10 @@ export default{
 </script>
 
 <style>
-
+.navMenu{
+    width: 100%;
+}
+.MainContainerRoot{
+    position: absolute;
+}
 </style>

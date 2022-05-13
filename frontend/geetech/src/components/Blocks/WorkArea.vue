@@ -57,10 +57,10 @@ export default{
 <style>
 .workAreaRoot{
     position: fixed;
-    width: 72%;
+    width: 72vw;
     height: 85%;
     float: left;
-    left: 1%;
+    left: 1vw;
     bottom: 0;
     border: 2px dotted #3A506B;
     top: 12%;

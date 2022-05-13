@@ -66,10 +66,10 @@ export default ({
 <style>
 .ToolPanelRoot{
     position: fixed;
-     float: right;
+    float: right;
     width: 25%;
     height: 85%;
-    right: 1%;
+    right: 1vw;
     top: 12%;
     bottom: 3px;
     border: 2px solid #3A506B;
