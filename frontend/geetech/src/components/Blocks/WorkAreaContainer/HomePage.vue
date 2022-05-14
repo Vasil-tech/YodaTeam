@@ -19,8 +19,9 @@
 
 <style>
 .HomeWorkArea{
-    align-conent: center;
-    margin-top: 20%
+    align-content: center;
+    margin-top: 20%;
+    text-align: center;
 }
 
 .navb li{

@@ -62,7 +62,7 @@ export default{
     float: left;
     left: 1vw;
     bottom: 0;
-    border: 2px dotted #3A506B;
+    border: 1px dashed #666666;
     top: 12%;
 }
 </style>

@@ -1,8 +1,5 @@
 <template>
 <div class="HomePageEdit">
-    <div class="container1">
-        <button class="points">•••</button>
-    </div>
     <div class="container2">
         <p>Выберете модель, которую необходимо просмотреть</p>
     </div>
@@ -44,45 +41,31 @@ function handleFiles() {
 <style>
 .HomePageEdit{
     position:fixed;
-    height: 85%;
-    width: 24%;
-}
-.container1{
-    position:relative;
-    height: 10%;
-}
-
-button.points{
-    position: relative;
-    float: right;
-    font-size: 30px;
-    margin-right: 10px;
-    background: #FFFFFF;
-    border: #FFFFFF;
-    margin-top: none;
-
+    height: 85vh;
+    width: 24vw;
 }
 .container2{
     position: relative;
-    height: 45%;
-    margin: 10px;  
-    align-content: center;
-    text-align: center;
-    margin-top: 45%;
+    top: 25vh;
 }
 .container3{
-    position:relative;
-    height: 20%;
-    Float: center;
-    margin-bottom: 10px;
+    top: 85%;
+    position:absolute;
+    margin:auto;
+    left:0;
+    right:0;
+    display: block;
+    text-align: center;
 }
 p{
+        vertical-align: middle;
+
     font-family: 'Montserrat';
     font-size: 18px;
 }
 hr{
     border: none;
-    border-top: 2px solid #1CBAC3;
+    border: 1px solid #8E8E8E;
     width: 80%;
 }
 label.ForFile{
@@ -93,6 +76,7 @@ label.ForFile{
     font-family: 'Montserrat';
     font-size: 18px;
     display: inline-block;
+    color: #FFFFFF;
     cursor: pointer;
 }
 input.inputForFile{

@@ -77,5 +77,7 @@ export default {
 </script>
 
 <style>
-
+.AuthPageRoot{
+    text-align: center;
+}
 </style>

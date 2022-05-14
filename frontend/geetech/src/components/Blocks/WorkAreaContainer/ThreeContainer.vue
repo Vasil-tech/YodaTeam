@@ -43,6 +43,11 @@ export default {
         // this.emitter.on("FullScreenCanvas", data=>{
         //     start3d(THREE, this.color, this.orbValue, data, true)
         // })
+        this.emitter.on("Resize", data => {
+            if(data){
+                start3d(THREE, this.color, this.orbValue, this.autoRotate)
+            }
+        })
     }
 }
 
@@ -68,3 +73,6 @@ function start3d(THREE, color="black", orbCont, autoRotate = false){
     }
 }
 </script>
+<style>
+
+</style>
