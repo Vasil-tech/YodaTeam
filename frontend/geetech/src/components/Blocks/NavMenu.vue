@@ -14,12 +14,13 @@
       </div>
     </div>
     <div class="rightPart">
-      <div class="entire" @click="Auth(0)">
-        <a class="entire">Вход</a>
-          <div class="regist" @click="Auth(1)">
-            <a class="regist">Регистрация</a>
+      <div class="regist" @click="Auth(0)">
+        <a class="regist">Регистрация</a>
+    
+        <div class="entire" @click="Auth(1)">
+          <a class="entire">Вход</a>
+        </div>
           </div>
-      </div>
     </div>
       <div class="line">
       </div>
@@ -47,7 +48,7 @@ export default {
 <style>
 .line{
   position: fixed;
-  top: 10vh;
+  top: 10%;
   left: 1vw;
   width: 98vw;
   border: 1px solid #BDBDBD;
@@ -60,17 +61,17 @@ export default {
   font-weight: 500;
   position: fixed;
   float: right;
-  width: 25%;
+  width: 50%;
   right: 1vw;
-  top: 2vw;
+  top: 3vh;
 }
 a.entire{
-  float: left;
+  float: right;
+  right: 10%;
   padding-top:6pt;
   vertical-align:middle;
   text-align: center;
   position: relative;
-  left: 2vw;
   border: 1px solid #1CBAC4;
   border-radius: 50px;
   background-color: #1CBAC4;
@@ -81,16 +82,13 @@ a.entire{
 .entire:hover{
   cursor: pointer;
 }
-div.regist{
-  position: sticky;
-  left: 1vw;
-}
 a.regist{
   padding-top:6pt;
   vertical-align:middle;
   text-align: center;
   position: relative;
   float: right;
+  right: 3vw;
   border: 1px solid #1CBAC4;
   border-radius: 50px;
   height: 28pt;
@@ -126,6 +124,7 @@ a.chapter{
 .logo{
   float: left;
   width:0%;
+  top: 1%;
 }
 .leftPart{
   float: left;
