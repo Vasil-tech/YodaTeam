@@ -11,4 +11,10 @@ public class MainController {
         model.addAttribute("tittle", "Главная страница");
         return "index";
     }
+    @PostMapping("/")
+    public String blogAddMain (@RequestParam String eMail, @RequestParam String login, @RequestParam String password, Model model) {
+        User post = new User(eMail, login, password);
+        userRepo.save(post);
+        return "index";
+    }
 }
