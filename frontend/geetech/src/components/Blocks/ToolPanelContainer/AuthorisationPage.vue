@@ -62,7 +62,6 @@ export default {
         else if(this.way == "Authorisation"){
             this.fieldAlert = false
             jsonGenerate({ action: this.way, login: document.getElementById("loginInput").value, password: document.getElementById("passwordInput").value})
-            return null;
         }
         if(document.getElementById("emailInput").value.length <=  5 || document.getElementById("loginInput").value.length <= 3 || document.getElementById("passwordInput").value.length <= 8){
             this.fieldAlert = true;

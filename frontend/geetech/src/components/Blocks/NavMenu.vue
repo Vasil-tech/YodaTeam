@@ -14,16 +14,16 @@
       </div>
     </div>
     <div class="rightPart">
-      <div class="regist" @click="Auth(0)">
-        <a class="regist">Регистрация</a>
+      <div class="regist">
+        <a class="regist"  @click="Auth(0)">Регистрация</a>
     
-        <div class="entire" @click="Auth(1)">
-          <a class="entire">Вход</a>
+        <div class="entire" >
+          <a class="entire" @click="Auth(1)">Вход</a>
         </div>
           </div>
-    </div>
-      <div class="line">
+          <div class="line">
       </div>
+    </div>
   </div>
 </template>
 
@@ -47,13 +47,13 @@ export default {
 
 <style>
 .line{
-  position: fixed;
-  top: 10%;
-  left: 1vw;
+  position: relative;
+  float: right;
+  right: 1vw;
+  top: 1vw;
   width: 98vw;
   border: 1px solid #BDBDBD;
 }
-
 .rightPart{
   font-family: 'Montserrat';
   font-size: 16pt;
@@ -62,7 +62,7 @@ export default {
   position: fixed;
   float: right;
   width: 50%;
-  right: 1vw;
+  right: 0vw;
   top: 3vh;
 }
 a.entire{
@@ -72,9 +72,9 @@ a.entire{
   vertical-align:middle;
   text-align: center;
   position: relative;
-  border: 1px solid #1CBAC4;
+  border: 1px solid #71D4DA;
   border-radius: 50px;
-  background-color: #1CBAC4;
+  background-color: #71D4DA;
   width: 90pt;
   height: 28pt;
   color: white;
@@ -101,6 +101,7 @@ a.regist{
   position: fixed;
   top: 4vh;
   float: left;
+  left: 1%;
 }
 a.chapter{
   font-family: 'Montserrat';

@@ -6,7 +6,7 @@
     <div class="container3">
     <hr>
         <label class="ForFile" @click="loadClick()">
-            <span>Выберете файл</span>
+            <span>Выберите файл</span>
         </label>
         <input id="input" class="inputForFile" type="file" accept=".obj">
     </div>
@@ -17,7 +17,6 @@
 <script>
 import errorHandler from "../scripts/errorHandler";
 import {userLoader} from "../scripts/Three/Loader.js"
-//import {fs} from 'fs'
 export default{
     methods:{
         loadClick(){
