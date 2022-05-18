@@ -2,16 +2,26 @@
     <div class="EditParamRoot">
         <div class="MenuButtons">
             <div class="component1" v-if="EditTool1">
-                <button v-if="buttonVisible" @click="NavButtonClick(1)">Данные о модели</button>
+                <div class="NavBut1">
+                    <button v-if="buttonVisible" @click="NavButtonClick(1)">Детали</button>
+                </div>
+                <hr>
                 <div v-if="componentVisible">
-                    <button @click="NavButtonClick(0)">Назад</button>
+                    <div class="BtnBack">
+                    <button @click="NavButtonClick(0)">🢔 Назад</button>
+                    </div>
                     <ModelInfo></ModelInfo>
                 </div>
             </div>
             <div class="component2" v-if="EditTool2">
-                <button v-if="buttonVisible" @click="NavButtonClick(2)">Параметры сцены</button>
+                <div class="NavBut2">
+                    <button v-if="buttonVisible" @click="NavButtonClick(2)">Настройки</button>
+                </div>
+                <hr>
                 <div v-if="componentVisible">
-                    <button @click="NavButtonClick(0)">Назад</button>
+                    <div class="BtnBack">
+                        <button @click="NavButtonClick(0)">🢔 Назад</button>
+                    </div>
                     <SceneParam></SceneParam>
                 </div>
             </div>
@@ -63,5 +73,49 @@ export default{
 </script>
 
 <style>
+.NavBut1 button{
+    text-align: left;
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding: 5px;
+    background-color: #fbfaff;
+
+}
+.NavBut2 button{
+    text-align: left;
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding: 5px;
+    background-color: #fbfaff;
+
+}
+.component1 hr{
+    width: 100%;
+    margin: 0;
+    border-top: 1px solid #B0E0E6;
+}
+.component2 hr{
+    width: 100%;
+    margin: 0;
+    border-top: 1px solid #B0E0E6;
+    
+}
+button{
+     background-color: #fbfaff;
+}
+
+button:hover{
+    background-color: #B0E0E6;
+}
+.BtnBack button{
+    background-color: #fbfaff;
+}
+.BtnBack button:hover{
+    background-color: #B0E0E6;
+}
+
+
 
 </style>

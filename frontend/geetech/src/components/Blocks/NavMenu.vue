@@ -6,7 +6,7 @@
       </div>
       <div class="chapters">
         <div class="editor" @click="Editor()">
-          <a class="chapter">Редактор</a>
+          <a id="Aeditor" class="chapter">Редактор</a>
         </div>
         <div class="market">
           <a class="chapter">Модели</a>
@@ -31,18 +31,28 @@
 export default {
     data(){
       return{
-
+            editorBold: false,
+      }
+    },
+    created: function(){
+      if(this.editorBold == true){
+        let ed = document.getElementById("Aeditor");
+        ed.style.background = "red";
       }
     },
     methods:{
       Auth(type){
         this.emitter.emit("OpenAuthorisation", type)
+
       },
       Editor(){
-        this.emitter.emit("OpenEditor", true)
+        this.emitter.emit("OpenEditor", true);
+        this.editorBold = true
       },
     }
 }
+
+
 </script>
 
 <style>
@@ -104,6 +114,8 @@ a.regist{
   left: 1%;
 }
 a.chapter{
+  width: 90pt;
+  height: 28pt;
   font-family: 'Montserrat';
   font-size: 15pt;
   font-style: normal;

@@ -25,5 +25,17 @@ export default{
 </script>
 
 <style>
+.ModelInfoRoot p{
+    text-decoration: none;
+    margin-top: 5%;  
+   
+    border-top: 2px solid #B0E0E6;
+    border-bottom: 2px solid #B0E0E6;
+}
 
+.ModelInfoRoot li {
+font-family: 'Montserrat';
+    font-size: 16px;
+    margin-top: 3%;
+}
 </style>

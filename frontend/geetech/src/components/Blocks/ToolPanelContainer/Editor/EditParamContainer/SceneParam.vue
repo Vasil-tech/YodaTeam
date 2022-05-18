@@ -76,5 +76,48 @@ export default{
 }
 </script>
 <style>
+.backColor p{
+    text-decoration: none;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    border-top: 2px solid #B0E0E6;
+    border-bottom: 2px solid #B0E0E6;
+}
+.colorBar{
+    width: 100%;
+    margin-bottom: 5%;
+}
+.colorBar button{
+    text-align: center;
+    position: relative;
+    width: 33%;
+    margin: 0;
+    padding: 5px;
+    background-color: #fbfaff;
+}
+.colorBar button:hover{
+    background-color: #B0E0E6;
+}
+label{
+    font-family: 'Montserrat','sans-serif';
+    font-size: 18px;
+}
+.control button{
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding: 5px;
+    background-color: #fbfaff;
+    text-align: left;
+}
+.control button:hover{
+    background-color: #B0E0E6;
+}
+#checkbox{
+    width: 5%;
+    height: auto;
+    
+}
+
 
 </style>

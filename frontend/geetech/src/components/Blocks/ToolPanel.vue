@@ -72,6 +72,6 @@ export default ({
     right: 1vw;
     top: 12%;
     bottom: 3px;
-    background-color: #FBFAFF;
+    background-color: #fbfaff;
 }
 </style>
