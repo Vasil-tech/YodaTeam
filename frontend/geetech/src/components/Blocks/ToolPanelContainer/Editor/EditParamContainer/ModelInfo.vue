@@ -28,7 +28,7 @@ export default{
 .ModelInfoRoot p{
     text-decoration: none;
     margin-top: 5%;  
-   
+    margin-bottom: 5%;
     border-top: 2px solid #B0E0E6;
     border-bottom: 2px solid #B0E0E6;
 }

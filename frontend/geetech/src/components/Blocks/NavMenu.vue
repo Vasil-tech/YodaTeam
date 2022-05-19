@@ -1,6 +1,6 @@
 <template>
   <div class="navMenuRoot">
-    <div class="leftPart">
+    <div  class="leftPart">
       <div class="logo">
         <img src="@/assets/logo.png"/>
       </div>
@@ -31,26 +31,34 @@
 export default {
     data(){
       return{
-            editorBold: false,
+
       }
     },
-    created: function(){
-      if(this.editorBold == true){
-        let ed = document.getElementById("Aeditor");
-        ed.style.background = "red";
-      }
-    },
+    
     methods:{
       Auth(type){
-        this.emitter.emit("OpenAuthorisation", type)
+        this.emitter.emit("OpenAuthorisation", type);
+        this.emitter.emit("SmenaCveta", false);
 
       },
       Editor(){
         this.emitter.emit("OpenEditor", true);
-        this.editorBold = true
+        this.emitter.emit("SmenaCveta", true);
       },
+    } ,
+    
+    created: function(){
+      this.emitter.on("SmenaCveta", data => {
+        if(data == true)
+        document.getElementById("Aeditor").style.fontWeight = "bold";
+        else
+        document.getElementById("Aeditor").style.fontWeight = "normal";
+
+      }) 
+
     }
 }
+
 
 
 </script>

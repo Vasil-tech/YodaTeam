@@ -77,6 +77,27 @@ export default {
 
 <style>
 .AuthPageRoot{
+    font-family: 'Montserrat';
+    font-size: 16pt;
     text-align: center;
+    font-style: normal;
+    font-weight: 500;
+}
+
+.AuthPageRoot button{
+    align-content: center;
+    position: relative;
+    text-align: center;
+    border: 1px solid #71D4DA;
+    border-radius: 50px;
+    background-color: #71D4DA;
+    width: auto;
+    color: white;
+    margin-top: 5%;
+    padding: 8pt 16pt;
+}
+
+.AuthPageRoot button:hover{
+    background-color: #B0E0E6;
 }
 </style>
