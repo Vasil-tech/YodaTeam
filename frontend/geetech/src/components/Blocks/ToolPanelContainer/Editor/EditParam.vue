@@ -102,6 +102,13 @@ export default{
     background-color: #fbfaff;
 
 }
+
+.NavBut1 button:hover {
+    background-color: #B0E0E6;
+}
+.NavBut2 button:hover {
+    background-color: #B0E0E6;
+}
 .MenuButtons     hr{
     position: relative;
     width: 100%;
@@ -125,9 +132,6 @@ button{
      background-color: #fbfaff;
 }
 
-button:hover{
-    background-color: #B0E0E6;
-}
 .BtnBack button{
     background-color: #fbfaff;
     background-image: url("@/assets/ArrowBack.png");

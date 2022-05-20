@@ -3,9 +3,21 @@
         <div class="backColor">
             <p>Смена цвета фона сцены</p>
             <div class="colorBar">
-                <button @click="changeColor('grey')">серый</button>
-                <button @click="changeColor('red')">красный</button>
-                <button @click="changeColor('white')">белый</button>
+                <div class="FirstStorka">
+                    <button class="BtnWhite" id="white" @click="changeColor('white')"></button>
+                    <button class="BtnBlue" id="blue" @click="changeColor('blue')"></button>
+                    <button class="BtnRed" id="red" @click="changeColor('red')"></button>
+                    <button class="BtnGrey" id="grey" @click="changeColor('grey')"></button>
+                    <button class="BtnBlack" id="black" @click="changeColor('black')"></button>
+                    
+                </div>
+                <div class="SecondStroka">
+                    <button class="BtnYellow" id="yellow" @click="changeColor('yellow')"></button>
+                    <button class="BtnGreen" id="green" @click="changeColor('green')"></button>
+                    <button class="BtnPurple" id="purple" @click="changeColor('purple')"></button>
+                    <button class="BtnOrange" id="orange" @click="changeColor('orange')"></button>
+                    <button class="BtnTema" id="pink" @click="changeColor('pink')"></button>
+                </div>
             </div>
         </div>
         <div class="control">
@@ -46,7 +58,8 @@ export default{
             catch(e){
                 this.emitter.emit("CanvasError", {'file': 'SceneParam', 'method':'changeColor', 'ext':e})
             }
-        },
+            },
+            
         orbContChecked(orbValue){
             try{
                 this.emitter.emit("OrbitControlStatus", orbValue)
@@ -73,6 +86,7 @@ export default{
             }
         }
     }
+    
 }
 </script>
 <style>
@@ -87,17 +101,7 @@ export default{
     width: 100%;
     margin-bottom: 5%;
 }
-.colorBar button{
-    text-align: center;
-    position: relative;
-    width: 33%;
-    margin: 0;
-    padding: 5px;
-    background-color: #fbfaff;
-}
-.colorBar button:hover{
-    background-color: #B0E0E6;
-}
+
 label{
     font-family: 'Montserrat','sans-serif';
     font-size: 18px;
@@ -117,6 +121,80 @@ label{
     width: 5%;
     height: auto;
     
+}
+.colorBar button{
+    position: relative;
+    width: 2.5vw;
+    height: 3.3vh;
+    margin: 5%;
+}
+
+.colorBar button:hover{
+    border-radius: 50%;
+}
+
+.FirstStroka{
+    width: 100%;
+    height: 10%;
+    float: right;
+    align-content: center;
+}
+.SecondStroka{
+    width: 100%;
+    height: 10%;
+    float: right;
+    align-content: center;
+}
+
+button.BtnGrey{
+    
+    background-color: grey;
+    border: 1px solid #B0E0E6;
+}
+button.BtnRed{
+    
+    background-color: red;
+    border: 1px solid #B0E0E6;
+}
+button.BtnWhite{
+   
+    background-color: white;
+    border: 1px solid #B0E0E6;
+}
+button.BtnBlack{
+   
+    background-color: black;
+    border: 1px solid #B0E0E6;
+}
+button.BtnBlue{
+    
+    background-color: blue;
+    border: 1px solid #B0E0E6;
+}
+button.BtnYellow{
+    
+    background-color: yellow;
+    border: 1px solid #B0E0E6;
+}
+button.BtnGreen{
+
+    background-color: green;
+    border: 1px solid #B0E0E6;
+}
+button.BtnOrange{
+    
+    background-color: orange;
+    border: 1px solid #B0E0E6;
+}
+button.BtnTema{
+  
+    background-color: pink;
+    border: 1px solid #B0E0E6;
+}
+button.BtnPurple{
+  
+    background-color: rebeccapurple;
+    border: 1px solid #B0E0E6;
 }
 
 
