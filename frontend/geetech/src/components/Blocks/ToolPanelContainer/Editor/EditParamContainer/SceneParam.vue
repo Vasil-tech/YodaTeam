@@ -90,6 +90,12 @@ export default{
 }
 </script>
 <style>
+.orbControl{
+    position: relative;
+    width: 100%;
+    margin-top: 30%;
+}
+
 .backColor p{
     text-decoration: none;
     margin-top: 5%;
@@ -118,28 +124,32 @@ label{
     background-color: #B0E0E6;
 }
 #checkbox{
+    position: relative;
     width: 5%;
     height: auto;
     
 }
 .colorBar button{
     position: relative;
-    width: 2.5vw;
-    height: 3.3vh;
-    margin: 5%;
+    width: 25px;
+    height: 25px;
+    margin: 2%;
+    float: right;
 }
 
 .colorBar button:hover{
     border-radius: 50%;
 }
 
-.FirstStroka{
+.FirstStorka{
+    position: relative;
     width: 100%;
     height: 10%;
     float: right;
     align-content: center;
 }
 .SecondStroka{
+    position: relative;
     width: 100%;
     height: 10%;
     float: right;

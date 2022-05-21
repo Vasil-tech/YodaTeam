@@ -5,7 +5,7 @@
         <nav class="navb">
             <p>примеры моделей:</p>
             <ul>
-                <li><a>biba</a></li>
+                <li><a class="Primer1" @click="Editor()">Model1</a></li>
                 <li><a>Bigbiba</a></li>
                 <li><a class="last">Boba</a></li>
             </ul>
@@ -14,6 +14,19 @@
 </template>
 
 <script>
+export default {
+    data(){
+      return{
+
+      }
+    },
+    
+    methods:{
+      Editor(){
+        this.emitter.emit("OpenEditor", true);
+      },
+    } 
+}
 
 </script>
 
@@ -68,6 +81,9 @@ ul{
 }
 .navb a.last{
     border-right: none;
+}
+.navb a:hover{
+    cursor: pointer;
 }
 
 </style>
