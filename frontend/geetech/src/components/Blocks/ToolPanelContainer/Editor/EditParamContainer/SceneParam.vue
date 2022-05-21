@@ -5,19 +5,19 @@
             
             <div class="colorBar">
                 <div class="FirstStorka">
-                    <button class="BtnWhite" id="white" @click="changeColor('white')"></button>
-                    <button class="BtnBlue" id="blue" @click="changeColor('blue')"></button>
-                    <button class="BtnRed" id="red" @click="changeColor('red')"></button>
-                    <button class="BtnGrey" id="grey" @click="changeColor('grey')"></button>
-                    <button class="BtnBlack" id="black" @click="changeColor('black')"></button>
+                    <button class="BtnWhite" id="white" @click="changeColor('#FFFFFF')"></button>
+                    <button class="BtnBlue" id="blue" @click="changeColor('#0000FF')"></button>
+                    <button class="BtnRed" id="red" @click="changeColor('#FF0000')"></button>
+                    <button class="BtnGrey" id="grey" @click="changeColor('#808080')"></button>
+                    <button class="BtnBlack" id="black" @click="changeColor('#000000')"></button>
                     
                 </div>
                 <div class="SecondStroka">
-                    <button class="BtnYellow" id="yellow" @click="changeColor('yellow')"></button>
-                    <button class="BtnGreen" id="green" @click="changeColor('green')"></button>
-                    <button class="BtnPurple" id="purple" @click="changeColor('purple')"></button>
-                    <button class="BtnOrange" id="orange" @click="changeColor('orange')"></button>
-                    <button class="BtnTema" id="pink" @click="changeColor('pink')"></button>
+                    <button class="BtnYellow" id="yellow" @click="changeColor('#FFFF00')"></button>
+                    <button class="BtnGreen" id="green" @click="changeColor('#008000')"></button>
+                    <button class="BtnPurple" id="purple" @click="changeColor('#800080')"></button>
+                    <button class="BtnOrange" id="orange" @click="changeColor('#FFA500')"></button>
+                    <button class="BtnTema" id="pink" @click="changeColor('#FFC0CB')"></button>
                     <input type="color" id="color" value="#000000" @change="Changed(this.value)">
                 </div>
             </div>
@@ -56,7 +56,7 @@ export default{
         changeColor(color){
             try{
                 this.emitter.emit("SceneBackgroundColor", color);
-                document.getElementById('color').color = color;
+                document.getElementById('color').value = color;
             }
             catch(e){
                 this.emitter.emit("CanvasError", {'file': 'SceneParam', 'method':'changeColor', 'ext':e})
@@ -103,9 +103,9 @@ export default{
 }
 </script>
 <style>
-
 input{
-    background-color:transparent;
+    position: relative;
+    margin-left: 10%;
 }
 
 .orbControl{
@@ -152,7 +152,7 @@ label{
     width: 25px;
     height: 25px;
     margin: 2%;
-    float: right;
+    float: left;
 }
 
 .colorBar button:hover{
