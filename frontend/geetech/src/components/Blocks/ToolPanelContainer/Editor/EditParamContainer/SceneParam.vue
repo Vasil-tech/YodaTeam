@@ -2,6 +2,7 @@
     <div class="SceneParamRoot">
         <div class="backColor">
             <p>Смена цвета фона сцены</p>
+            
             <div class="colorBar">
                 <div class="FirstStorka">
                     <button class="BtnWhite" id="white" @click="changeColor('white')"></button>
@@ -17,6 +18,7 @@
                     <button class="BtnPurple" id="purple" @click="changeColor('purple')"></button>
                     <button class="BtnOrange" id="orange" @click="changeColor('orange')"></button>
                     <button class="BtnTema" id="pink" @click="changeColor('pink')"></button>
+                    <input type="color" id="color" value="#000000" @change="Changed(this.value)">
                 </div>
             </div>
         </div>
@@ -47,18 +49,29 @@ export default{
     data(){
         return{
                 rotateStatus: false,
-                checked: false
+                checked: false,
         }
     },
     methods:{
         changeColor(color){
             try{
                 this.emitter.emit("SceneBackgroundColor", color);
+                document.getElementById('color').color = color;
             }
             catch(e){
                 this.emitter.emit("CanvasError", {'file': 'SceneParam', 'method':'changeColor', 'ext':e})
             }
             },
+
+        Changed(color){
+            try{
+                color = document.getElementById('color').value;
+                this.emitter.emit("SceneBackgroundColor", color);
+            }
+            catch(e){
+                this.emitter.emit("CanvasError", {'file': 'SceneParam', 'method':'changeColor', 'ext':e})
+            }
+        },
             
         orbContChecked(orbValue){
             try{
@@ -90,6 +103,11 @@ export default{
 }
 </script>
 <style>
+
+input{
+    background-color:transparent;
+}
+
 .orbControl{
     position: relative;
     width: 100%;
