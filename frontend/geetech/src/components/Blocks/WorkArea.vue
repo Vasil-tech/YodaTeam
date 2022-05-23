@@ -58,19 +58,16 @@ export default{
             this.Error.ext = data.ext
         })
         this.emitter.on("OpenEditor", data=>{
-            this.HPvisible = false;
-            this.Canvasvisible = !data;
-            this.MarketVisible = false;
-        })
-        this.emitter.on("DefaultModel", data => {
-        if(typeof(data) == 'object'){
-            this.modelNum = data['modelNum']
-            this.HPvisible = !this.HPvisible;
+            if(typeof(data) == 'object'){
+                this.modelNum = data['modelNum']
+                this.HPvisible = false;
+                this.Canvasvisible = !data;
+                this.MarketVisible = false;}
+                else{
+                this.HPvisible = false;
+                this.Canvasvisible = !data;
+                this.MarketVisible = false;
             }
-            else{
-                this.HPvisible = !data
-            }
-
         })
         this.emitter.on("MarketStore", data =>{
             this.HPvisible = false;
