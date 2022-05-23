@@ -15,26 +15,17 @@
 
 
 <script>
-import errorHandler from "../scripts/errorHandler";
-import {userLoader} from "../scripts/Three/Loader.js"
+//import errorHandler from "../scripts/errorHandler";
 export default{
     methods:{
-        loadClick(){
-            document.querySelector('.inputForFile').click()
-            const inputElement = document.getElementById("input");
-            inputElement.addEventListener("change", handleFiles, false);
-        }
+        // loadClick(){
+        //     document.querySelector('.inputForFile').click()
+        //     const inputElement = document.getElementById("input");
+        //     inputElement.addEventListener("change", handleFiles, false);
+        // }
     }
 }
-function handleFiles() {
-    try{
-        const fileList = this.files;
-        userLoader(fileList[0])
-    }
-    catch(e){
-        errorHandler("HomePage", "handleFiles", e, "canvas")
-    }
-}
+
 </script>
 
 <style>
