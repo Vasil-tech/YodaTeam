@@ -8,7 +8,8 @@ let controls, scene, renderer, light;
 
 
 export default class{
-    constructor(THREE, color, OrbitControl, autoRotate, cameraPosition) {
+        constructor(THREE, color, OrbitControl, autoRotate, cameraPosition, modelNum) {
+        console.log(modelNum)
         const ans = this.supportAndCnvsSize();
         const canvas = ans.canvas;
         let height = ans.height;

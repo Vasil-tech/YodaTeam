@@ -50,6 +50,10 @@ export default{
         this.emitter.on("OpenEditor", data=>{
             this.HPvisible = !data;
         })
+        this.emitter.on("DefaultModel", data => {
+            this.HPvisible = !this.HPvisible;
+            setTimeout(this.emitter.emit("SelectedModel", data), 500)
+        })
     },
 }
 </script>

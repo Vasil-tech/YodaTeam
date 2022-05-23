@@ -12,13 +12,14 @@ import Rendering from '../scripts/Three/Renderering.js'
 import * as THREE from 'three'
 import OrbitControl from 'three-orbitcontrols'
 import {camera} from '../scripts/Three/Renderering.js'
+
 export default {
     data(){
         return{
             color: "black",
             orbValue: false,
             renderNum:0,
-            autoRotate: false,
+            autoRotate: false, 
         }
     },
     methods:{
@@ -40,18 +41,19 @@ export default {
             this.autoRotate = autoRotate
             start3d(THREE, this.color, true, this.autoRotate)
         })
-        // this.emitter.on("FullScreenCanvas", data=>{
-        //     start3d(THREE, this.color, this.orbValue, data, true)
-        // })
         this.emitter.on("Resize", data => {
             if(data){
                 start3d(THREE, this.color, this.orbValue, this.autoRotate)
             }
         })
+        this.emitter.on("SelectedModel", data => {
+            start3d(THREE, this.color, this.orbValue, this.autoRotate, data)
+        })
     }
 }
 
-function start3d(THREE, color="black", orbCont, autoRotate = false){
+
+function start3d(THREE , color="black", orbCont, autoRotate = false, modelNum = 0){
     try{
         let cameraPosition = {};
         if(typeof session[0] == 'object'){
@@ -62,10 +64,10 @@ function start3d(THREE, color="black", orbCont, autoRotate = false){
             cameraPosition.z = 1000;
         }
         if(orbCont){
-            session[0]=new Rendering(THREE, color, OrbitControl, autoRotate, cameraPosition)
+            session[0]=new Rendering(THREE, color, OrbitControl, autoRotate, cameraPosition, modelNum)
         }
         else{
-            session[0]=new Rendering(THREE, color, false, null, cameraPosition);
+            session[0]=new Rendering(THREE, color, false, null, cameraPosition, modelNum);
         }
     }
     catch(e){

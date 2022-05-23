@@ -5,9 +5,9 @@
         <nav class="navb">
             <p>примеры моделей:</p>
             <ul>
-                <li><a class="Primer1" @click="Editor()">Model1</a></li>
-                <li><a>Bigbiba</a></li>
-                <li><a class="last">Boba</a></li>
+                <li><a class="Primer1" @click="ModelNum(0)">Model1</a></li>
+                <li><a class="Primer2" @click="ModelNum(1)">Bigbiba</a></li>
+                <li><a class="Primer3" @click="ModelNum(2)">Boba</a></li>
             </ul>
         </nav>
     </div>
@@ -22,10 +22,11 @@ export default {
     },
     
     methods:{
-      Editor(){
-        this.emitter.emit("OpenEditor", true);
-      },
-    } 
+      ModelNum(num){
+          console.log(num)
+          this.emitter.emit("DefaultModel", num);
+      }
+    },
 }
 
 </script>
