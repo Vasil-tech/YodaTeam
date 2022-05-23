@@ -20,7 +20,6 @@ export default {
 
       }
     },
-    
     methods:{
       ModelNum(num){
           console.log(num)

@@ -8,8 +8,8 @@
         <div class="editor" @click="Editor()">
           <a id="Aeditor" class="chapter">Редактор</a>
         </div>
-        <div class="market">
-          <a class="chapter">Модели</a>
+        <div class="market" @click="Market()">
+          <a id="AMarket" class="chapter">Модели</a>
         </div>
       </div>
     </div>
@@ -28,6 +28,7 @@
 </template>
 
 <script>
+
 export default {
     data(){
       return{
@@ -39,26 +40,37 @@ export default {
       Auth(type){
         this.emitter.emit("OpenAuthorisation", type);
         this.emitter.emit("SmenaCveta", false);
+        this.emitter.emit("SmenaCveta1", false);
 
       },
       Editor(){
         this.emitter.emit("OpenEditor", true);
         this.emitter.emit("SmenaCveta", true);
+        this.emitter.emit("SmenaCveta1", false);
       },
-    } ,
+      Market(){
+        this.emitter.emit("MarketStore", true);
+        this.emitter.emit("SmenaCveta1", true);
+        this.emitter.emit("SmenaCveta", false);
+      }
+    },
     
-    created: function(){
+    created: 
+    function(){
       this.emitter.on("SmenaCveta", data => {
         if(data == true)
         document.getElementById("Aeditor").style.fontWeight = "bold";
         else
         document.getElementById("Aeditor").style.fontWeight = "normal";
-
-      }) 
-
-    }
+      }),
+      this.emitter.on("SmenaCveta1", data => {
+        if(data == true)
+        document.getElementById("AMarket").style.fontWeight = "bold";
+        else
+        document.getElementById("AMarket").style.fontWeight = "normal";
+      })
+  }
 }
-
 
 
 </script>
@@ -96,6 +108,9 @@ a.entire{
   width: 90pt;
   height: 28pt;
   color: white;
+}
+.market:hover{
+  cursor: pointer;
 }
 .entire:hover{
   cursor: pointer;

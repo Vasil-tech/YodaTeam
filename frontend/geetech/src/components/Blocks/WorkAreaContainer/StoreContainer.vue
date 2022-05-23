@@ -1,10 +1,16 @@
 <template>
-  <div class="storeContainerRoot"></div>
+  <div class="storeContainerRoot">
+    <p>fhjgdfghfdk</p>
+  </div>
 </template>
 
 <script>
 export default {
+ data(){
+      return{
 
+      }
+    },
 }
 </script>
 
