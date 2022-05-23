@@ -1,20 +1,22 @@
-export default async function(obj){
+import errorHandler from "./errorHandler";
+export default async function(data){
     try{
-      let data = JSON.stringify(obj)
-      let url = '/'
-      try {
-          const response = await fetch(url, {
-            method: 'POST', 
-            body: data,
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          });
-          const json = await response.json();
-          console.log('Успех:', JSON.stringify(json));
-        } catch (error) {
-          console.error('Ошибка:', error);
-        }        
+      console.log(data)
+      let response = await fetch("/",{
+          method: "POST",
+          headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+          },
+          body:JSON.stringify(data)
+      }
+      );
+      
+      if (response.ok) {
+        let json = await response.json();
+        console.log(json);
+      } else {
+        errorHandler("JSONgenerate", "", response.status);
+      }      
     }
     catch(e){
         console.error(e)

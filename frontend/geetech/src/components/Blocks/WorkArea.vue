@@ -8,7 +8,7 @@
         </div>
         <div class="WAd" id="WAd" v-if="!Canvasvisible">
             <div class="threeContainer" v-if="!Error.check">
-                <three-container></three-container>
+                <three-container :modelNum="modelNum"></three-container>
             </div>
             
                 <div class="errorHandler" v-if="Error.check">
@@ -35,6 +35,7 @@ export default{
     },
     data(){
         return{
+            modelNum: 0,
             HPvisible: true,
             MarketVisible: false,
             Canvasvisible: true,
@@ -62,8 +63,13 @@ export default{
             this.MarketVisible = false;
         })
         this.emitter.on("DefaultModel", data => {
+        if(typeof(data) == 'object'){
+            this.modelNum = data['modelNum']
             this.HPvisible = !this.HPvisible;
-            setTimeout(this.emitter.emit("SelectedModel", data), 500)
+            }
+            else{
+                this.HPvisible = !data
+            }
         })
         this.emitter.on("MarketStore", data =>{
             this.HPvisible = false;
