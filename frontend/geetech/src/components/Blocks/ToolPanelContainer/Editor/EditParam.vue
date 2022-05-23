@@ -21,7 +21,7 @@
                 <hr>
                 <div v-if="componentVisible">
                     <div class="BtnBack">
-                        <button @click="NavButtonClick(0)">Назад</button>
+                        <button @click="NavButtonClick(0)"><a>Назад</a></button>
                     </div>
                     <SceneParam></SceneParam>
                 </div>
