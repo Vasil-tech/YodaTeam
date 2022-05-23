@@ -70,6 +70,7 @@ export default{
             else{
                 this.HPvisible = !data
             }
+
         })
         this.emitter.on("MarketStore", data =>{
             this.HPvisible = false;
