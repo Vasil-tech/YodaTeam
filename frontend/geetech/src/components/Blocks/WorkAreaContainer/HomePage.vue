@@ -20,9 +20,11 @@ export default {
 
       }
     },
+    
     methods:{
       ModelNum(num){
-          this.emitter.emit("OpenEditor", {modelNum: num});
+          console.log(num)
+          this.emitter.emit("DefaultModel", num);
       }
     },
 }

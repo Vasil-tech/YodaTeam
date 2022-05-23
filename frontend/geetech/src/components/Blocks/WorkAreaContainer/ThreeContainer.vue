@@ -14,46 +14,46 @@ import OrbitControl from 'three-orbitcontrols'
 import {camera} from '../scripts/Three/Renderering.js'
 
 export default {
-    props:{
-        modelNum: Number
-    },
     data(){
         return{
             color: "black",
             orbValue: false,
             renderNum:0,
-            autoRotate: false,
+            autoRotate: false, 
         }
     },
     methods:{
 
     },
     mounted: function(){
-        start3d(THREE,this.color, this.orbValue, this.autoRotate, this.modelNum)
+        start3d(THREE)
     },
     created: function(){
         this.emitter.on("SceneBackgroundColor", color => {
-            start3d(THREE, color, this.orbValue, this.autoRotate, this.modelNum)
+            start3d(THREE, color, this.orbValue, this.autoRotate)
             this.color = color
         })
         this.emitter.on("OrbitControlStatus", orbValue =>{
             this.orbValue = orbValue
-            start3d(THREE, this.color, orbValue, null, this.modelNum)
+            start3d(THREE, this.color, orbValue)
         })
         this.emitter.on("RotateOn", autoRotate=> {
             this.autoRotate = autoRotate
-            start3d(THREE, this.color, true, this.autoRotate, this.modelNum)
+            start3d(THREE, this.color, true, this.autoRotate)
         })
         this.emitter.on("Resize", data => {
             if(data){
-                start3d(THREE, this.color, this.orbValue, this.autoRotate, this.modelNum)
+                start3d(THREE, this.color, this.orbValue, this.autoRotate)
             }
+        })
+        this.emitter.on("SelectedModel", data => {
+            start3d(THREE, this.color, this.orbValue, this.autoRotate, data)
         })
     }
 }
 
 
-function start3d(THREE, color="black", orbCont, autoRotate = false, modelNum){
+function start3d(THREE , color="black", orbCont, autoRotate = false, modelNum = 0){
     try{
         let cameraPosition = {};
         if(typeof session[0] == 'object'){

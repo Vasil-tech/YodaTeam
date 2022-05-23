@@ -5,7 +5,7 @@
         </div>
         <div class="WAd" id="WAd" v-if="!HPvisible">
             <div class="threeContainer" v-if="!Error.check">
-                <three-container :modelNum="modelNum"></three-container>
+                <three-container></three-container>
             </div>
                 <div class="errorHandler" v-if="Error.check">
                     <h1>Хьюстон, пиздец</h1>
@@ -28,7 +28,6 @@ export default{
     },
     data(){
         return{
-            modelNum: 0,
             HPvisible: true,
             Error:{
                 check: false,
@@ -49,13 +48,11 @@ export default{
             this.Error.ext = data.ext
         })
         this.emitter.on("OpenEditor", data=>{
-        if(typeof(data) == 'object'){
-            this.modelNum = data['modelNum']
+            this.HPvisible = !data;
+        })
+        this.emitter.on("DefaultModel", data => {
             this.HPvisible = !this.HPvisible;
-            }
-            else{
-                this.HPvisible = !data
-            }
+            setTimeout(this.emitter.emit("SelectedModel", data), 500)
         })
     },
 }
