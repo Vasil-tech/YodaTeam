@@ -1,4 +1,6 @@
-import { Loader } from './Loader.js';
+import { LoadCube } from './Loader.js';
+import { LoadSphere } from './Loader.js';
+import { LoadTorus } from './Loader.js';
 import errorHandler from '../errorHandler.js'
 import check from './SupportThreeCheck.js'
 import { canvasHeight } from '../bus.js';
@@ -9,14 +11,13 @@ let controls, scene, renderer, light;
 
 export default class{
         constructor(THREE, color, OrbitControl, autoRotate, cameraPosition, modelNum) {
-        console.log(modelNum)
         const ans = this.supportAndCnvsSize();
         const canvas = ans.canvas;
         let height = ans.height;
         let width = ans.width;
         try{
             this.init(THREE, canvas, color, width, height, cameraPosition);
-            this.addToScene(THREE);
+            this.addToScene(THREE, modelNum);
             if(OrbitControl!== false){
                 this.setControls(OrbitControl, canvas)
                 if(autoRotate){
@@ -69,11 +70,28 @@ export default class{
         controls.target.set(0, 0, 0);
         controls.update();
     }
-    addToScene(THREE){
+    addToScene(THREE, modelNum){
         try{
-            let model = Loader(THREE)
-            scene.add(model)
-            scene.add(light)
+            let model;
+            switch(modelNum){
+                case 0:
+                    model = LoadSphere(THREE)
+                    scene.add(model)
+                    scene.add(light)
+                break;
+                case 1:
+                    model = LoadCube(THREE)
+                    scene.add(model)
+                    scene.add(light)
+                break;
+                case 2:
+                    model = LoadTorus(THREE);
+                    scene.add(model)
+                    scene.add(light);
+                    scene.add(light.target);
+                break;
+            }
+            
         }
         catch(e){
             errorHandler('Rendering', 'addToScene', e, 'canvas')
@@ -82,7 +100,12 @@ export default class{
 
     Light(THREE){
         try{
-            let light = new THREE.AmbientLight(0xffffff);
+            const color = 0xFFFFFF;
+            const intensity = 1;
+            const light = new THREE.DirectionalLight(color, intensity);
+            light.position.set(100, 100, 100);
+            light.target.position.set(-5, 0, 0);
+            
             return light;
         }
         catch(e){
