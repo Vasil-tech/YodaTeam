@@ -42,7 +42,6 @@ export default {
                 canvas.height = window.innerHeight
                 canvas.style.top = 0;
                 canvas.style.left = 0;
-                console.log(window.innerWidth)
                 this.emitter.emit("Rerender", true)
             }
             else{

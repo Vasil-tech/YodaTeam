@@ -10,6 +10,7 @@ import { autoRotate } from '../Three/Variables.js';
 import { modelNum } from '../Three/Variables.js';
 import { width } from '../bus.js';
 import { height } from '../bus.js';
+import { lightType } from '../Three/Variables.js';
 export default class{
         constructor(THREE, OrbitControl, cameraPosition) {
         const ans = this.supportAndCnvsSize();
@@ -102,13 +103,19 @@ export default class{
 
     Light(THREE){
         try{
-            const color = 0xFFFFFF;
-            const intensity = 1;
-            const light = new THREE.DirectionalLight(color, intensity);
-            light.position.set(100, 100, 100);
-            light.target.position.set(-5, 0, 0);
-            
-            return light;
+            if(lightType == 'ambient'){
+                const light = new THREE.AmbientLight( 0xffffff ); 
+                return light;
+            }
+            if(lightType == 'directional'){
+                const light = new THREE.DirectionalLight( 0xffffff, 0.5 );
+                return light;
+            }
+            if(lightType == 'point'){
+                const light = new THREE.PointLight( 0xffffff, 1, 10000 );
+                light.position.set( 50, 50, 50 );
+                return light;
+            }
         }
         catch(e){
             errorHandler('Rendering', 'Light', e, 'canvas');

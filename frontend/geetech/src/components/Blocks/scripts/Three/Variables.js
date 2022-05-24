@@ -2,6 +2,7 @@ export let orbValue = false;
 export let color = "black"
 export let autoRotate = false;
 export let modelNum = 0;
+export let lightType = 'ambient'
 export function setVarData(key, value){
     switch(key){
         case "color":
@@ -16,5 +17,8 @@ export function setVarData(key, value){
         case "modelNum":
             modelNum = value;
         break;
+        case "light":
+            lightType = value
+            break;
     }
 }

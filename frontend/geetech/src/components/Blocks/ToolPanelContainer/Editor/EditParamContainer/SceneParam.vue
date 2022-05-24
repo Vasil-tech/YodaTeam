@@ -1,7 +1,7 @@
 <template>
     <div class="SceneParamRoot">
         <div class="backColor">
-            <p>Смена цвета фона сцены</p>
+            <p class="title">Смена цвета фона сцены</p>
             
             <div class="colorBar">
                 <a>Выберите цвет:</a>
@@ -26,6 +26,7 @@
                     </div>
             </div>
         </div>
+        <p class="title">Управление</p>
         <div class="control">
             <div class="orbControl">
             <input 
@@ -45,11 +46,25 @@
                 <button @click="fullScreen()">Открыть на весь экран</button>
             </div>
         </div>
-            <p>Изменение освещения</p>
+            <p class="title">Изменение освещения</p>
             <div class="Osveshenie">
-                <p><label class="RadioB" for="Osveshenie1"><input type="radio" id="Osveshenie1">Освещение1</label></p>
-                <p><label class="RadioB" for="Osveshenie2"><input type="radio" id="Osveshenie2">Освещение2</label></p>
-                <p><label class="RadioB" for="Osveshenie3"><input type="radio" id="Osveshenie3">Освещение3</label></p>
+                <form>
+                    <div class="firsElem">
+                <input type="radio" id="contactChoice1" @click="selectLight('ambient')"
+                    name="light" value="Ambient Light">
+                    <label for="contactChoice1">Ambient Light</label>
+                    </div>
+                    <div class="secElem">
+                    <input type="radio" id="contactChoice2" @click="selectLight('directional')"
+                    name="light" value="phone">
+                    <label for="contactChoice2">Directional light</label>
+                    </div>
+                    <div class="thirElem">
+                    <input type="radio" id="contactChoice3" @click="selectLight('point')"
+                    name="light" value="mail">
+                    <label for="contactChoice3">Point light</label>
+                    </div>
+                </form>
             </div>
             <div class="Scroll">
                 <div id="Scroll1" class="name">Свет</div>
@@ -74,6 +89,10 @@ export default{
         }
     },
     methods:{
+        selectLight(light){
+            setVarData('light', light)
+            this.emitter.emit("Rerender", true)
+        },
         changeColor(color){
             try{
                 setVarData("color", color)
@@ -127,7 +146,15 @@ export default{
     
 }
 </script>
+
 <style>
+p.title{
+    text-decoration: none;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    border-top: 2px solid #B0E0E6;
+    border-bottom: 2px solid #B0E0E6;
+}
 .Scroll{
    align-items: center;
 display: flex;
@@ -187,8 +214,9 @@ text-align: left;
 
 
 .Osveshenie p{
+    top: 5%;
     position: relative;
-    margin: 0%;
+    margin-top: 0%;
     text-align: left;
 }
 .Osveshenie{
