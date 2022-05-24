@@ -59,6 +59,27 @@ export default ({
                 this.editMenuVisible = true;
             }
         })
+        this.emitter.on("OpenHomePage", data =>{
+            if(data == true){
+                this.AuthorisationPageVisible = false;
+                this.editMenuVisible = false;
+                this.HPEvisible = true;
+            }
+        })
+        this.emitter.on("MarketStore", data =>{
+            if(data == true){
+                this.AuthorisationPageVisible = false;
+                this.editMenuVisible = false;
+                this.HPEvisible = true;
+            }
+        })
+        this.emitter.on("OpenAboutUS", data =>{
+            if(data == true){
+                this.AuthorisationPageVisible = false;
+                this.editMenuVisible = false;
+                this.HPEvisible = true;
+            }
+        })
     }
 })
 

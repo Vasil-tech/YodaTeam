@@ -6,6 +6,9 @@
         <div class="Market" v-if="MarketVisible">
                 <MarketPlace></MarketPlace>
         </div>
+        <div class="About" v-if="AboutPageVisible">
+                <AboutUsPage></AboutUsPage>
+        </div>
         <div class="WAd" id="WAd" v-if="!Canvasvisible">
             <div class="threeContainer" v-if="!Error.check">
                 <three-container :modelNum="modelNum"></three-container>
@@ -26,12 +29,14 @@
 <script>
 import HomePage from './WorkAreaContainer/HomePage.vue'
 import MarketPlace from './WorkAreaContainer/StoreContainer.vue'
+import AboutUsPage from './WorkAreaContainer/PageAbout.vue'
 import { defineAsyncComponent } from 'vue'
 export default{
     components:{
         HomePage,
         ThreeContainer: defineAsyncComponent(()=> import('./WorkAreaContainer/ThreeContainer.vue')),
-        MarketPlace
+        MarketPlace,
+        AboutUsPage
     },
     data(){
         return{
@@ -39,6 +44,7 @@ export default{
             HPvisible: true,
             MarketVisible: false,
             Canvasvisible: true,
+            AboutPageVisible: false,
             Error:{
                 check: false,
                 file: null,
@@ -62,18 +68,35 @@ export default{
                 this.modelNum = data['modelNum']
                 this.HPvisible = false;
                 this.Canvasvisible = !data;
-                this.MarketVisible = false;}
+                this.MarketVisible = false;
+                this.AboutPageVisible = false;
+                }
                 else{
                 this.HPvisible = false;
                 this.Canvasvisible = !data;
                 this.MarketVisible = false;
+                this.AboutPageVisible = false;
             }
         })
         this.emitter.on("MarketStore", data =>{
             this.HPvisible = false;
             this.Canvasvisible = true;
             this.MarketVisible = data;
+            this.AboutPageVisible = false
 
+        }),
+        this.emitter.on("OpenHomePage", data =>{
+            this.HPvisible = data;
+            this.MarketVisible = false;
+            this.Canvasvisible = true;
+            this.AboutPageVisible = false;
+
+        })
+        this.emitter.on("OpenAboutUS", data=>{
+            this.AboutPageVisible = data;
+            this.MarketVisible = false;
+            this.Canvasvisible = true;
+            this.HPvisible = false;
         })
     },
 }

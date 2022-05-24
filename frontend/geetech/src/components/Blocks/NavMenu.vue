@@ -1,15 +1,18 @@
 <template>
   <div class="navMenuRoot">
     <div  class="leftPart">
-      <div class="logo">
-        <img src="@/assets/logo.png"/>
-      </div>
+        <div class="logo">
+          <img @click="Home" src="@/assets/logo.png">
+        </div>
       <div class="chapters">
         <div class="editor" @click="Editor()">
           <a id="Aeditor" class="chapter">Редактор</a>
         </div>
         <div class="market" @click="Market()">
           <a id="AMarket" class="chapter">Модели</a>
+        </div>
+        <div class="about" @click="About()">
+          <a id="AboutUs" class="chapter">О нас</a>
         </div>
       </div>
     </div>
@@ -37,21 +40,35 @@ export default {
     },
     
     methods:{
+      Home(){
+        this.emitter.emit("OpenHomePage", true)
+        this.emitter.emit("SmenaCveta", false);
+        this.emitter.emit("SmenaCveta1", false);
+        this.emitter.emit("SmenaCveta2", false);
+      },
       Auth(type){
         this.emitter.emit("OpenAuthorisation", type);
         this.emitter.emit("SmenaCveta", false);
         this.emitter.emit("SmenaCveta1", false);
-
+        this.emitter.emit("SmenaCveta2", false);
       },
       Editor(){
         this.emitter.emit("OpenEditor", true);
         this.emitter.emit("SmenaCveta", true);
         this.emitter.emit("SmenaCveta1", false);
+        this.emitter.emit("SmenaCveta2", false);
       },
       Market(){
         this.emitter.emit("MarketStore", true);
         this.emitter.emit("SmenaCveta1", true);
         this.emitter.emit("SmenaCveta", false);
+        this.emitter.emit("SmenaCveta2", false);
+      },
+      About(){
+        this.emitter.emit("OpenAboutUS", true);
+        this.emitter.emit("SmenaCveta", false);
+        this.emitter.emit("SmenaCveta1", false);
+        this.emitter.emit("SmenaCveta2", true);
       }
     },
     
@@ -62,12 +79,18 @@ export default {
         document.getElementById("Aeditor").style.fontWeight = "bold";
         else
         document.getElementById("Aeditor").style.fontWeight = "normal";
-      }),
+      })
       this.emitter.on("SmenaCveta1", data => {
         if(data == true)
         document.getElementById("AMarket").style.fontWeight = "bold";
         else
         document.getElementById("AMarket").style.fontWeight = "normal";
+      })
+      this.emitter.on("SmenaCveta2", data => {
+        if(data == true)
+        document.getElementById("AboutUs").style.fontWeight = "bold";
+        else
+        document.getElementById("AboutUs").style.fontWeight = "normal";
       })
   }
 }
@@ -76,6 +99,18 @@ export default {
 </script>
 
 <style>
+.logo{
+  width: 16%;
+}
+img{
+  z-index: 2;
+}
+
+.logo:hover{
+  cursor: pointer;
+}
+
+
 .line{
   position: relative;
   float: right;
@@ -135,6 +170,7 @@ a.regist{
   top: 4vh;
   float: left;
   left: 1%;
+  z-index: -1;
 }
 a.chapter{
   width: 90pt;
@@ -143,24 +179,28 @@ a.chapter{
   font-size: 15pt;
   font-style: normal;
   font-weight: 500;
+  z-index: 1;
 }
 .market{
   position: relative;
   float: left;
-  left: 25vw;
+  left: 22vw;
 }
 .editor{
   position: relative;
   float: left;
-  left: 15vw;
+  left: 12vw;
+}
+.about{
+  position: relative;
+  float: left;
+  left: 32vw;
+}
+.about:hover{
+  cursor: pointer;
 }
 .editor:hover{
   cursor: pointer;
-}
-.logo{
-  float: left;
-  width:0%;
-  top: 1%;
 }
 .leftPart{
   float: left;

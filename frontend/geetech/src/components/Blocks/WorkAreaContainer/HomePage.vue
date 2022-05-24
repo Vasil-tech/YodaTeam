@@ -5,9 +5,9 @@
         <nav class="navb">
             <p>примеры моделей:</p>
             <ul>
-                <li><a class="Primer1" @click="ModelNum(0)">Model1</a></li>
-                <li><a class="Primer2" @click="ModelNum(1)">Bigbiba</a></li>
-                <li><a class="Primer3" @click="ModelNum(2)">Boba</a></li>
+                <li><a class="Primer1" @click="ModelNum(0)">Сфера</a></li>
+                <li><a class="Primer2" @click="ModelNum(1)">Куб</a></li>
+                <li><a class="Primer3" @click="ModelNum(2)">Торический узел</a></li>
             </ul>
         </nav>
     </div>
