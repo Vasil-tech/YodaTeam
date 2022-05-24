@@ -13,11 +13,12 @@ import * as THREE from 'three'
 import OrbitControl from 'three-orbitcontrols'
 import {camera} from '../scripts/Three/Renderering.js'
 import {orbValue} from "../scripts/Three/Variables.js"
+import { canvasHeight } from '../scripts/bus.js';
+import { canvasWidht } from '../scripts/bus.js';
+import { fullScrnSet } from '../scripts/bus.js';
 export default {
     data(){
         return{
-            color: "black",
-            renderNum:0,
         }
     },
     methods:{
@@ -32,11 +33,25 @@ export default {
                 start3d(THREE, orbValue)
             }
         })
-        // this.emitter.on("FullScreenCanvas", data =>{
-        //     if(data){
-        //         document.getElementById("canvasContainer").requestFullScreen();
-        //     }
-        // })
+        this.emitter.on("FullScreenCanvas", data =>{
+            let canvas = document.getElementById("canvas")
+            if(data){
+                fullScrnSet()
+                canvas.style.position = 'fixed'
+                canvas.width = window.innerWidth
+                canvas.height = window.innerHeight
+                canvas.style.top = 0;
+                canvas.style.left = 0;
+                console.log(window.innerWidth)
+                this.emitter.emit("Rerender", true)
+            }
+            else{
+                canvas.style.position = 'absolute'
+                canvas.style.height = canvasHeight() + 'px';
+                canvas.style.width = canvasWidht() + 'px';
+                this.emitter.emit("Rerender", true)
+            }
+        })
     }
 }
 

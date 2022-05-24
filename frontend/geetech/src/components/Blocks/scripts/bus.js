@@ -1,8 +1,12 @@
+export let width = 0;
+export let height = 0;
 export function canvasWidht(){
-    let width = document.getElementById("workAreaRoot").offsetWidth -2
-    return width;
+    width = document.getElementById("workAreaRoot").offsetWidth -2
 }
 export function canvasHeight(){
-    let height = document.getElementById("workAreaRoot").offsetHeight -2
-    return height;
+    height = document.getElementById("workAreaRoot").offsetHeight -2
+}
+export function fullScrnSet(){
+    height = window.innerHeight
+    width = window.innerWidth
 }

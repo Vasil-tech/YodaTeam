@@ -106,12 +106,12 @@ export default{
             }
         },
         fullScreen(){
-            // try{
-            //     this.emitter.emit('FullScreenCanvas', true)
-            // }
-            // catch(e){
-            //     this.emitter.emit("CanvasError", {'file': 'SceneParam', 'method':'fullScreen', 'ext':e})
-            // }
+            try{
+                this.emitter.emit('FullScreenCanvas', true)
+            }
+            catch(e){
+                this.emitter.emit("CanvasError", {'file': 'SceneParam', 'method':'fullScreen', 'ext':e})
+            }
         },
         rotateOn(){
             try{
