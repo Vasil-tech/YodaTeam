@@ -3,13 +3,13 @@ import { LoadSphere } from './Loader.js';
 import { LoadTorus } from './Loader.js';
 import errorHandler from '../errorHandler.js'
 import check from './SupportThreeCheck.js'
-import { canvasHeight } from '../bus.js';
-import { canvasWidht } from '../bus.js';
 export let camera
 let controls, scene, renderer, light;
 import { color } from '../Three/Variables.js';
 import { autoRotate } from '../Three/Variables.js';
 import { modelNum } from '../Three/Variables.js';
+import { width } from '../bus.js';
+import { height } from '../bus.js';
 export default class{
         constructor(THREE, OrbitControl, cameraPosition) {
         const ans = this.supportAndCnvsSize();
@@ -39,8 +39,8 @@ export default class{
     supportAndCnvsSize(){
         try{
             const canvas = document.querySelector("#canvas");
-            canvas.width = canvasWidht();
-            canvas.height = canvasHeight();
+            canvas.width = width
+            canvas.height = height
             const checking = check(canvas);
             if(checking.status == false){
                 errorHandler('threeLogic', 'checking', checking.ext, 'canvas');
