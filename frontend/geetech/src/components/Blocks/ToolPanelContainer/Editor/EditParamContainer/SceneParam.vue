@@ -45,6 +45,22 @@
                 <button @click="fullScreen()">Открыть на весь экран</button>
             </div>
         </div>
+            <p>Изменение освещения</p>
+            <div class="Osveshenie">
+                <p><label class="RadioB" for="Osveshenie1"><input type="radio" id="Osveshenie1">Освещение1</label></p>
+                <p><label class="RadioB" for="Osveshenie2"><input type="radio" id="Osveshenie2">Освещение2</label></p>
+                <p><label class="RadioB" for="Osveshenie3"><input type="radio" id="Osveshenie3">Освещение3</label></p>
+            </div>
+            <div class="Scroll">
+                <div id="Scroll1" class="name">Свет</div>
+                    <div class="widget">
+                        <div class="slider">
+                            <div class="fill" style="width: 100%">
+                            </div>
+                        </div>
+                        <input class="number" type="number" step="any" aria-labelledby="Skroll1">
+                    </div>
+            </div>
     </div>
 </template>
 
@@ -112,7 +128,87 @@ export default{
 }
 </script>
 <style>
-input{
+.Scroll{
+   align-items: center;
+display: flex;
+box-sizing: border-box;
+font-style: normal;
+font-weight: 400;
+line-height: 1;
+text-align: left;
+}
+.widget{
+    align-items: center;
+display: flex;
+position: relative;
+width: 100%;
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+font-style: normal;
+font-weight: 400;
+line-height: 1;
+text-align: left;
+}
+.slider{
+cursor: ew-resize;
+overflow: hidden;
+touch-action: pan-y;
+width: 100%;
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+}
+.fill{
+  box-sizing: content-box;
+  height: 100%;
+  cursor: ew-resize;
+  margin: 0;
+padding: 0;
+font-style: normal;
+font-weight: 400;
+line-height: 1;
+text-align: left;
+}
+input .number{
+flex-shrink: 0;
+outline: none; 
+box-sizing: border-box;
+margin: 0;
+pointer-events: auto;
+color: var(--text-color);
+font-family: var(--font-family);
+font-size: var(--font-size);
+font-style: normal;
+font-weight: 400;
+line-height: 1;
+text-align: left;
+}
+
+
+.Osveshenie p{
+    position: relative;
+    margin: 0%;
+    text-align: left;
+}
+.Osveshenie{
+    position: relative;
+    height: 15%;
+}
+.Osveshenie input{
+    position: relative;
+    float: left;
+    margin: 0%;
+    vertical-align: middle;
+}
+.Osveshenie label{
+    position: relative;
+    margin: 0%;
+    padding-left: 10px;
+
+}
+
+.inputColor input{
     position: relative;
     margin-left: 3%;
 }
