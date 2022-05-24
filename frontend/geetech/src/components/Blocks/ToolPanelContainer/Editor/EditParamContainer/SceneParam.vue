@@ -49,18 +49,20 @@
 </template>
 
 <script>
+import { setVarData } from '@/components/Blocks/scripts/Three/Variables';
 export default{
     data(){
         return{
-                rotateStatus: false,
-                checked: false,
+            checked: false,
+            rotation: false
         }
     },
     methods:{
         changeColor(color){
             try{
-                this.emitter.emit("SceneBackgroundColor", color);
+                setVarData("color", color)
                 document.getElementById('color').value = color;
+                this.emitter.emit("Rerender", true);
             }
             catch(e){
                 this.emitter.emit("CanvasError", {'file': 'SceneParam', 'method':'changeColor', 'ext':e})
@@ -70,7 +72,8 @@ export default{
         Changed(color){
             try{
                 color = document.getElementById('color').value;
-                this.emitter.emit("SceneBackgroundColor", color);
+                setVarData("color", color)
+                this.emitter.emit("Rerender", true);
             }
             catch(e){
                 this.emitter.emit("CanvasError", {'file': 'SceneParam', 'method':'changeColor', 'ext':e})
@@ -79,7 +82,8 @@ export default{
             
         orbContChecked(orbValue){
             try{
-                this.emitter.emit("OrbitControlStatus", orbValue)
+                setVarData("orbValue", orbValue)
+                this.emitter.emit("Rerender", true)
             }
             catch(e){
                 this.emitter.emit("CanvasError", {'file': 'SceneParam', 'method':'orbContChecked', 'ext':e})
@@ -95,8 +99,9 @@ export default{
         },
         rotateOn(){
             try{
-                this.rotateStatus = !this.rotateStatus
-                this.emitter.emit("RotateOn", this.rotateStatus)
+                this.rotation = !this.rotation
+                setVarData("autoRotate", this.rotation)
+                this.emitter.emit("Rerender", true)
             }
             catch(e){
                 this.emitter.emit("CanvasError", {'file': 'SceneParam', 'method': 'rotateOn', 'ext': e})

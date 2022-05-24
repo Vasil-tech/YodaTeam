@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import { setVarData } from '../scripts/Three/Variables';
 export default {
     data(){
       return{
@@ -22,6 +23,7 @@ export default {
     },
     methods:{
       ModelNum(num){
+          setVarData("modelNum", num)
           this.emitter.emit("OpenEditor", {modelNum: num});
       }
     },
