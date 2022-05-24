@@ -14,7 +14,7 @@ export default {
   }
 }
 window.onresize = function(){
-  emitter.emit("Resize", true)
+  emitter.emit("Rerender", true)
 }
 </script>
 

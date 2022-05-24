@@ -7,17 +7,18 @@ import { canvasHeight } from '../bus.js';
 import { canvasWidht } from '../bus.js';
 export let camera
 let controls, scene, renderer, light;
-
-
+import { color } from '../Three/Variables.js';
+import { autoRotate } from '../Three/Variables.js';
+import { modelNum } from '../Three/Variables.js';
 export default class{
-        constructor(THREE, color, OrbitControl, autoRotate, cameraPosition, modelNum) {
+        constructor(THREE, OrbitControl, cameraPosition) {
         const ans = this.supportAndCnvsSize();
         const canvas = ans.canvas;
         let height = ans.height;
         let width = ans.width;
         try{
-            this.init(THREE, canvas, color, width, height, cameraPosition);
-            this.addToScene(THREE, modelNum);
+            this.init(THREE, canvas, width, height, cameraPosition);
+            this.addToScene(THREE);
             if(OrbitControl!== false){
                 this.setControls(OrbitControl, canvas)
                 if(autoRotate){
@@ -53,10 +54,11 @@ export default class{
         }
         return false;
     }
-    init(THREE, canvas, color, width, height, cameraPosition){
+    init(THREE, canvas, width, height, cameraPosition){
         try{
             renderer = this.Renderer(canvas, THREE);
-            scene = this.Scene(THREE, color);
+            let clr = color;
+            scene = this.Scene(THREE, clr);
             camera = this.Camera(width, height, THREE, cameraPosition);
             light = this.Light(THREE);
         }
@@ -70,9 +72,9 @@ export default class{
         controls.target.set(0, 0, 0);
         controls.update();
     }
-    addToScene(THREE, modelNum){
+    addToScene(THREE){
         try{
-            let model;
+            let model = modelNum;
             switch(modelNum){
                 case 0:
                     model = LoadSphere(THREE)
