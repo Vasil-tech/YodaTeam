@@ -1,6 +1,5 @@
 package com.geetech.geetech.controllers;
 
-import com.geetech.geetech.repository.UserRepo;
 import com.geetech.geetech.services.UserService;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -18,14 +17,6 @@ public class MainController {
 
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private UserRepo userRepo;
-
-//    @GetMapping
-//    public String main(Model model) {
-//        return "index";
-//    }
 
     @PostMapping
     public ResponseEntity send(@RequestBody String user)  {
@@ -45,7 +36,6 @@ public class MainController {
                     String auth_pass = (String) jo.get("password");
                     return ResponseEntity.ok(userService.authorization(auth_login, auth_pass));
                 default:
-//                    sosi();
                     return ResponseEntity.ok("Sosi");
             }
         }
@@ -54,14 +44,4 @@ public class MainController {
         }
     }
 }
-
-//        JSONObject peronObject = JSONObject(user);
-//        JSONArray person = user.JSONArray(person);
-//        String action = getValuesForGivenKey( user, "type");
-//        return action;
-//        public List<String> getValuesForGivenKey(String jsonArrayStr, String key) {
-//        JSONArray jsonArray = new JSONArray(jsonArrayStr);
-//        return IntStream.range(0, jsonArray.length())
-//                .mapToObj(index -> ((JSONObject)jsonArray.get(index)).optString(key))
-//                .collect(Collectors.toList());
 

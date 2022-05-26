@@ -1,6 +1,7 @@
 package com.geetech.geetech.exception;
 
 public class Access {
+
     private String biba;
     private String login;
     private boolean access;
