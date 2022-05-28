@@ -18,11 +18,12 @@
 //import errorHandler from "../scripts/errorHandler";
 export default{
     methods:{
-        // loadClick(){
-        //     document.querySelector('.inputForFile').click()
-        //     const inputElement = document.getElementById("input");
-        //     inputElement.addEventListener("change", handleFiles, false);
-        // }
+         /*loadClick(){
+             document.querySelector('.inputForFile').click()
+             const inputElement = document.getElementById("input");
+             inputElement.addEventListener("change", handleFiles, false);
+         }*/
+
     }
 }
 
