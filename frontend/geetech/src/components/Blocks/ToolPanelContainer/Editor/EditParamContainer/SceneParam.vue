@@ -1,8 +1,7 @@
 <template>
     <div class="SceneParamRoot">
-        <div class="backColor">
-            <p class="title">Смена цвета фона сцены</p>
-            
+            <p @click="openBlock('colors')" class="title">Смена цвета фона сцены</p>
+            <div class="backColor" v-if="colorVisible">
             <div class="colorBar">
                 <a>Выберите цвет:</a>
                 <div class="FirstStorka">
@@ -26,8 +25,8 @@
                     </div>
             </div>
         </div>
-        <p class="title">Управление</p>
-        <div class="control">
+        <p class="title" @click="openBlock('control')">Управление</p>
+        <div v-if="controlVisible" class="control">
             <div class="orbControl">
             <input 
                 type="checkbox" 
@@ -46,50 +45,134 @@
                 <button @click="fullScreen()">Открыть на весь экран</button>
             </div>
         </div>
-            <p class="title">Изменение освещения</p>
-            <div class="Osveshenie">
-                <form>
-                    <div class="firsElem">
-                <input type="radio" id="contactChoice1" @click="selectLight('ambient')"
-                    name="light" value="Ambient Light">
-                    <label for="contactChoice1">Ambient Light</label>
-                    </div>
-                    <div class="secElem">
-                    <input type="radio" id="contactChoice2" @click="selectLight('directional')"
-                    name="light" value="phone">
-                    <label for="contactChoice2">Directional light</label>
-                    </div>
-                    <div class="thirElem">
-                    <input type="radio" id="contactChoice3" @click="selectLight('point')"
-                    name="light" value="mail">
-                    <label for="contactChoice3">Point light</label>
-                    </div>
-                </form>
-            </div>
-            <div class="Scroll">
-                <div id="Scroll1" class="name">Свет</div>
-                    <div class="widget">
-                        <div class="slider">
-                            <div class="fill" style="width: 100%">
+            <p @click="openBlock('light')" class="title">Настройка освещения</p>
+                <div class="lightControl" v-if="lightVisible">
+
+                <div class="Osveshenie">
+                    <form>
+                        <div class="firsElem">
+                    <input type="radio" id="contactChoice1" @change="selectLight('ambient')"
+                        name="light" value="Ambient Light">
+                        <label for="contactChoice1">Ambient Light</label>
+                        <div v-if="ambientParam" class="ambientParam">
+                            <a>sajn</a>
+                        </div>
+                        </div>
+                        <div class="secElem">
+                        <input type="radio" id="contactChoice2" @change="selectLight('directional')"
+                        name="light" value="">
+                        <label for="contactChoice2">Directional light</label>
+                            <div v-if="directionalParam" class="directionalParam">
+                                <div class="">
+                                    <label>Цвет:</label>
+                                    <input type="color" id="DirLight" value="#ffffff" @change="dirLightChange(this.value)">
+                                </div>
+                                <div class="dirLightIntensity">
+                                    <label>Интенсивность:</label>
+                                    <input id="inputDirLightIntencity" value="1" type="text" @input="setIntensity()">
+                                </div>
                             </div>
                         </div>
-                        <input class="number" type="number" step="any" aria-labelledby="Skroll1">
-                    </div>
+                        <div class="thirElem">
+                        <input type="radio" id="contactChoice3" @change="selectLight('point')"
+                        name="light" value="mail">
+                        <label for="contactChoice3">Point light</label>
+                        <div v-if="pointParam" class="pointParam">
+                            <div class="">
+                                <label>Цвет:</label>
+                                    <input type="color" id="DirLight" value="#ffffff" @change="pointLightChange(this.value)">
+                                </div>
+                                <div class="pointLightIntensity">
+                                    <label>Интенсивность:</label>
+                                    <input id="pointLightIntencity" value="1" type="text" @input="setIntensity()">
+                                </div>
+                                <div class="pointLightIntensity">
+                                    <label>Дистанция:</label>
+                                    <input id="pointDirLightDistance" value="1" type="text" @input="setDistance()">
+                                </div>
+                                <div class="pointLightIntensity">
+                                    <label>Распад:</label>
+                                    <input id="inputDirLightDecay" value="100" type="text" @input="setDecay()">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- <div class="Scroll">
+                    <div id="Scroll1" class="name">Свет</div>
+                        <div class="widget">
+                            <div class="slider">
+                                <div class="fill" style="width: 100%">
+                                </div>
+                            </div>
+                            <input class="number" type="number" step="any" aria-labelledby="Skroll1">
+                        </div>
+                </div> -->
             </div>
     </div>
 </template>
 
 <script>
 import { setVarData } from '@/components/Blocks/scripts/Three/Variables';
+
 export default{
     data(){
         return{
             checked: false,
-            rotation: false
+            rotation: false,
+            colorVisible: false,
+            controlVisible: false,
+            lightVisible: false,
+            ambientParam: false,
+            directionalParam: false,
+            pointParam: false,
         }
     },
     methods:{
+        setDistance(){
+            setVarData('pointLightDistance',document.getElementById('pointDirLightDistance').value)
+            this.emitter.emit('Rerender', true)
+        },
+        setIntensity(){
+            setVarData('directionalLightIntensity', document.getElementById('inputDirLightIntencity').value)
+            this.emitter.emit('Rerender', true)
+        },
+        dirLightChange(value){
+            value = document.getElementById('DirLight').value;
+            setVarData('directionalLightColor', value)
+            this.emitter.emit('Rerender', true)
+        },
+        openBlock(block){
+            switch(block){
+                case "colors":
+                    this.colorVisible = !this.colorVisible
+                    break;
+                case 'control':
+                    this.controlVisible = !this.controlVisible
+                    break;
+                case 'light':
+                    this.lightVisible = !this.lightVisible;
+                    break;
+            }
+        },
         selectLight(light){
+            switch(light){
+                case 'ambient':
+                    this.directionalParam = false
+                    this.pointParam = false
+                    this.ambientParam = true
+                    break;
+                case 'directional':
+                    this.directionalParam = true
+                    this.pointParam = false
+                    this.ambientParam = false
+                    break;
+                case 'point':
+                    this.directionalParam = false
+                    this.pointParam = true
+                    this.ambientParam = false
+                    break;
+            }
             setVarData('light', light)
             this.emitter.emit("Rerender", true)
         },
@@ -156,60 +239,60 @@ p.title{
     border-bottom: 2px solid #B0E0E6;
 }
 .Scroll{
-   align-items: center;
-display: flex;
-box-sizing: border-box;
-font-style: normal;
-font-weight: 400;
-line-height: 1;
-text-align: left;
+    align-items: center;
+    display: flex;
+    box-sizing: border-box;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    text-align: left;
 }
 .widget{
     align-items: center;
-display: flex;
-position: relative;
-width: 100%;
-box-sizing: border-box;
-margin: 0;
-padding: 0;
-font-style: normal;
-font-weight: 400;
-line-height: 1;
-text-align: left;
+    display: flex;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    text-align: left;
 }
 .slider{
-cursor: ew-resize;
-overflow: hidden;
-touch-action: pan-y;
-width: 100%;
-box-sizing: border-box;
-margin: 0;
-padding: 0;
+    cursor: ew-resize;
+    overflow: hidden;
+    touch-action: pan-y;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 .fill{
-  box-sizing: content-box;
-  height: 100%;
-  cursor: ew-resize;
-  margin: 0;
-padding: 0;
-font-style: normal;
-font-weight: 400;
-line-height: 1;
-text-align: left;
+    box-sizing: content-box;
+    height: 100%;
+    cursor: ew-resize;
+    margin: 0;
+    padding: 0;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    text-align: left;
 }
 input .number{
-flex-shrink: 0;
-outline: none; 
-box-sizing: border-box;
-margin: 0;
-pointer-events: auto;
-color: var(--text-color);
-font-family: var(--font-family);
-font-size: var(--font-size);
-font-style: normal;
-font-weight: 400;
-line-height: 1;
-text-align: left;
+    flex-shrink: 0;
+    outline: none; 
+    box-sizing: border-box;
+    margin: 0;
+    pointer-events: auto;
+    color: var(--text-color);
+    font-family: var(--font-family);
+    font-size: var(--font-size);
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    text-align: left;
 }
 
 
@@ -233,7 +316,6 @@ text-align: left;
     position: relative;
     margin: 0%;
     padding-left: 10px;
-
 }
 
 .inputColor input{
@@ -244,7 +326,6 @@ text-align: left;
 .orbControl{
     position: relative;
     width: 100%;
-    margin-top: 10%;
 }
 
 .backColor p{
@@ -357,6 +438,4 @@ button.BtnPurple{
     background-color: rebeccapurple;
     border: 1px solid #B0E0E6;
 }
-
-
 </style>

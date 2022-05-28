@@ -11,6 +11,9 @@ import { modelNum } from '../Three/Variables.js';
 import { width } from '../bus.js';
 import { height } from '../bus.js';
 import { lightType } from '../Three/Variables.js';
+import {directionalLightColor} from '../Three/Variables.js'
+import {directionalLightIntensity} from '../Three/Variables.js'
+import { pointLightDistance } from '../Three/Variables.js';
 export default class{
         constructor(THREE, OrbitControl, cameraPosition) {
         const ans = this.supportAndCnvsSize();
@@ -108,11 +111,11 @@ export default class{
                 return light;
             }
             if(lightType == 'directional'){
-                const light = new THREE.DirectionalLight( 0xffffff, 0.5 );
+                const light = new THREE.DirectionalLight( directionalLightColor, directionalLightIntensity);
                 return light;
             }
             if(lightType == 'point'){
-                const light = new THREE.PointLight( 0xffffff, 1, 10000 );
+                const light = new THREE.PointLight( directionalLightColor, pointLightDistance, 10000 );
                 light.position.set( 50, 50, 50 );
                 return light;
             }
