@@ -4,6 +4,7 @@ import { LoadTorus } from './Loader.js';
 import errorHandler from '../errorHandler.js'
 import check from './SupportThreeCheck.js'
 export let camera
+export let objLoader
 let controls, scene, renderer, light;
 import { color } from '../Three/Variables.js';
 import { autoRotate } from '../Three/Variables.js';
@@ -14,6 +15,7 @@ import { lightType } from '../Three/Variables.js';
 import {directionalLightColor} from '../Three/Variables.js'
 import {directionalLightIntensity} from '../Three/Variables.js'
 import { pointLightDistance } from '../Three/Variables.js';
+import { obj } from './objParser.js';
 export default class{
         constructor(THREE, OrbitControl, cameraPosition) {
         const ans = this.supportAndCnvsSize();
@@ -96,12 +98,41 @@ export default class{
                     scene.add(light);
                     scene.add(light.target);
                 break;
+                case 3:
+                    model = this.customLoad(THREE)
+                    scene.add(model)
+                    scene.add(light);
+                    scene.add(light.target);
+                break;
             }
             
         }
         catch(e){
             errorHandler('Rendering', 'addToScene', e, 'canvas')
         }
+    }
+
+    customLoad(THREE){
+        const positions = obj.position;
+        const normals = obj.normal;
+        const uvs = obj.texcoord;
+        console.log(obj)
+        let geometry = new THREE.BufferGeometry();
+        const positionNumComponents = 3;
+        const normalNumComponents = 3;
+        const uvNumComponents = 2;
+        geometry.addAttribute(
+            'position',
+            new THREE.BufferAttribute(new Float32Array(positions), positionNumComponents));
+        geometry.addAttribute(
+            'normal',
+            new THREE.BufferAttribute(new Float32Array(normals), normalNumComponents));
+        geometry.addAttribute(
+            'uv',
+            new THREE.BufferAttribute(new Float32Array(uvs), uvNumComponents));
+            const material = new THREE.MeshLambertMaterial( {color: 0x34F215} );
+            const mesh = new THREE.Mesh( geometry, material );
+        return mesh;
     }
 
     Light(THREE){

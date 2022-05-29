@@ -15,24 +15,28 @@
 
 
 <script>
-//import errorHandler from "../scripts/errorHandler";
+import { setVarData } from "../scripts/Three/Variables";
+import objParser from "@/components/Blocks/scripts/Three/objParser.js"
+import { emitter } from "@/main";
 export default{
     methods:{
          loadClick(){
-             document.querySelector('.inputForFile').click()
-             const inputElement = document.getElementById("input");
-             inputElement.addEventListener("change", function (){
+            document.querySelector('.inputForFile').click()
+            const inputElement = document.getElementById("input");
+            inputElement.addEventListener("change", function (){
             let reader = new FileReader();
             reader.readAsText(inputElement.files[0])
             reader.onload = function(){
-              console.log(reader.result)
+            objParser(reader.result)
+            setVarData("modelNum", 3)
+            emitter.emit("OpenEditor", {modelNum: 3})
+            emitter.emit("Rerender", true)
             }
           }, true);
          }
 
     }
 }
-
 </script>
 
 <style>

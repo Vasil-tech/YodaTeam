@@ -16,6 +16,7 @@ import {orbValue} from "../scripts/Three/Variables.js"
 import { canvasHeight } from '../scripts/bus.js';
 import { canvasWidht } from '../scripts/bus.js';
 import { fullScrnSet } from '../scripts/bus.js';
+
 export default {
     data(){
         return{
@@ -26,6 +27,7 @@ export default {
     },
     mounted: function(){
         start3d(THREE, orbValue)
+
     },
     created: function(){
         this.emitter.on("Rerender", data=>{
@@ -57,6 +59,7 @@ export default {
 
 function start3d(THREE, orbCont){
     try{
+        
         let cameraPosition = {};
         if(typeof session[0] == 'object'){
             cameraPosition = camera.position
