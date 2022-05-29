@@ -15,7 +15,7 @@ import { lightType } from '../Three/Variables.js';
 import {directionalLightColor} from '../Three/Variables.js'
 import {directionalLightIntensity} from '../Three/Variables.js'
 import { pointLightDistance } from '../Three/Variables.js';
-import { obj } from './objParser.js';
+import { customLoad } from './Loader.js';
 export default class{
         constructor(THREE, OrbitControl, cameraPosition) {
         const ans = this.supportAndCnvsSize();
@@ -99,7 +99,7 @@ export default class{
                     scene.add(light.target);
                 break;
                 case 3:
-                    model = this.customLoad(THREE)
+                    model = customLoad(THREE)
                     scene.add(model)
                     scene.add(light);
                     scene.add(light.target);
@@ -110,29 +110,6 @@ export default class{
         catch(e){
             errorHandler('Rendering', 'addToScene', e, 'canvas')
         }
-    }
-
-    customLoad(THREE){
-        const positions = obj.position;
-        const normals = obj.normal;
-        const uvs = obj.texcoord;
-        console.log(obj)
-        let geometry = new THREE.BufferGeometry();
-        const positionNumComponents = 3;
-        const normalNumComponents = 3;
-        const uvNumComponents = 2;
-        geometry.addAttribute(
-            'position',
-            new THREE.BufferAttribute(new Float32Array(positions), positionNumComponents));
-        geometry.addAttribute(
-            'normal',
-            new THREE.BufferAttribute(new Float32Array(normals), normalNumComponents));
-        geometry.addAttribute(
-            'uv',
-            new THREE.BufferAttribute(new Float32Array(uvs), uvNumComponents));
-            const material = new THREE.MeshLambertMaterial( {color: 0x34F215} );
-            const mesh = new THREE.Mesh( geometry, material );
-        return mesh;
     }
 
     Light(THREE){
