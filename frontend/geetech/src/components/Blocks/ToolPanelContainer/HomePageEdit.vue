@@ -26,10 +26,11 @@ export default{
             inputElement.addEventListener("change", function (){
             let reader = new FileReader();
             reader.readAsText(inputElement.files[0])
+            emitter.emit("OpenEditor", {modelNum: null})
             reader.onload = function(){
             objParser(reader.result)
             setVarData("modelNum", 3)
-            emitter.emit("OpenEditor", {modelNum: 3})
+            
             emitter.emit("Rerender", true)
             }
           }, true);

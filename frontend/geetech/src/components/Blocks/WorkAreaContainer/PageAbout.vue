@@ -6,7 +6,7 @@
         <p class="About"><a class="abouts" href="https://github.com/Vasil-tech" target="_blank">Болдаков Василий - BackEnd</a></p> 
         <p class="About"><a class="abouts" href="https://github.com/Neuromancer404" target="_blank">Осипов Кирилл - Работа с 3D</a></p>
         <p class="About"><a class="abouts" href="https://github.com/AndreySoKuR" target="_blank">Сокур Андрей - Frontend</a></p>
-        <p class="About"><a class="abouts" href="https://github.com/mszubova" target="_blank">Мария Зубова - Дизайн</a></p>
+        <p class="About"><a class="abouts" href="https://github.com/mszubova" target="_blank"> Зубова Мария - Дизайн</a></p>
       
 
   </div>

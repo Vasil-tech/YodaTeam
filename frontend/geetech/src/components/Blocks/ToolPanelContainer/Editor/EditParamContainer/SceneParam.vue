@@ -44,6 +44,9 @@
             <div class="fullScreenButt" id="fullScreenButt">
                 <button @click="fullScreen()">Открыть на весь экран</button>
             </div>
+            <div class="setka" id="setka" >
+                <button @click="AddSetka()">Добавить сетку</button>
+            </div>
         </div>
             <p @click="openBlock('light')" class="title">Настройка освещения</p>
                 <div class="lightControl" v-if="lightVisible">
@@ -224,7 +227,18 @@ export default{
             catch(e){
                 this.emitter.emit("CanvasError", {'file': 'SceneParam', 'method': 'rotateOn', 'ext': e})
             }
+        },
+        AddSetka(){
+            try{
+                this.setka = !this.setka
+                setVarData("AddSetka", this.setka)
+                this.emitter.emit("Rerender", true)
+            }
+            catch(e){
+                this.emitter.emit("CanvasError", {'file': 'SceneParam', 'method': 'AddSetka', 'ext': e})
+            }
         }
+
     }
     
 }

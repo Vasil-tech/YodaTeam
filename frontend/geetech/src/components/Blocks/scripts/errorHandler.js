@@ -1,5 +1,6 @@
 import { emitter } from "@/main";
 export default function(File = "Unknown file", Method = "Unknown method", Ext = "Unknow extension", Type){
+    console.log(Ext)
     switch (Type){
         case "canvas":
             emitter.emit("CanvasError", {'file': File, 'method':Method, 'ext':Ext})
