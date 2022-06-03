@@ -1,77 +1,68 @@
-<template>
+<template><!--Блок гипертекстовой разметки-->
     <div class="HomeWorkArea">
         <h1>Загрузите свою первую модель</h1>
         <button>(Виды поддерживаемых форматов)</button>
         <nav class="navb">
             <p>примеры моделей:</p>
             <ul>
-                <li><a class="Primer1" @click="ModelNum(0)">Сфера</a></li>
-                <li><a class="Primer2" @click="ModelNum(1)">Куб</a></li>
-                <li><a class="Primer3" @click="ModelNum(2)">Торический узел</a></li>
+                <li><button class="Primer1" @click="ModelNum(0)">Сфера</button></li><!--Вызов события ModelNum(0) для открытия модели "Сфера"-->
+                <li><button class="Primer2" @click="ModelNum(1)">Куб</button></li> <!--Вызов события ModelNum(1) для открытия модели "Куб"-->
+                <li><button class="Primer3" @click="ModelNum(2)">Торический узел</button></li> <!--Вызов события ModelNum(2) для открытия модели "Торический узел"-->
             </ul>
         </nav>
     </div>
 </template>
-
-<script>
-import { setVarData } from '../scripts/Three/Variables';
+<script>//Блок скрипта
+import { setVarData } from '../scripts/Three/Variables'; //импорт файла для записи данных
 export default {
     data(){
       return{
-
       }
     },
     methods:{
       ModelNum(num){
-          setVarData("modelNum", num)
-          this.emitter.emit("OpenEditor", {modelNum: num});
+          setVarData("modelNum", num)//Принимает значение ModelNum
+          this.emitter.emit("OpenEditor", {modelNum: num}); // Вызов метода OpenEditor для отображения канваса с заданной моделью
       }
     },
 }
-
 </script>
-
-<style>
-.HomeWorkArea{
+<style>/*Блок каскадной таблицы стилей */
+.HomeWorkArea{/*Стили блока домашней страницы*/
     align-content: center;
     margin-top: 20%;
     text-align: center;
 }
-
-.navb li{
+.navb li{/*Стили кнопок примеров моделей */
     display: inline;
 }
-
-h1{
+h1{/*Стили заголовка домашней страницы */
     position: relative;
     text-align: center;
     font-family: 'Montserrat';
     font-size: 30px;
     margin-bottom: 0;
 }
-
-button{
+button{/*Стили кнопок */
     position: relative;
     border: none;
     background: #FFFFFF;
     font-family: 'Montserrat';
     font-size: 18px;
 }
-
-p{
+p{/*Стили текста */
     text-decoration: none;
-    text-align: center;
+    text-align: center;/*Выравнивание текста по цетру */
     font-family: 'Montserrat';
     font-size: 18px;
     padding: 5px 10px;
     margin-bottom: 0;
 }
-ul{
+ul{/*Стили списка кнопок */
     padding: 0px;
     margin: 0;
 }
-
-.navb a{
+.navb button{/*Стили кнопок примеров моделей */
     color: black;
     text-align: center;
     text-decoration: none;
@@ -80,11 +71,10 @@ ul{
     font-size: 18px;
     border-right: 1px solid black;
 }
-.navb a.last{
+.navb button.last{ /*Стили для последней кнопки */
     border-right: none;
 }
-.navb a:hover{
+.navb button:hover{/*Стили для кнопок при наведении*/
     cursor: pointer;
 }
-
 </style>

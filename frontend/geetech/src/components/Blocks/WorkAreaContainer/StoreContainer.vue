@@ -1,35 +1,10 @@
-<template>
-<div class="MarketPlace">
-        
+<template><!--Блок гипертекстовой разметки-->
+<div class="MarketPlace"> <!--Объявление контейнера с классом-->      
 </div>
-
 </template>
-
-<script>
-//import { create } from 'domain'
-//import { text } from 'body-parser';
-
+<script>//Блок скрипта
 export default {
- methods:{
-        // loadClickss(){
-        //   document.querySelector('.inputForFiles').click()
-        //   const inputElement = document.getElementById("inputss");
-        //   inputElement.addEventListener("change", function (){
-        //     let reader = new FileReader();
-        //     reader.readAsText(inputElement.files[0])
-        //     reader.onload = function(){
-        //       console.log(reader.result)
-        //     }
-        //   }, true);
-          
-        // }  
- }
-}
-
-
+ methods:{ }}
 </script>
-
-<style>
-
-
+<style>/*Блок каскадной таблицы стилей */
 </style>

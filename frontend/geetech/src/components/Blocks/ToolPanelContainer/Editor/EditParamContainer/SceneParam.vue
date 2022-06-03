@@ -1,17 +1,17 @@
-<template>
+<template><!--Блок гипертекстовой разметки-->
     <div class="SceneParamRoot">
-            <p @click="openBlock('colors')" class="title">Смена цвета фона сцены</p>
+            <button @click="openBlock('colors')" class="title">Смена цвета фона сцены</button><!--Открытие блока для настроек цвета фона канваса-->
             <div class="backColor" v-if="colorVisible">
             <div class="colorBar">
                 <a>Выберите цвет:</a>
-                <div class="FirstStorka">
+                <div class="FirstStorka"><!--Создание кнопок которые вызывают событие changeColor и передают значение в скобках-->
                     <button class="BtnWhite" id="white" @click="changeColor('#FFFFFF')"></button>
                     <button class="BtnBlue" id="blue" @click="changeColor('#0000FF')"></button>
                     <button class="BtnRed" id="red" @click="changeColor('#FF0000')"></button>
                     <button class="BtnGrey" id="grey" @click="changeColor('#808080')"></button>
                     <button class="BtnBlack" id="black" @click="changeColor('#000000')"></button>
                 </div>
-                <div class="SecondStroka">
+                <div class="SecondStroka"><!--Создание кнопок которые вызывают событие changeColor и передают значение в скобках-->
                     <div class="defaultColor"></div>
                     <button class="BtnYellow" id="yellow" @click="changeColor('#FFFF00')"></button>
                     <button class="BtnGreen" id="green" @click="changeColor('#008000')"></button>
@@ -21,13 +21,13 @@
                 </div>
                 <div class="inputColor">
                         <a>Палитра:</a>
-                        <input type="color" id="color" value="#000000" @change="Changed(this.value)">
+                        <input type="color" id="color" value="#000000" @change="Changed(this.value)"><!--Передает значение на канвас при изменении-->
                     </div>
             </div>
         </div>
-        <p class="title" @click="openBlock('control')">Управление</p>
+        <button class="title" @click="openBlock('control')">Управление</button> <!--Открытие блока для настроек отображения моделей-->
         <div v-if="controlVisible" class="control">
-            <div class="orbControl">
+            <div class="orbControl"> <!--Включить orbControl для модели-->
             <input 
                 type="checkbox" 
                 id="checkbox" 
@@ -38,24 +38,24 @@
             >
             <label for="checkbox">Включить orbit control</label>
             </div>
-            <div class="rotate" v-if="checked">
+            <div class="rotate" v-if="checked"><!--Использование директивы для получения значения элемента input-->
                 <button @click="rotateOn()">Auto rotate</button>
             </div>
-            <div class="fullScreenButt" id="fullScreenButt">
+            <div class="fullScreenButt" id="fullScreenButt"> <!--Вызов метода открытия на весь экран-->
                 <button @click="fullScreen()">Открыть на весь экран</button>
             </div>
             <div class="setka" id="setka" >
-                <button @click="AddSetka()">Добавить сетку</button>
+                <button @click="AddSetka()">Добавить сетку</button><!--Вызов метода для отображения сетки-->
             </div>
         </div>
-            <p @click="openBlock('light')" class="title">Настройка освещения</p>
+            <button @click="openBlock('light')" class="title">Настройка освещения</button><!--Отображение блока для настроек освещения-->
                 <div class="lightControl" v-if="lightVisible">
 
                 <div class="Osveshenie">
                     <form>
                         <div class="firsElem">
                     <input type="radio" id="contactChoice1" @change="selectLight('ambient')"
-                        name="light" value="Ambient Light">
+                        name="light" value="Ambient Light"> <!--Вызов метода для передачи стандартного значения освещения -->
                         <label for="contactChoice1">Ambient Light</label>
                         <div v-if="ambientParam" class="ambientParam">
                             <a>sajn</a>
@@ -63,62 +63,52 @@
                         </div>
                         <div class="secElem">
                         <input type="radio" id="contactChoice2" @change="selectLight('directional')"
-                        name="light" value="">
+                        name="light" value=""><!--Вызов метода для передачи значения освещения directional-->
                         <label for="contactChoice2">Directional light</label>
                             <div v-if="directionalParam" class="directionalParam">
                                 <div class="">
                                     <label>Цвет:</label>
-                                    <input type="color" id="DirLight" value="#ffffff" @change="dirLightChange(this.value)">
+                                    <input type="color" id="DirLight" value="#ffffff" @change="dirLightChange(this.value)"><!--Передает значение цвета освещения-->
                                 </div>
                                 <div class="dirLightIntensity">
                                     <label>Интенсивность:</label>
-                                    <input id="inputDirLightIntencity" value="1" type="text" @input="setIntensity()">
+                                    <input id="inputDirLightIntencity" value="1" type="text" @input="setIntensity()"><!--Передает значение интенсивности освещения-->
                                 </div>
                             </div>
                         </div>
                         <div class="thirElem">
                         <input type="radio" id="contactChoice3" @change="selectLight('point')"
-                        name="light" value="mail">
+                        name="light" value="mail"><!-- Вызов метода для передачи значения освещения point-->
                         <label for="contactChoice3">Point light</label>
                         <div v-if="pointParam" class="pointParam">
                             <div class="">
                                 <label>Цвет:</label>
-                                    <input type="color" id="DirLight" value="#ffffff" @change="pointLightChange(this.value)">
+                                    <input type="color" id="DirLight" value="#ffffff" @change="pointLightChange(this.value)"><!--Передает значение цвета освещения-->
                                 </div>
                                 <div class="pointLightIntensity">
                                     <label>Интенсивность:</label>
-                                    <input id="pointLightIntencity" value="1" type="text" @input="setIntensity()">
+                                    <input id="pointLightIntencity" value="1" type="text" @input="setIntensity()"><!--Передает значение интенсивности освещения-->
                                 </div>
                                 <div class="pointLightIntensity">
                                     <label>Дистанция:</label>
-                                    <input id="pointDirLightDistance" value="1" type="text" @input="setDistance()">
+                                    <input id="pointDirLightDistance" value="1" type="text" @input="setDistance()"><!--Передает значение дистанции от источника освещения-->
                                 </div>
                                 <div class="pointLightIntensity">
                                     <label>Распад:</label>
-                                    <input id="inputDirLightDecay" value="100" type="text" @input="setDecay()">
+                                    <input id="inputDirLightDecay" value="100" type="text" @input="setDecay()"><!--Передает значение распада-->
                                 </div>
                             </div>
                         </div>
                     </form>
                 </div>
-                <!-- <div class="Scroll">
-                    <div id="Scroll1" class="name">Свет</div>
-                        <div class="widget">
-                            <div class="slider">
-                                <div class="fill" style="width: 100%">
-                                </div>
-                            </div>
-                            <input class="number" type="number" step="any" aria-labelledby="Skroll1">
-                        </div>
-                </div> -->
             </div>
     </div>
 </template>
 
-<script>
-import { setVarData } from '@/components/Blocks/scripts/Three/Variables';
+<script> //Блок скрипта
+import { setVarData } from '@/components/Blocks/scripts/Three/Variables';//Импорт файла для изменения данных
 
-export default{
+export default{// дефолтная загрузка страницы
     data(){
         return{
             checked: false,
@@ -132,110 +122,110 @@ export default{
         }
     },
     methods:{
-        setDistance(){
+        setDistance(){// Вызов метода для регулирования дистанции источника освещения 
             setVarData('pointLightDistance',document.getElementById('pointDirLightDistance').value)
             this.emitter.emit('Rerender', true)
         },
-        setIntensity(){
+        setIntensity(){// Вызов метода для регулировки интенсивности освещения
             setVarData('directionalLightIntensity', document.getElementById('inputDirLightIntencity').value)
             this.emitter.emit('Rerender', true)
         },
-        dirLightChange(value){
+        dirLightChange(value){// Вызов метода для изменения освещения
             value = document.getElementById('DirLight').value;
             setVarData('directionalLightColor', value)
             this.emitter.emit('Rerender', true)
         },
-        openBlock(block){
+        openBlock(block){ //Метод для отображения блоков настроек
             switch(block){
-                case "colors":
+                case "colors"://метод для отображения блока изменение цвета фона канваса
                     this.colorVisible = !this.colorVisible
                     break;
-                case 'control':
+                case 'control': //Метод для отображения блока настроек
                     this.controlVisible = !this.controlVisible
                     break;
-                case 'light':
+                case 'light': //Метод для отображения блка освещения
                     this.lightVisible = !this.lightVisible;
                     break;
             }
         },
-        selectLight(light){
+        selectLight(light){// Метод для выбора типа освещения
             switch(light){
-                case 'ambient':
+                case 'ambient'://Изменение типа освещения на ambient
                     this.directionalParam = false
                     this.pointParam = false
                     this.ambientParam = true
                     break;
-                case 'directional':
+                case 'directional':// Изменение типа освещения на directional
                     this.directionalParam = true
                     this.pointParam = false
                     this.ambientParam = false
                     break;
-                case 'point':
+                case 'point'://Изменение типа освещения на point 
                     this.directionalParam = false
                     this.pointParam = true
                     this.ambientParam = false
                     break;
             }
             setVarData('light', light)
-            this.emitter.emit("Rerender", true)
+            this.emitter.emit("Rerender", true) //Вызов события обновления параметров сцены
         },
-        changeColor(color){
+        changeColor(color){// Метод для смены фона канваса
             try{
                 setVarData("color", color)
                 document.getElementById('color').value = color;
-                this.emitter.emit("Rerender", true);
+                this.emitter.emit("Rerender", true);//вызов события обновления параметров сцены
             }
             catch(e){
-                this.emitter.emit("CanvasError", {'file': 'SceneParam', 'method':'changeColor', 'ext':e})
+                this.emitter.emit("CanvasError", {'file': 'SceneParam', 'method':'changeColor', 'ext':e})//Отображения обработчика ошибок с указанием метода
             }
             },
 
-        Changed(color){
+        Changed(color){// Метод для смены цвета фона канваса через input
             try{
                 color = document.getElementById('color').value;
                 setVarData("color", color)
-                this.emitter.emit("Rerender", true);
+                this.emitter.emit("Rerender", true);//Вызов события обновления параметров сцены
             }
             catch(e){
-                this.emitter.emit("CanvasError", {'file': 'SceneParam', 'method':'changeColor', 'ext':e})
+                this.emitter.emit("CanvasError", {'file': 'SceneParam', 'method':'changeColor', 'ext':e})//Отображение обработчика ошибок с указанием метода
             }
         },
             
-        orbContChecked(orbValue){
+        orbContChecked(orbValue){// Метод для изменения параметра Orbit Control
             try{
                 setVarData("orbValue", orbValue)
-                this.emitter.emit("Rerender", true)
+                this.emitter.emit("Rerender", true)// Вызов события обновления параметров сцены
             }
             catch(e){
-                this.emitter.emit("CanvasError", {'file': 'SceneParam', 'method':'orbContChecked', 'ext':e})
+                this.emitter.emit("CanvasError", {'file': 'SceneParam', 'method':'orbContChecked', 'ext':e})//Отображение обработчика ошибок с указанием метода
             }
         },
-        fullScreen(){
+        fullScreen(){//метод для открытия канваса на весь экран
             try{
-                this.emitter.emit('FullScreenCanvas', true)
+                this.emitter.emit('FullScreenCanvas', true) //Вызов метода для открытия на весь экран
             }
             catch(e){
-                this.emitter.emit("CanvasError", {'file': 'SceneParam', 'method':'fullScreen', 'ext':e})
+                this.emitter.emit("CanvasError", {'file': 'SceneParam', 'method':'fullScreen', 'ext':e})//Отображение обработчика ошибок с указанием метода
             }
         },
-        rotateOn(){
+        rotateOn(){//Метод для автоматического вращения модели 
             try{
                 this.rotation = !this.rotation
                 setVarData("autoRotate", this.rotation)
-                this.emitter.emit("Rerender", true)
+                this.emitter.emit("Rerender", true)//Вызов события обновления параметров сцены
             }
             catch(e){
-                this.emitter.emit("CanvasError", {'file': 'SceneParam', 'method': 'rotateOn', 'ext': e})
+                this.emitter.emit("CanvasError", {'file': 'SceneParam', 'method': 'rotateOn', 'ext': e})//Отображение обработчика ошибок с указанием метода
             }
         },
-        AddSetka(){
+        AddSetka(){//Метод для отображения сетки на канвасе
             try{
                 this.setka = !this.setka
-                setVarData("AddSetka", this.setka)
-                this.emitter.emit("Rerender", true)
+                setVarData("AddSetka", this.setka)//Вызов события получения значений для сетки
+                this.emitter.emit("Rerender", true)//Вызов события обновления параметров сцены
             }
             catch(e){
-                this.emitter.emit("CanvasError", {'file': 'SceneParam', 'method': 'AddSetka', 'ext': e})
+                this.emitter.emit("CanvasError", {'file': 'SceneParam', 'method': 'AddSetka', 'ext': e})//Отображение обработчика ошибок с указанием метода
             }
         }
 
@@ -244,121 +234,51 @@ export default{
 }
 </script>
 
-<style>
-p.title{
+<style>/*Блок каскадных таблиц стилей*/
+button.title{/*Стили для главных кнопок*/
+    position: relative;
     text-decoration: none;
     margin-top: 5%;
     margin-bottom: 5%;
-    border-top: 2px solid #B0E0E6;
-    border-bottom: 2px solid #B0E0E6;
-}
-.Scroll{
-    align-items: center;
-    display: flex;
-    box-sizing: border-box;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 1;
-    text-align: left;
-}
-.widget{
-    align-items: center;
-    display: flex;
-    position: relative;
-    width: 100%;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 1;
-    text-align: left;
-}
-.slider{
-    cursor: ew-resize;
-    overflow: hidden;
-    touch-action: pan-y;
-    width: 100%;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-.fill{
-    box-sizing: content-box;
-    height: 100%;
-    cursor: ew-resize;
-    margin: 0;
-    padding: 0;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 1;
-    text-align: left;
-}
-input .number{
-    flex-shrink: 0;
-    outline: none; 
-    box-sizing: border-box;
-    margin: 0;
-    pointer-events: auto;
-    color: var(--text-color);
-    font-family: var(--font-family);
-    font-size: var(--font-size);
-    font-style: normal;
-    font-weight: 400;
-    line-height: 1;
-    text-align: left;
+    border-top: 2px solid #71D4DA;/*Стили рамки для кнопок*/
+    border-bottom: 2px solid #71D4DA;
+    width: 96%;
+    padding: 2%;
+    margin: 2%;
 }
 
-
-.Osveshenie p{
-    top: 5%;
-    position: relative;
-    margin-top: 0%;
-    text-align: left;
-}
-.Osveshenie{
-    position: relative;
-    height: 15%;
-}
-.Osveshenie input{
-    position: relative;
-    float: left;
-    margin: 0%;
-    vertical-align: middle;
-}
-.Osveshenie label{
-    position: relative;
-    margin: 0%;
-    padding-left: 10px;
+button.title:hover{/*Стили для главных кнопок при наведении */
+    cursor: pointer;
+    background-color: #B0E0E6;
 }
 
-.inputColor input{
+.inputColor input{/*Стили для input, задающего цвет фона канваса */
     position: relative;
     margin-left: 3%;
 }
 
-.orbControl{
+.orbControl{/*Стили для блока настроек */
     position: relative;
     width: 100%;
 }
 
-.backColor p{
+.backColor p{ /*Стили для текста в блоке изменения фона канваса */
     text-decoration: none;
     margin-top: 5%;
     margin-bottom: 5%;
-    border-top: 2px solid #B0E0E6;
+    border-top: 2px solid #B0E0E6;/*Стили рамок для текста в блоке изменения цвета канваса*/
     border-bottom: 2px solid #B0E0E6;
 }
-.colorBar{
+.colorBar{/*Стили для кнопок изменения цвета фона канваса */
     width: 100%;
     margin-bottom: 5%;
 }
 
-label{
+label{/* Стили для тега label в блоке освещения*/
     font-family: 'Montserrat','sans-serif';
     font-size: 18px;
 }
-.control button{
+.control button{/*Стили для кнопок в блоке настроек */
     position: relative;
     width: 100%;
     margin: 0;
@@ -366,16 +286,16 @@ label{
     background-color: #fbfaff;
     text-align: left;
 }
-.control button:hover{
+.control button:hover{/*Стили для кнопок блока настроек при наведении */
     background-color: #B0E0E6;
 }
-#checkbox{
+#checkbox{/*Стили для тега checkbox*/
     position: relative;
     width: 5%;
     height: auto;
     
 }
-.colorBar button{
+.colorBar button{/*Стили для кнопок в блоке изменения цвета фона канваса */
     position: relative;
     width: 25px;
     height: 25px;
@@ -383,18 +303,18 @@ label{
     float: left;
 }
 
-.colorBar button:hover{
+.colorBar button:hover{/*Стили для кнопок в блоке изменения цвета фона канваса при наведении */
     border-radius: 50%;
 }
 
-.FirstStorka{
+.FirstStorka{/*Стили для первых пяти кнопок изменения цвета фона канваса */
     position: relative;
     width: 100%;
     height: 10%;
     float: right;
     align-content: center;
 }
-.SecondStroka{
+.SecondStroka{/*Стили для второй части кнопок изменения цвета фона канваса */
     position: relative;
     width: 100%;
     height: 10%;
@@ -402,53 +322,43 @@ label{
     align-content: center;
 }
 
-button.BtnGrey{
-    
+button.BtnGrey{/*Стили для серой кнопки изменения цвета фона канваса */
     background-color: grey;
     border: 1px solid #B0E0E6;
 }
-button.BtnRed{
-    
+button.BtnRed{  /*Стили для красной кнопки изменения цвета фона канваса*/
     background-color: red;
     border: 1px solid #B0E0E6;
 }
-button.BtnWhite{
-   
+button.BtnWhite{ /*Стили для белой кнопки изменения цвета фона канваса */
     background-color: white;
     border: 1px solid #B0E0E6;
 }
-button.BtnBlack{
-   
+button.BtnBlack{ /*Стили для черной кнопки изменения цвета фона канваса */
     background-color: black;
     border: 1px solid #B0E0E6;
 }
-button.BtnBlue{
-    
+button.BtnBlue{ /*Стили для синей кнопки изменения цвета фона канваса */
     background-color: blue;
     border: 1px solid #B0E0E6;
 }
-button.BtnYellow{
-    
+button.BtnYellow{ /*Стили для желтой кнопки изменения цвета фона канваса */
     background-color: yellow;
     border: 1px solid #B0E0E6;
 }
-button.BtnGreen{
-
+button.BtnGreen{ /*Стили для зеленой кнопки изменения цвета фона канваса */
     background-color: green;
     border: 1px solid #B0E0E6;
 }
-button.BtnOrange{
-    
+button.BtnOrange{ /*Стили для оранжевой кнопки изменения цвета фона канваса */
     background-color: orange;
     border: 1px solid #B0E0E6;
 }
-button.BtnTema{
-  
+button.BtnTema{ /*Стили для розовой кнопки изменения цвета фона канваса */
     background-color: pink;
     border: 1px solid #B0E0E6;
 }
-button.BtnPurple{
-  
+button.BtnPurple{ /*Стили для фиолетовой кнопки изменения цвета фона канваса */
     background-color: rebeccapurple;
     border: 1px solid #B0E0E6;
 }
