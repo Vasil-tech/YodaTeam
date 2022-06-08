@@ -1,41 +1,35 @@
-<template>
+<template><!--Блок гипертекстовой разметки-->
     <div class="MainContainerRoot">
         <div class="navMenu">
-            <nav-menu></nav-menu>
+            <nav-menu></nav-menu> <!--Вызов метода для загрузки файла меню-->
         </div>
         <div class="toolPanel">
-            <tool-panel></tool-panel>
+            <tool-panel></tool-panel> <!--Вызов метода для загрузки файла панели управления-->
         </div>
         <div class="workArea" id="workArea">
-            <work-area></work-area>
+            <work-area></work-area> <!--Вызов метода для загрузки файла рабочей области-->
         </div>
     </div>
 </template>
-
-<script>
-import NavMenu from './Blocks/NavMenu.vue'
-import ToolPanel from './Blocks/ToolPanel.vue'
-import WorkArea from './Blocks/WorkArea.vue'   
+<script>//Блок скрипта
+import NavMenu from './Blocks/NavMenu.vue' //импорт меню
+import ToolPanel from './Blocks/ToolPanel.vue' //Импорт панели управления 
+import WorkArea from './Blocks/WorkArea.vue'   //Импорт рабочей области
 export default{
-    components:{
+    components:{//Объявление компонент
         NavMenu,
         WorkArea,
         ToolPanel
     },
     data(){
-        
     }
 }
-// window.onload = function(){
-//     this.emitter.emit("Rendering", {Num:0})
-// }
 </script>
-
-<style>
-.navMenu{
+<style>/*Блок каскадной таблицы стилей */
+.navMenu{/*Стили для меню */
     width: 100%;
 }
-.MainContainerRoot{
+.MainContainerRoot{/*Стили для всей страницы*/
     position: absolute;
 }
 </style>

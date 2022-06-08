@@ -3,21 +3,30 @@ import { LoadSphere } from './Loader.js';
 import { LoadTorus } from './Loader.js';
 import errorHandler from '../errorHandler.js'
 import check from './SupportThreeCheck.js'
-import { canvasHeight } from '../bus.js';
-import { canvasWidht } from '../bus.js';
 export let camera
+export let objLoader
 let controls, scene, renderer, light;
-
+import { color } from '../Three/Variables.js';
+import { autoRotate } from '../Three/Variables.js';
+import { modelNum } from '../Three/Variables.js';
+import { width } from '../bus.js';
+import { height } from '../bus.js';
+import { lightType } from '../Three/Variables.js';
+import {directionalLightColor} from '../Three/Variables.js'
+import {directionalLightIntensity} from '../Three/Variables.js'
+import { pointLightDistance } from '../Three/Variables.js';
+import { customLoad } from './Loader.js';
+import { AddSetka } from '../Three/Variables.js';
 
 export default class{
-        constructor(THREE, color, OrbitControl, autoRotate, cameraPosition, modelNum) {
+        constructor(THREE, OrbitControl, cameraPosition) {
         const ans = this.supportAndCnvsSize();
         const canvas = ans.canvas;
         let height = ans.height;
         let width = ans.width;
         try{
-            this.init(THREE, canvas, color, width, height, cameraPosition);
-            this.addToScene(THREE, modelNum);
+            this.init(THREE, canvas, width, height, cameraPosition);
+            this.addToScene(THREE);
             if(OrbitControl!== false){
                 this.setControls(OrbitControl, canvas)
                 if(autoRotate){
@@ -37,9 +46,9 @@ export default class{
 
     supportAndCnvsSize(){
         try{
-            const canvas = document.querySelector("#canvas");
-            canvas.width = canvasWidht();
-            canvas.height = canvasHeight();
+            const canvas = document.getElementById("canvas");
+            canvas.width = width
+            canvas.height = height
             const checking = check(canvas);
             if(checking.status == false){
                 errorHandler('threeLogic', 'checking', checking.ext, 'canvas');
@@ -53,10 +62,11 @@ export default class{
         }
         return false;
     }
-    init(THREE, canvas, color, width, height, cameraPosition){
+    init(THREE, canvas, width, height, cameraPosition){
         try{
             renderer = this.Renderer(canvas, THREE);
-            scene = this.Scene(THREE, color);
+            let clr = color;
+            scene = this.Scene(THREE, clr);
             camera = this.Camera(width, height, THREE, cameraPosition);
             light = this.Light(THREE);
         }
@@ -70,10 +80,15 @@ export default class{
         controls.target.set(0, 0, 0);
         controls.update();
     }
-    addToScene(THREE, modelNum){
+    addToScene(THREE){        
         try{
-            let model;
+
+            this.addGreed(THREE);
+            let model = modelNum;
+            
             switch(modelNum){
+                case null:
+                    break;
                 case 0:
                     model = LoadSphere(THREE)
                     scene.add(model)
@@ -88,7 +103,13 @@ export default class{
                     model = LoadTorus(THREE);
                     scene.add(model)
                     scene.add(light);
-                    scene.add(light.target);
+                    //scene.add(light.target);
+                break;
+                case 3:
+                    model = customLoad(THREE)
+                    scene.add(model)
+                    scene.add(light);
+                    //scene.add(light.target);
                 break;
             }
             
@@ -98,15 +119,34 @@ export default class{
         }
     }
 
+    addGreed(THREE){
+        try{
+        if(AddSetka == true){
+            let grid = new THREE.GridHelper(1000, 25);
+            grid.position.y = 0;  
+            scene.add(grid);
+        }
+    }
+    catch(e){
+        errorHandler("Rendering", "AddSetka", e, "canvas")
+    }
+    }
+
     Light(THREE){
         try{
-            const color = 0xFFFFFF;
-            const intensity = 1;
-            const light = new THREE.DirectionalLight(color, intensity);
-            light.position.set(100, 100, 100);
-            light.target.position.set(-5, 0, 0);
-            
-            return light;
+            if(lightType == 'ambient'){
+                const light = new THREE.AmbientLight( 0xffffff ); 
+                return light;
+            }
+            if(lightType == 'directional'){
+                const light = new THREE.DirectionalLight( directionalLightColor, directionalLightIntensity);
+                return light;
+            }
+            if(lightType == 'point'){
+                const light = new THREE.PointLight( directionalLightColor, pointLightDistance, 10000 );
+                light.position.set( 50, 50, 50 );
+                return light;
+            }
         }
         catch(e){
             errorHandler('Rendering', 'Light', e, 'canvas');

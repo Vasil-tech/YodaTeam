@@ -1,19 +1,10 @@
-<template>
-  <div class="storeContainerRoot">
-    <p>fhjgdfghfdk</p>
-  </div>
+<template><!--Блок гипертекстовой разметки-->
+<div class="MarketPlace"> <!--Объявление контейнера с классом-->      
+</div>
 </template>
-
-<script>
+<script>//Блок скрипта
 export default {
- data(){
-      return{
-
-      }
-    },
-}
+ methods:{ }}
 </script>
-
-<style>
-
+<style>/*Блок каскадной таблицы стилей */
 </style>
